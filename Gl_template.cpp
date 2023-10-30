@@ -279,17 +279,7 @@ gluCylinder(obj,0,20,30,15,7);
 glPopMatrix();
 }
 
-void kula(void)
-{	GLUquadricObj*obj;
-	obj=gluNewQuadric();
-	gluQuadricTexture(obj,GL_TRUE);
-	glBindTexture(GL_TEXTURE_2D,texture[0]);
-	glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
-	glColor3d(1.0,0.8,0.8);
-	glEnable(GL_TEXTURE_2D);
-	gluSphere(obj,40,15,7);
-	glDisable(GL_TEXTURE_2D);
-}
+
 
 
 
