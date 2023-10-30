@@ -1,0 +1,6 @@
+﻿  Gl_template.cpp
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(350,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(738,12): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(907,27): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(908,27): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+  szescian.vcxproj -> C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\x64\Debug\szescian.exe
