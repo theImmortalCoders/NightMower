@@ -1,15 +1,5 @@
 #include "Wheel.h"
 
-void kula(void)
-{
-    GLUquadricObj* obj;
-    obj = gluNewQuadric();
-    gluQuadricTexture(obj, GL_TRUE);
-    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-    glEnable(GL_TEXTURE_2D);
-    gluSphere(obj, 10, 15, 7);
-    glDisable(GL_TEXTURE_2D);
-}
 
 Wheel::Wheel(int x, int y, int z)
 {
@@ -32,7 +22,13 @@ void Wheel::draw(int x, int y, int z)
         glPushMatrix();
         glTranslatef(centerX + x, centerY + y, centerZ + z);
         glColor3f(0,0,0);
-        kula();
+        GLUquadricObj* obj;
+        obj = gluNewQuadric();
+        gluQuadricTexture(obj, GL_TRUE);
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+        glEnable(GL_TEXTURE_2D);
+        gluSphere(obj, 10, 15, 7);
+        glDisable(GL_TEXTURE_2D);
         glPopMatrix();
     }
 }
