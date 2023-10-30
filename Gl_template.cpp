@@ -33,6 +33,8 @@
 #include <stdio.h>
 #include "resource.h"           // About box resource identifiers.
 
+#include "szescian/Lazik.h"
+
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
 #define GL_PI 3.14
@@ -526,43 +528,29 @@ void ramie(double r1, double r2, double h, double d)
 		}
 	glEnd();
 }
+
 // Called to draw scene
 void RenderScene(void)
 	{
-	//float normal[3];	// Storeage for calculated surface normal
-
-	// Clear the window with current clearing color
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	// Save the matrix state and do the rotations
 	glPushMatrix();
+
+	int centerX = 0;
+	int centerY = 0;
+	int centerZ = 0;
+
+	glTranslatef(centerX, centerY, centerZ);
 	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
 	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-
-	/////////////////////////////////////////////////////////////////
-	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
-	/////////////////////////////////////////////////////////////////
-	//szescian();
-	
-	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK,GL_LINE);
-	//walec(40, 40);
-	szescian();
-	//Uzyskanie siatki:
-	//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
-	//Wyrysowanie prostokata:
-	//glRectd(-10.0,-10.0,20.0,20.0);
-		
-	/////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	Lazik prost(0, 0, 0);
+	prost.draw(50, 20, 10);
+
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
-
-	// Flush drawing commands
 	glFlush();
-	}
+}
 
 
 // Select the pixel format for a given device context
@@ -737,8 +725,6 @@ int APIENTRY WinMain(   HINSTANCE       hInst,
 
 	return msg.wParam;
 	}
-
-
 
 
 // Window procedure, handles all messages for this program

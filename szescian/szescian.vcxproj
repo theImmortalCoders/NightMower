@@ -139,6 +139,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,6 +150,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Gl_template.cpp" />
+    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Lazik.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\RESOURCE.APS" />
@@ -156,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\RESOURCE.H" />
+    <ClInclude Include="Core.h" />
+    <ClInclude Include="Lazik.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
