@@ -152,6 +152,7 @@
     <ClCompile Include="..\Gl_template.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Lazik.cpp" />
+    <ClCompile Include="Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\RESOURCE.APS" />
@@ -161,6 +162,7 @@
     <ClInclude Include="..\RESOURCE.H" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Lazik.h" />
+    <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
