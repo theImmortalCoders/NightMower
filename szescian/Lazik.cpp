@@ -2,20 +2,20 @@
 #include "Core.h"
 #include "Wheel.h"
 
-Lazik::Lazik(int x, int y, int z)
+Lazik::Lazik(int xSize, int ySize, int zSize)
 {
-    this->x = x;
-    this->y = y;
-    this->z = z;
+    this->xSize = xSize;
+    this->ySize = zSize;
+    this->zSize = ySize;
 }
 
-void Lazik::draw(int xSize, int ySize, int zSize)
+void Lazik::draw(int x, int y, int z)
 {
-    Core core(this->x, this->y, this->z);
-    Wheel wheel(this->x, this->y, this->z);
+    Core core(x, y, z);
+    Wheel wheel(x, y, z);
     core.draw(xSize, ySize, zSize);
-    wheel.draw(-15, 13, -5);
-    wheel.draw(-15, -13, -5);
-    wheel.draw(15, 13, -5);
-    wheel.draw(15, -13, -5);
+    wheel.draw(-15, -5, 13);
+    wheel.draw(-15, -5, -13);
+    wheel.draw(15, -5, 13);
+    wheel.draw(15, -5, -13);
 }

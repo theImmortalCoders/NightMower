@@ -51,7 +51,7 @@ static GLfloat xRot = 0.0f;
 static GLfloat yRot = 0.0f;
 static GLfloat zRot = 0.0f;
 
-static GLfloat xPos = 0.0f;
+static GLfloat yPos = 0.0f;
 static GLfloat zPos = 0.0f;
 
 
@@ -533,15 +533,15 @@ void RenderScene(void)
 	int centerY = 0;
 	int centerZ = 0;
 
-	glTranslatef(centerX + xPos, centerY, centerZ + zPos); // Translate to position of Lazik
+	glTranslatef(centerX +yPos, centerY + zPos, centerZ ); // Translate to position of Lazik
 	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
 	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
 	glRotatef(zRot, 0.0f, 0.0f, 1.0f);
 
 	glPolygonMode(GL_BACK, GL_LINE);
 
-	Lazik prost(0, 0, 0);
-	prost.draw(50, 20, 10);
+	Lazik prost(50, 20, 10);
+	prost.draw(0, 0, 0);
 
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
@@ -888,10 +888,10 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 				yRot += 5.0f;
 
 			if (wParam == 'A')
-				zRot -= 5.0f;
+				yRot -= 5.0f;
 
 			if (wParam == 'D')
-				zRot += 5.0f;
+				yRot += 5.0f;
 
 			/*if (wParam == 'W')
 				xPos -= 5.0f;
@@ -899,14 +899,15 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 			if (wParam == 'S')
 				xPos += 5.0f;*/
 
-			if (wParam == 'W') { //todo
-				xPos -= 5 * cos((xRot*3.14)/180);
+			if (wParam == 'W') {
+				yPos -= 5 * cos((yRot*3.14)/180);
 				zPos -= 5 * sin((zRot * 3.14) / 180);
 			}
 			if (wParam == 'S') {
-				xPos += 5 * cos((xRot * 3.14) / 180);
+				yPos += 5 * cos((yRot * 3.14) / 180);
 				zPos += 5 * sin((zRot * 3.14) / 180);
 			}
+
 			xRot = (const int)xRot % 360;
 			yRot = (const int)yRot % 360;
 			zRot = (const int)zRot % 360;

@@ -10,11 +10,11 @@
 #include <stdio.h>
 class Lazik
 {
-	int x;
-	int y;
-	int z;
+	int xSize;
+	int ySize;
+	int zSize;
 public:
-	Lazik(int x, int y, int z);
-	void draw(int xSize, int ySize, int zSize);
+	Lazik(int xSize, int ySize, int zSize);
+	void draw(int x, int y, int z);
 };
 
