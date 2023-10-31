@@ -49,6 +49,10 @@ static HINSTANCE hInstance;
 // Rotation amounts
 static GLfloat xRot = 0.0f;
 static GLfloat yRot = 0.0f;
+static GLfloat zRot = 0.0f;
+
+static GLfloat xPos = 0.0f;
+static GLfloat zPos = 0.0f;
 
 
 static GLsizei lastHeight;
@@ -521,7 +525,7 @@ void ramie(double r1, double r2, double h, double d)
 
 // Called to draw scene
 void RenderScene(void)
-	{
+{
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glPushMatrix();
 
@@ -529,10 +533,12 @@ void RenderScene(void)
 	int centerY = 0;
 	int centerZ = 0;
 
-	glTranslatef(centerX, centerY, centerZ);
+	glTranslatef(centerX + xPos, centerY, centerZ + zPos); // Translate to position of Lazik
 	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
 	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-	glPolygonMode(GL_BACK,GL_LINE);
+	glRotatef(zRot, 0.0f, 0.0f, 1.0f);
+
+	glPolygonMode(GL_BACK, GL_LINE);
 
 	Lazik prost(0, 0, 0);
 	prost.draw(50, 20, 10);
@@ -541,6 +547,7 @@ void RenderScene(void)
 	glMatrixMode(GL_MODELVIEW);
 	glFlush();
 }
+
 
 
 // Select the pixel format for a given device context
@@ -868,20 +875,41 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 		// Key press, check for arrow keys to do cube rotation.
 		case WM_KEYDOWN:
 			{
-			if(wParam == VK_UP)
-				xRot-= 5.0f;
+			if (wParam == VK_UP)
+				xRot -= 5.0f;
 
-			if(wParam == VK_DOWN)
+			if (wParam == VK_DOWN)
 				xRot += 5.0f;
 
-			if(wParam == VK_LEFT)
+			if (wParam == VK_LEFT)
 				yRot -= 5.0f;
 
-			if(wParam == VK_RIGHT)
+			if (wParam == VK_RIGHT)
 				yRot += 5.0f;
 
+			if (wParam == 'A')
+				zRot -= 5.0f;
+
+			if (wParam == 'D')
+				zRot += 5.0f;
+
+			/*if (wParam == 'W')
+				xPos -= 5.0f;
+
+			if (wParam == 'S')
+				xPos += 5.0f;*/
+
+			if (wParam == 'W') { //todo
+				xPos -= 5 * cos((xRot*3.14)/180);
+				zPos -= 5 * sin((zRot * 3.14) / 180);
+			}
+			if (wParam == 'S') {
+				xPos += 5 * cos((xRot * 3.14) / 180);
+				zPos += 5 * sin((zRot * 3.14) / 180);
+			}
 			xRot = (const int)xRot % 360;
 			yRot = (const int)yRot % 360;
+			zRot = (const int)zRot % 360;
 
 			InvalidateRect(hWnd,NULL,FALSE);
 			}
