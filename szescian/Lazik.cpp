@@ -5,17 +5,17 @@
 Lazik::Lazik(int xSize, int ySize, int zSize)
 {
     this->xSize = xSize;
-    this->ySize = zSize;
+    this->ySize = zSize; //zamiana z Y na Z ¿eby by³ nie na boku
     this->zSize = ySize;
 }
 
 void Lazik::draw(int x, int y, int z)
 {
-    Core core(x, y, z);
+    Core core(this->xSize*1.2, this->ySize*2, this->zSize*1.5);
     Wheel wheel(x, y, z);
-    core.draw(xSize, ySize, zSize);
-    wheel.draw(-15, -5, 13);
-    wheel.draw(-15, -5, -13);
-    wheel.draw(15, -5, 13);
-    wheel.draw(15, -5, -13);
+    core.draw(x, y, z);
+    wheel.draw(x-15, z-5, y+13);
+    wheel.draw(x-15, z-5, y-13);
+    wheel.draw(x+15, z-5, y+13);
+    wheel.draw(x+15, z-5, y-13);
 }

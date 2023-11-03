@@ -11,11 +11,11 @@
 #include <stdio.h>
 class Core
 {
-	int x;
-	int y;
-	int z;
+	int xSize;
+	int ySize;
+	int zSize;
 public:
-	Core(int x, int y, int z);
-	void draw(int xSize, int ySize, int zSize);
+	Core(int xSize, int ySize, int zSize);
+	void draw(int x, int y, int z);
 };
 
