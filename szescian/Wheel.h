@@ -16,6 +16,6 @@ class Wheel
 	int z;
 public:
 	Wheel(int x, int y, int z);
-	void draw(int xSize, int ySize, int zSize);
+	void draw(int xSize, int ySize, int zSize, bool flip);
 };
 
