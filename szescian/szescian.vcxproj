@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Gl_template.cpp" />
+    <ClCompile Include="Axle.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Lazik.cpp" />
     <ClCompile Include="Wheel.cpp" />
@@ -160,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\RESOURCE.H" />
+    <ClInclude Include="Axle.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Lazik.h" />
     <ClInclude Include="Wheel.h" />
