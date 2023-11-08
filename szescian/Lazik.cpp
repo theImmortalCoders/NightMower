@@ -13,9 +13,6 @@ void Lazik::draw(int x, int y, int z)
 {
     Core core(this->xSize*1.2, this->ySize*2, this->zSize*1.5);
     Wheel wheel(x, y, z);
-    //core.draw(x, y, z);
-    wheel.draw(x-15, z-5, y+13, 0);
-    wheel.draw(x-15, z-5, y-13, 0);
-    wheel.draw(x+15, z-5, y+13, 1);
-    wheel.draw(x+15, z-5, y-13, 1);
+    core.draw(x, y, z);
+    wheel.draw(x, z, y, 1);
 }
