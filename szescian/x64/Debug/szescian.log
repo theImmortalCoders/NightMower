@@ -1,0 +1,4 @@
+﻿  Lazik.cpp
+C:\Users\HP\Documents\GitHub\GK_Bator_Bosak\szescian\Lazik.cpp(15,58): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\HP\Documents\GitHub\GK_Bator_Bosak\szescian\Lazik.cpp(15,26): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  szescian.vcxproj -> C:\Users\HP\Documents\GitHub\GK_Bator_Bosak\x64\Debug\lazik.exe

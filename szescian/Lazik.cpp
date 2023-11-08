@@ -17,7 +17,7 @@ void Lazik::draw(int x, int y, int z)
     Axle axle(x, y, z);
     core.draw(x, y, z);
     axle.draw(x + this->xSize / 2, y, z);
-    axle.draw(x - this->xSize / 2, y, z);
+    //axle.draw(x - this->xSize / 2, y, z);
     wheel.draw(x+this->xSize/2, 0, x-this->ySize-10);
     wheel.draw(x+this->xSize/2, 0, x+this->ySize+10, 1);
     wheel.draw(x-this->xSize/2, 0, x-this->ySize-10);
