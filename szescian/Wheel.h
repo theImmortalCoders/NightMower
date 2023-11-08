@@ -16,6 +16,6 @@ class Wheel
 	int z;
 public:
 	Wheel(int x, int y, int z);
-	void draw(int xSize, int ySize, int zSize, bool flip);
+	void draw(int xSize, int ySize, int zSize, bool mirror = 0, GLfloat rotation = 0);
 };
 
