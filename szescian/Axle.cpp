@@ -6,7 +6,7 @@ Axle::Axle(int x, int y, int z)
     this->y = y;
     this->z = z;
     this->radius = 1;
-    this->length = 13;
+    this->length = 15;
 }
 
 void Axle::draw(int x, int y, int z) {
@@ -18,7 +18,7 @@ void Axle::draw(int x, int y, int z) {
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     {
-        glColor3f(0.2, 0.2, 0.2);
+        glColor3f(0, 0, 0);
         for (int i = -length; i < length; i++) {
             glBegin(GL_TRIANGLE_STRIP);
             for (int j = 0; j < 41; j++) {

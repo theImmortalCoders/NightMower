@@ -2,6 +2,7 @@
 #include "Core.h"
 #include "Wheel.h"
 #include "Axle.h"
+#include "Handle.h"
 
 Lazik::Lazik(int xSize, int ySize, int zSize)
 {
@@ -12,14 +13,19 @@ Lazik::Lazik(int xSize, int ySize, int zSize)
 
 void Lazik::draw(int x, int y, int z)
 {
-    Core core(this->xSize*1.2, this->ySize*2, this->zSize*1.5);
+    Core core(this->xSize*1.2, this->ySize, this->zSize*1.5);
     Wheel wheel(x, y, z);
     Axle axle(x, y, z);
+    Handle handle(x, y, z);
+    handle.draw(x - this->xSize+10, y-10+3*this->ySize, z, this->zSize);
     core.draw(x, y, z);
-    axle.draw(x + this->xSize / 2, y, z);
-    //axle.draw(x - this->xSize / 2, y, z);
-    wheel.draw(x+this->xSize/2, 0, x-this->ySize-10);
-    wheel.draw(x+this->xSize/2, 0, x+this->ySize+10, 1);
-    wheel.draw(x-this->xSize/2, 0, x-this->ySize-10);
-    wheel.draw(x-this->xSize/2, 0, x+this->ySize+10, 1);
+    axle.draw(x+4+this->xSize / 2, y, z);
+    axle.draw(x-4-this->xSize / 2, y, z);
+    axle.draw(x, y, z);
+    wheel.draw(x, 0, x - this->ySize - 12);
+    wheel.draw(x, 0, x + this->ySize + 12, 1);
+    wheel.draw(x+4+this->xSize/2, 0, x-this->ySize-12);
+    wheel.draw(x+4+this->xSize/2, 0, x+this->ySize+12, 1);
+    wheel.draw(x-4-this->xSize/2, 0, x-this->ySize-12);
+    wheel.draw(x-4-this->xSize/2, 0, x+this->ySize+12, 1);
 }

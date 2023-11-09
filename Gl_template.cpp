@@ -892,20 +892,13 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 
 			if (wParam == 'D')
 				yRot += 5.0f;
-
-			/*if (wParam == 'W')
-				xPos -= 5.0f;
-
-			if (wParam == 'S')
-				xPos += 5.0f;*/
-
 			if (wParam == 'W') {
-				yPos -= 5 * cos((yRot*3.14)/180);
-				zPos -= 5 * sin((zRot * 3.14) / 180);
+				yPos += 5 * cos((yRot*3.14)/180);
+				zPos += 5 * sin((zRot * 3.14) / 180);
 			}
 			if (wParam == 'S') {
-				yPos += 5 * cos((yRot * 3.14) / 180);
-				zPos += 5 * sin((zRot * 3.14) / 180);
+				yPos -= 5 * cos((yRot * 3.14) / 180);
+				zPos -= 5 * sin((zRot * 3.14) / 180);
 			}
 
 			xRot = (const int)xRot % 360;
