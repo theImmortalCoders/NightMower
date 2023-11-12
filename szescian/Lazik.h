@@ -8,6 +8,8 @@
 #include <gl\glu.h>
 #include <math.h>
 #include <stdio.h>
+#include <vector>
+using namespace std;
 class Lazik
 {
 	int xSize;
