@@ -1,8 +1,6 @@
 ﻿  Lazik.cpp
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(24,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(24,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(49,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(49,22): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  loader.cpp
-  Generating Code...
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(22,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(22,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(58,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(58,22): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   szescian.vcxproj -> C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\x64\Debug\lazik.exe
