@@ -154,6 +154,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Handle.cpp" />
     <ClCompile Include="Lazik.cpp" />
+    <ClCompile Include="loader.cpp" />
     <ClCompile Include="Reflector.cpp" />
     <ClCompile Include="Wheel.cpp" />
   </ItemGroup>
@@ -167,6 +168,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Handle.h" />
     <ClInclude Include="Lazik.h" />
+    <ClInclude Include="loader.h" />
     <ClInclude Include="Reflector.h" />
     <ClInclude Include="Wheel.h" />
   </ItemGroup>

@@ -15,6 +15,7 @@ class Lazik
 	int xSize;
 	int ySize;
 	int zSize;
+	void cow();
 public:
 	Lazik(int xSize, int ySize, int zSize);
 	void draw(int x, int y, int z);
