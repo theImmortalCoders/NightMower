@@ -156,6 +156,7 @@
     <ClCompile Include="Lazik.cpp" />
     <ClCompile Include="loader.cpp" />
     <ClCompile Include="Reflector.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="Lazik.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="Reflector.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

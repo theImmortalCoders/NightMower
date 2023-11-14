@@ -42,26 +42,7 @@ void Lazik::draw(int x, int y, int z)
     this->cow();
 }
 
-void Lazik::grass()
-{
-    std::vector<float> vertices;
-    loadObjFile("grass.obj", vertices);
-    glBegin(GL_TRIANGLES);
-    glColor3f(0, 1, 0);
-    for (size_t i = 0; i < vertices.size(); i += 3) {
-        glVertex3f(10 * vertices[i], 10 * (vertices[i + 1]) - 10, 10 * vertices[i + 2]);
-    }
-    glEnd();
-}
-
 void Lazik::cow()
 {
-    std::vector<float> vertices;
-    loadObjFile("untitled.obj", vertices);
-    glBegin(GL_TRIANGLES);
-    glColor3f(1.000, 0.078, 0.576);
-    for (size_t i = 0; i < vertices.size(); i += 3) {
-        glVertex3f(5 * vertices[i], 5 * (vertices[i + 1]) + 27, 5 * vertices[i + 2]);
-    }
-    glEnd();
+    loadObjFile("untitled.obj",1,0,0,10,20,0,3,3,3);
 }

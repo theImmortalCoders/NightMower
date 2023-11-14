@@ -1,12 +1,2 @@
-﻿  Gl_template.cpp
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(112,30): warning C4018: '<': signed/unsigned mismatch
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(130,46): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(261,12): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(358,15): warning C4244: '+=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(359,15): warning C4244: '+=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(362,15): warning C4244: '-=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(363,15): warning C4244: '-=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(366,27): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(367,27): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(368,27): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+﻿  Terrain.cpp
   szescian.vcxproj -> C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\x64\Debug\lazik.exe

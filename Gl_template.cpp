@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include "resource.h"           // About box resource identifiers.
 #include "szescian/Lazik.h"
+#include "szescian/Terrain.h"
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -141,13 +142,12 @@ void RenderScene(void){
 	glMatrixMode(GL_MODELVIEW);
 	glFlush();
 
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glPushMatrix();
 	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
 	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
 	glRotatef(zRot, 0.0f, 0.0f, 1.0f);
 	glPolygonMode(GL_BACK, GL_LINE);
-	prost.grass();
+	Terrain terrain;
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glFlush();
