@@ -140,6 +140,17 @@ void RenderScene(void){
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glFlush();
+
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glPushMatrix();
+	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
+	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+	glRotatef(zRot, 0.0f, 0.0f, 1.0f);
+	glPolygonMode(GL_BACK, GL_LINE);
+	prost.grass();
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glFlush();
 }
 
 void SetDCPixelFormat(HDC hDC){

@@ -19,5 +19,6 @@ class Lazik
 public:
 	Lazik(int xSize, int ySize, int zSize);
 	void draw(int x, int y, int z);
+	void grass();
 };
 

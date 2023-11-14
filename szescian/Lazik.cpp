@@ -40,12 +40,16 @@ void Lazik::draw(int x, int y, int z)
         reflector.draw(x + 5 + this->xSize / 2, y + 3 + this->ySize, z * 8 + 4);
     }
     this->cow();
+}
+
+void Lazik::grass()
+{
     std::vector<float> vertices;
     loadObjFile("grass.obj", vertices);
     glBegin(GL_TRIANGLES);
     glColor3f(0, 1, 0);
     for (size_t i = 0; i < vertices.size(); i += 3) {
-        glVertex3f( 10* vertices[i], 10* (vertices[i + 1])-10,10* vertices[i + 2]);
+        glVertex3f(10 * vertices[i], 10 * (vertices[i + 1]) - 10, 10 * vertices[i + 2]);
     }
     glEnd();
 }
