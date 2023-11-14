@@ -43,9 +43,9 @@ void Lazik::draw(int x, int y, int z)
     std::vector<float> vertices;
     loadObjFile("grass.obj", vertices);
     glBegin(GL_TRIANGLES);
-
+    glColor3f(0, 1, 0);
     for (size_t i = 0; i < vertices.size(); i += 3) {
-        glVertex3f( 10* vertices[i], 10* (vertices[i + 1])-50,10* vertices[i + 2]);
+        glVertex3f( 10* vertices[i], 10* (vertices[i + 1])-10,10* vertices[i + 2]);
     }
     glEnd();
 }
