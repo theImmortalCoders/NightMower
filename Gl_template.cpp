@@ -39,6 +39,9 @@ static GLfloat zRot = 0.0f;
 static GLfloat yPos = 0.0f;
 static GLfloat zPos = 0.0f;
 
+static GLfloat rangeX = 100.0f;
+static GLfloat rangeY = 100.0f;
+
 static GLsizei lastHeight;
 static GLsizei lastWidth;
 
@@ -55,7 +58,7 @@ INT_PTR APIENTRY AboutDlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 void SetDCPixelFormat(HDC hDC);
 
 void ChangeSize(GLsizei w, GLsizei h){
-	GLfloat nRange = 100.0f;
+	GLfloat nRange = 500;
 	GLfloat fAspect;
 	if(h == 0)
 		h = 1;
@@ -337,6 +340,14 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 			break;
 		case WM_KEYDOWN:
 			{
+			if (wParam == '+') {
+				rangeX += 100;
+				rangeY += 100;
+			}
+			if (wParam == '-') {
+				rangeX -= 100;
+				rangeY -= 100;
+			}
 			if (wParam == VK_UP)
 				xRot -= 5.0f;
 

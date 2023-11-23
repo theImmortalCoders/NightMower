@@ -39,7 +39,7 @@ void Lazik::draw(int x, int y, int z)
     for (int z = -2; z < 2; z++) {
         reflector.draw(x + 5 + this->xSize / 2, y + 3 + this->ySize, z * 8 + 4);
     }
-    this->cow();
+    //this->cow();
 }
 
 void Lazik::cow()
