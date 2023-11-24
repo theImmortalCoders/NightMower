@@ -1,2 +1,11 @@
-﻿  Terrain.cpp
+﻿  Lazik.cpp
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(22,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(22,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Terrain.cpp
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Terrain.cpp(10,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,88): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,75): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,62): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,34): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  Generating Code...
   szescian.vcxproj -> C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\x64\Debug\lazik.exe
