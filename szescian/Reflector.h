@@ -16,7 +16,7 @@ private:
 	int x;
 	int y;
 	int z;
-	GLfloat radius;
+	GLfloat camDistance;
 	GLfloat length;
 public:
 	Reflector(int x, int y, int z);

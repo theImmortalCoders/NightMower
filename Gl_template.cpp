@@ -32,17 +32,19 @@ HPALETTE hPalette = NULL;
 static LPCTSTR lpszAppName = "Kosiarka";
 static HINSTANCE hInstance;
 
-static GLfloat xCamPos = -50;
-static GLfloat yCamPos = 50;
-static GLfloat zCamPos = 0;
-double angle = 0;
-double vertAngle = GL_PI / 8;
+
+//camera
+double azimuth = GL_PI;   // K¹t poziomy
+double elevation = GL_PI/8; // K¹t pionowy
+
+static GLfloat xCamPos;
+static GLfloat yCamPos;
+static GLfloat zCamPos;
+
+double camDistance = 200;
 double const angleJump = GL_PI / 16;
 double const radiusJump = 10;
-double radius = sqrt(5000);
-
-static GLsizei lastHeight;
-static GLsizei lastWidth;
+//camera
 
 BITMAPINFOHEADER	bitmapInfoHeader;	// nag³ówek obrazu
 unsigned char*		bitmapData;			// dane tekstury
@@ -57,14 +59,14 @@ INT_PTR APIENTRY AboutDlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 void SetDCPixelFormat(HDC hDC);
 
 void ChangeSize(GLsizei w, GLsizei h) {
-	yCamPos = sin(vertAngle) * radius;
-	xCamPos = -(cos(vertAngle)*radius);
 
 	GLfloat fAspect;
 	GLfloat fFrustumScale = 1.0;
 
 	if (h == 0)
 		h = 1;
+	static GLsizei lastHeight;
+	static GLsizei lastWidth;
 
 	lastWidth = w;
 	lastHeight = h;
@@ -76,7 +78,7 @@ void ChangeSize(GLsizei w, GLsizei h) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(45.0f, fAspect, 0.1f, 2000.0f);  // Zmieni³em na perspektywê
+	gluPerspective(45.0f, fAspect, 0.1f, 2000.0f);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -132,7 +134,10 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 
 void RenderScene(void){
 	glLoadIdentity(); //disables spinning
-
+	double a = camDistance * cos(elevation);
+	xCamPos = a * cos(azimuth);
+	yCamPos = camDistance * sin(elevation);
+	zCamPos = a * sin(azimuth);
 	gluLookAt(xCamPos, yCamPos, zCamPos, 0, 0, 0, 0, 1, 0);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -350,34 +355,25 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 			break;
 		case WM_KEYDOWN:
 			{
-
-			if (wParam == VK_LEFT) {
-				angle -= angleJump;
-				if (angle < 0) {
-					angle = GL_PI * 2;
+			if (wParam == VK_LEFT || wParam == VK_RIGHT) {
+				if (wParam == VK_LEFT) {
+					azimuth -= angleJump;
 				}
-				double a = sqrt((radius * radius) - (yCamPos * yCamPos));
-				xCamPos = sin(angle) * a;
-				zCamPos = cos(angle) * a;
-			}
-			if (wParam == VK_RIGHT) {
-				angle += angleJump;
-				if (angle > GL_PI * 2) {
-					angle = 0;
+				else {
+					azimuth += angleJump;
 				}
-				double a = sqrt((radius * radius) - (yCamPos * yCamPos));
-				xCamPos = sin(angle) * a;
-				zCamPos = cos(angle) * a;
+				if (azimuth < 0) {
+					azimuth += 2 * GL_PI;
+				}
+				else if (azimuth >= 2 * GL_PI) {
+					azimuth -= 2 * GL_PI;
+				}
 			}
-			if (wParam == VK_UP && radius > 50) {
-				radius -= radiusJump;
-				yCamPos = sin(vertAngle) * radius;
-				xCamPos = -(cos(vertAngle) * radius);
+			if (wParam == VK_UP && camDistance > 50) {
+				camDistance -= radiusJump;
 			}
-			if (wParam == VK_DOWN) {
-				radius += radiusJump;
-				yCamPos = sin(vertAngle) * radius;
-				xCamPos = -(cos(vertAngle) * radius);
+			else if (wParam == VK_DOWN) {
+				camDistance += radiusJump;
 			}
 			InvalidateRect(hWnd,NULL,FALSE);
 			}

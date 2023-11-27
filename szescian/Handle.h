@@ -14,7 +14,7 @@ class Handle
 	int x;
 	int y;
 	int z;
-	GLfloat radius;
+	GLfloat camDistance;
 	GLfloat length;
 public:
 	Handle(int x, int y, int z);

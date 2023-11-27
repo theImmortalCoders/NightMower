@@ -1,2 +1,10 @@
-﻿  LINK : C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\x64\Debug\lazik.exe not found or not built by the last incremental link; performing full link
+﻿  Gl_template.cpp
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(125,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(138,14): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(139,24): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(140,14): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(149,33): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(149,24): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(149,15): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(279,12): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
   szescian.vcxproj -> C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\x64\Debug\lazik.exe

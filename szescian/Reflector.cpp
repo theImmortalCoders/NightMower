@@ -5,7 +5,7 @@ Reflector::Reflector(int x, int y, int z)
     this->x = x;
     this->y = y;
     this->z = z;
-    this->radius = 3;
+    this->camDistance = 3;
     this->length = 2;
 }
 
@@ -23,8 +23,8 @@ void Reflector::draw(int x, int y, int z) {
             glBegin(GL_TRIANGLE_STRIP);
             for (int j = 0; j < 41; j++) {
                 GLfloat x = 2 * i;
-                GLfloat y = radius * cos(deg9 * j);
-                GLfloat z = radius * sin(deg9 * j);
+                GLfloat y = camDistance * cos(deg9 * j);
+                GLfloat z = camDistance * sin(deg9 * j);
                 glVertex3d(z, y, x);
                 x = 2 * (i + 1);
                 glVertex3d(z, y, x);
@@ -36,8 +36,8 @@ void Reflector::draw(int x, int y, int z) {
             if (k) glColor3f(1, 1, 0);
             glBegin(GL_TRIANGLE_FAN);
             for (int j = 0; j < 41; j++) {
-                GLfloat x = radius * cos(deg9 * j);
-                GLfloat y = radius * sin(deg9 * j);
+                GLfloat x = camDistance * cos(deg9 * j);
+                GLfloat y = camDistance * sin(deg9 * j);
                 GLfloat z = capDist;
                 glVertex3d(x, y, z);
             }
