@@ -32,15 +32,14 @@ HPALETTE hPalette = NULL;
 static LPCTSTR lpszAppName = "Kosiarka";
 static HINSTANCE hInstance;
 
-static GLfloat xRot = 0.0f;
-static GLfloat yRot = 0.0f;
-static GLfloat zRot = 0.0f;
-
-static GLfloat yPos = 0.0f;
-static GLfloat zPos = 0.0f;
-
-static GLfloat rangeX = 100.0f;
-static GLfloat rangeY = 100.0f;
+static GLfloat xCamPos = -0.5;
+static GLfloat yCamPos = 0.025;
+static GLfloat zCamPos = 0;
+double angle = 0;
+double vertAngle = 3.14159 / 4;
+double const angleJump = 3.14159 / 16;
+double const radiusJump = 0.01;
+double radius = 0.1;
 
 static GLsizei lastHeight;
 static GLsizei lastWidth;
@@ -58,7 +57,7 @@ INT_PTR APIENTRY AboutDlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 void SetDCPixelFormat(HDC hDC);
 
 void ChangeSize(GLsizei w, GLsizei h){
-	GLfloat nRange = 500;
+	GLfloat nRange = 400;
 	GLfloat fAspect;
 	if(h == 0)
 		h = 1;
@@ -124,17 +123,26 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 }
 
 void RenderScene(void){
+	glLoadIdentity(); //disables spinning
+	//zoom
+	xCamPos = xCamPos + ((radius * cos(vertAngle)) / sin(vertAngle));
+	yCamPos = yCamPos + (radius/sin(vertAngle));
+	//circle
+	xCamPos = cos(angle) * radius;
+	zCamPos = sin(angle) * radius;
+
+	gluLookAt(xCamPos, yCamPos, zCamPos, 0, 0, 0, 0, 1, 0);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glPushMatrix();
-
 	int centerX = 0;
 	int centerY = 0;
 	int centerZ = 0;
 
-	glTranslatef(centerX +yPos, centerY + zPos, centerZ ); // Translate to position of Lazik
-	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
-	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-	glRotatef(zRot, 0.0f, 0.0f, 1.0f);
+	glTranslatef(centerX, centerY, centerZ ); // Translate to position of Lazik
+	glRotatef(0, 1.0f, 0.0f, 0.0f);
+	glRotatef(0, 0.0f, 1.0f, 0.0f);
+	glRotatef(0, 0.0f, 0.0f, 1.0f);
 
 	glPolygonMode(GL_BACK, GL_LINE);
 
@@ -146,9 +154,9 @@ void RenderScene(void){
 	glFlush();
 
 	glPushMatrix();
-	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
-	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-	glRotatef(zRot, 0.0f, 0.0f, 1.0f);
+	glRotatef(0, 1.0f, 0.0f, 0.0f);
+	glRotatef(0, 0.0f, 1.0f, 0.0f);
+	glRotatef(0, 0.0f, 0.0f, 1.0f);
 	glPolygonMode(GL_BACK, GL_LINE);
 	Terrain terrain;
 	glPopMatrix();
@@ -340,44 +348,30 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 			break;
 		case WM_KEYDOWN:
 			{
-			if (wParam == '+') {
-				rangeX += 100;
-				rangeY += 100;
+			//if (wParam == VK_UP)
+			//	
+
+			//if (wParam == VK_DOWN)
+			//	//xRot += 5.0f;
+
+			if (wParam == VK_LEFT) {
+				angle -= angleJump;
+				if (angle < 0) {
+					angle = 3.14159 * 2;
+				}
 			}
-			if (wParam == '-') {
-				rangeX -= 100;
-				rangeY -= 100;
+			if (wParam == VK_RIGHT) {
+				angle += angleJump;
+				if (angle > 3.14159 * 2) {
+					angle = 0;
+				}
 			}
-			if (wParam == VK_UP)
-				xRot -= 5.0f;
-
-			if (wParam == VK_DOWN)
-				xRot += 5.0f;
-
-			if (wParam == VK_LEFT)
-				yRot -= 5.0f;
-
-			if (wParam == VK_RIGHT)
-				yRot += 5.0f;
-
-			if (wParam == 'A')
-				yRot -= 5.0f;
-
-			if (wParam == 'D')
-				yRot += 5.0f;
-			if (wParam == 'W') {
-				yPos += 5 * cos((yRot*3.14)/180);
-				zPos += 5 * sin((zRot * 3.14) / 180);
+			if (wParam == VK_UP) {
+				radius -= radiusJump;
 			}
-			if (wParam == 'S') {
-				yPos -= 5 * cos((yRot * 3.14) / 180);
-				zPos -= 5 * sin((zRot * 3.14) / 180);
+			if (wParam == VK_DOWN) {
+				radius += radiusJump;
 			}
-
-			xRot = (const int)xRot % 360;
-			yRot = (const int)yRot % 360;
-			zRot = (const int)zRot % 360;
-
 			InvalidateRect(hWnd,NULL,FALSE);
 			}
 			break;
