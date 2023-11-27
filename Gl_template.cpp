@@ -32,8 +32,8 @@ HPALETTE hPalette = NULL;
 static LPCTSTR lpszAppName = "Kosiarka";
 static HINSTANCE hInstance;
 
-static GLfloat xCamPos = -0.5;
-static GLfloat yCamPos = 0.025;
+static GLfloat xCamPos = -200;
+static GLfloat yCamPos = 100;
 static GLfloat zCamPos = 0;
 double angle = 0;
 double vertAngle = 3.14159 / 4;
@@ -56,24 +56,48 @@ INT_PTR APIENTRY AboutDlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 
 void SetDCPixelFormat(HDC hDC);
 
-void ChangeSize(GLsizei w, GLsizei h){
-	GLfloat nRange = 400;
+//void ChangeSize(GLsizei w, GLsizei h){
+//	GLfloat nRange = 400;
+//	GLfloat fAspect;
+//	if(h == 0)
+//		h = 1;
+//	lastWidth = w;
+//	lastHeight = h;
+//	fAspect=(GLfloat)w/(GLfloat)h;
+//    glViewport(0, 0, w, h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//    if (w <= h) 
+//		glOrtho (-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
+//    else 
+//		glOrtho (-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//}
+
+void ChangeSize(GLsizei w, GLsizei h) {
 	GLfloat fAspect;
-	if(h == 0)
+	GLfloat fFrustumScale = 1.0;
+
+	if (h == 0)
 		h = 1;
+
 	lastWidth = w;
 	lastHeight = h;
-	fAspect=(GLfloat)w/(GLfloat)h;
-    glViewport(0, 0, w, h);
+
+	fAspect = (GLfloat)w / (GLfloat)h;
+
+	glViewport(0, 0, w, h);
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-    if (w <= h) 
-		glOrtho (-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
-    else 
-		glOrtho (-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
+
+	gluPerspective(45.0f, fAspect, 0.1f, 2000.0f);  // Zmieni³em na perspektywê
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
+
 
 void SetupRC(){
 	glEnable(GL_DEPTH_TEST);	// Hidden surface removal
@@ -124,12 +148,8 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 
 void RenderScene(void){
 	glLoadIdentity(); //disables spinning
-	//zoom
-	xCamPos = xCamPos + ((radius * cos(vertAngle)) / sin(vertAngle));
-	yCamPos = yCamPos + (radius/sin(vertAngle));
-	//circle
-	xCamPos = cos(angle) * radius;
-	zCamPos = sin(angle) * radius;
+	
+	
 
 	gluLookAt(xCamPos, yCamPos, zCamPos, 0, 0, 0, 0, 1, 0);
 
