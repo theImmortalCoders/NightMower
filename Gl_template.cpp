@@ -36,10 +36,10 @@ static GLfloat xCamPos = -200;
 static GLfloat yCamPos = 100;
 static GLfloat zCamPos = 0;
 double angle = 0;
-double vertAngle = 3.14159 / 4;
+double vertAngle = 3.14159 / 8;
 double const angleJump = 3.14159 / 16;
-double const radiusJump = 0.01;
-double radius = 0.1;
+double const radiusJump = 10;
+double radius = 200;
 
 static GLsizei lastHeight;
 static GLsizei lastWidth;
@@ -56,26 +56,9 @@ INT_PTR APIENTRY AboutDlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 
 void SetDCPixelFormat(HDC hDC);
 
-//void ChangeSize(GLsizei w, GLsizei h){
-//	GLfloat nRange = 400;
-//	GLfloat fAspect;
-//	if(h == 0)
-//		h = 1;
-//	lastWidth = w;
-//	lastHeight = h;
-//	fAspect=(GLfloat)w/(GLfloat)h;
-//    glViewport(0, 0, w, h);
-//	glMatrixMode(GL_PROJECTION);
-//	glLoadIdentity();
-//    if (w <= h) 
-//		glOrtho (-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
-//    else 
-//		glOrtho (-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
-//	glMatrixMode(GL_MODELVIEW);
-//	glLoadIdentity();
-//}
-
 void ChangeSize(GLsizei w, GLsizei h) {
+	yCamPos = (radius / cos(vertAngle));
+	xCamPos = -((radius * cos(vertAngle)) / sin(vertAngle));
 	GLfloat fAspect;
 	GLfloat fFrustumScale = 1.0;
 
@@ -148,8 +131,6 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 
 void RenderScene(void){
 	glLoadIdentity(); //disables spinning
-	
-	
 
 	gluLookAt(xCamPos, yCamPos, zCamPos, 0, 0, 0, 0, 1, 0);
 
@@ -368,29 +349,34 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 			break;
 		case WM_KEYDOWN:
 			{
-			//if (wParam == VK_UP)
-			//	
-
-			//if (wParam == VK_DOWN)
-			//	//xRot += 5.0f;
 
 			if (wParam == VK_LEFT) {
 				angle -= angleJump;
 				if (angle < 0) {
 					angle = 3.14159 * 2;
 				}
+				double a = sqrt((radius * radius) - (yCamPos * yCamPos));
+				xCamPos = sin(angle) * a;
+				zCamPos = cos(angle) * a;
 			}
 			if (wParam == VK_RIGHT) {
 				angle += angleJump;
 				if (angle > 3.14159 * 2) {
 					angle = 0;
 				}
+				double a = sqrt((radius * radius) - (yCamPos * yCamPos));
+				xCamPos = sin(angle) * a;
+				zCamPos = cos(angle) * a;
 			}
-			if (wParam == VK_UP) {
+			if (wParam == VK_UP && radius > 50) {
 				radius -= radiusJump;
+				yCamPos = (radius / cos(vertAngle));
+				xCamPos = -((radius * cos(vertAngle)) / sin(vertAngle));
 			}
 			if (wParam == VK_DOWN) {
 				radius += radiusJump;
+				yCamPos = (radius / cos(vertAngle));
+				xCamPos = -((radius * cos(vertAngle)) / sin(vertAngle));
 			}
 			InvalidateRect(hWnd,NULL,FALSE);
 			}
