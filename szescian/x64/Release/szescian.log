@@ -1,7 +1,7 @@
 ﻿  loader.cpp
   Generating code
-  2 of 1353 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 1354 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    11 functions had inline decision re-evaluated but remain unchanged
+    12 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   szescian.vcxproj -> C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\x64\Release\lazik.exe
