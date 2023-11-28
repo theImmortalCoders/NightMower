@@ -1,15 +1,10 @@
 #pragma once
+#include "glew-2.1.0/include/GL/glew.h"
 #include <string>
 #include <iostream>
 #include <vector>
 #define  _CRT_SECURE_NO_WARNINGS
-#ifdef _MSC_VER
-#  pragma comment(lib, "opengl32.lib")
-#  pragma comment(lib, "glu32.lib")
-#endif
 #include <windows.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
 #include <math.h>
 #include <stdio.h>
 

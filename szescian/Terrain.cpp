@@ -1,5 +1,5 @@
-#include "Terrain.h"
 #include "loader.h"
+#include "Terrain.h"
 #include "Wall.h"
 
 Terrain::Terrain()

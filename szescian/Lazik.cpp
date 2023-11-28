@@ -8,7 +8,6 @@
 #include <iostream>
 #include <vector>
 #include "Wall.h"
-#include "loader.h"
 
 Lazik::Lazik(int xSize, int ySize, int zSize)
 {
@@ -43,7 +42,3 @@ void Lazik::draw(int x, int y, int z)
     //this->cow();
 }
 
-void Lazik::cow()
-{
-    loadObjFile("untitled.obj",1,0,0,10,20,0,3,3,3);
-}
