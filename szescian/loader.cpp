@@ -7,7 +7,7 @@
 GLuint loadTexture(const char* filename) {
     GLuint texture;
     glewInit();
-    glewExperimental = GL_TRUE;
+    //glewExperimental = GL_TRUE;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -33,7 +33,7 @@ void loadObjFile(const std::string& filename, GLfloat red, GLfloat green, GLfloa
     std::vector<tinyobj::material_t> materials;
     std::string err;
     bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename.c_str());
-    GLuint textureID = loadTexture("wall.jpg");
+    GLuint textureID = loadTexture("wallo.jpg");
     for (const auto& shape : shapes) {
         for (const auto& index : shape.mesh.indices) {
             vertices.push_back(attrib.vertices[3 * index.vertex_index + 0]);
