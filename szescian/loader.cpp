@@ -4,43 +4,36 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-void loadTexture() {
-    unsigned int texture;
+GLuint loadTexture(const char* filename) {
+    GLuint texture;
     glewInit();
     glewExperimental = GL_TRUE;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-    // set the texture wrapping/filtering options (on the currently bound texture object)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glewExperimental = GL_TRUE;
-    // load and generate the texture
     int width, height, nrChannels;
-    unsigned char* data = stbi_load("wall.jpg", &width, &height, &nrChannels, STBI_rgb_alpha);
-    if (data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    unsigned char* data = stbi_load(filename, &width, &height, &nrChannels, STBI_rgb_alpha);
+    if (data) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
     stbi_image_free(data);
+    return texture;
 }
 
 void loadObjFile(const std::string& filename, GLfloat red, GLfloat green, GLfloat blue, int x, int y, int z, int scaleX, int scaleY, int scaleZ)
 {
     std::vector<float> vertices;
-    std::vector<float> textures; // Added texture coordinates
+    std::vector<float> textures;
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
     std::string err;
     bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename.c_str());
-
+    GLuint textureID = loadTexture("wall.jpg");
     for (const auto& shape : shapes) {
         for (const auto& index : shape.mesh.indices) {
             vertices.push_back(attrib.vertices[3 * index.vertex_index + 0]);
@@ -53,22 +46,17 @@ void loadObjFile(const std::string& filename, GLfloat red, GLfloat green, GLfloa
             }
         }
     }
-
-    // Rendering with texture coordinates
     glEnable(GL_TEXTURE_2D);
-    loadTexture();
-
+    glBindTexture(GL_TEXTURE_2D, textureID);
     glBegin(GL_TRIANGLES);
     glColor3f(red, green, blue);
     for (size_t i = 0; i < vertices.size(); i += 3) {
-        // Ensure there are enough texture coordinates for each vertex
         if (i + 2 < textures.size()) {
-            glTexCoord2f(textures[i], textures[i + 1]);  // Use texture coordinates
+            glTexCoord2f(textures[i], textures[i + 1]);
         }
-
         glVertex3f(scaleX * vertices[i] + x, scaleY * vertices[i + 1] + y, scaleZ * vertices[i + 2] + z);
     }
     glEnd();
-
     glDisable(GL_TEXTURE_2D);
+    glDeleteTextures(1, &textureID);
 }
