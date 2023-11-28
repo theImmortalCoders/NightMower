@@ -12,12 +12,14 @@ GLuint loadTexture(const char* filename) {
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
     int width, height, nrChannels;
-    unsigned char* data = stbi_load(filename, &width, &height, &nrChannels, STBI_rgb_alpha);
+    unsigned char* data = stbi_load(filename, &width, &height, &nrChannels, STBI_rgb);
     if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     stbi_image_free(data);
@@ -33,7 +35,8 @@ void loadObjFile(const std::string& filename, GLfloat red, GLfloat green, GLfloa
     std::vector<tinyobj::material_t> materials;
     std::string err;
     bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename.c_str());
-    GLuint textureID = loadTexture("wallo.jpg");
+    GLuint textureID = loadTexture("wall.png");
+
     for (const auto& shape : shapes) {
         for (const auto& index : shape.mesh.indices) {
             vertices.push_back(attrib.vertices[3 * index.vertex_index + 0]);
@@ -46,17 +49,19 @@ void loadObjFile(const std::string& filename, GLfloat red, GLfloat green, GLfloa
             }
         }
     }
+
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, textureID);
     glBegin(GL_TRIANGLES);
     glColor3f(red, green, blue);
     for (size_t i = 0; i < vertices.size(); i += 3) {
         if (i + 2 < textures.size()) {
-            glTexCoord2f(textures[i], textures[i + 1]);
+            glTexCoord2f(textures[i / 3 * 2], textures[i / 3 * 2 + 1]);
         }
         glVertex3f(scaleX * vertices[i] + x, scaleY * vertices[i + 1] + y, scaleZ * vertices[i + 2] + z);
     }
     glEnd();
     glDisable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, 0);
     glDeleteTextures(1, &textureID);
 }
