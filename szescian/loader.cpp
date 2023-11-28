@@ -6,6 +6,8 @@
 
 void loadTexture() {
     unsigned int texture;
+    glewInit();
+    glewExperimental = GL_TRUE;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     // set the texture wrapping/filtering options (on the currently bound texture object)
@@ -13,9 +15,10 @@ void loadTexture() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glewExperimental = GL_TRUE;
     // load and generate the texture
     int width, height, nrChannels;
-    unsigned char* data = stbi_load("wall.jpg", &width, &height, &nrChannels, 0);
+    unsigned char* data = stbi_load("wall.jpg", &width, &height, &nrChannels, STBI_rgb_alpha);
     if (data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -49,4 +52,5 @@ void loadObjFile(const std::string& filename, GLfloat red, GLfloat green, GLfloa
         glVertex3f(scaleX * vertices[i] + x, scaleY * (vertices[i + 1]) + y, scaleZ * vertices[i + 2] + z);
     }
     glEnd();
+    loadTexture();
 }
