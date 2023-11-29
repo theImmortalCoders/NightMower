@@ -148,17 +148,15 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)glew-2.1.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)libraries\glew-2.1.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Gl_template.cpp" />
     <ClCompile Include="Axle.cpp" />
-    <ClCompile Include="Core.cpp" />
     <ClCompile Include="Handle.cpp" />
     <ClCompile Include="Lazik.cpp" />
     <ClCompile Include="loader.cpp" />
-    <ClCompile Include="Reflector.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Wheel.cpp" />
@@ -170,11 +168,9 @@
   <ItemGroup>
     <ClInclude Include="..\RESOURCE.H" />
     <ClInclude Include="Axle.h" />
-    <ClInclude Include="Core.h" />
     <ClInclude Include="Handle.h" />
     <ClInclude Include="Lazik.h" />
     <ClInclude Include="loader.h" />
-    <ClInclude Include="Reflector.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Wheel.h" />

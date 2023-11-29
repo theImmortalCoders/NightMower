@@ -1,21 +1,18 @@
 #include "loader.h"
 #define TINYOBJLOADER_IMPLEMENTATION
-#include "tinyobjloader/tiny_obj_loader.h"
+#include "libraries/tinyobjloader/tiny_obj_loader.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "libraries/stb_image.h"
 
 GLuint loadTexture(const char* filename) {
     GLuint texture;
     glewInit();
-    //glewExperimental = GL_TRUE;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
     int width, height, nrChannels;
     unsigned char* data = stbi_load(filename, &width, &height, &nrChannels, STBI_rgb);
     if (data) {
@@ -26,7 +23,7 @@ GLuint loadTexture(const char* filename) {
     return texture;
 }
 
-void loadObjFile(const std::string& filename, const char* textureName, GLfloat red, GLfloat green, GLfloat blue, int x, int y, int z, int scaleX, int scaleY, int scaleZ)
+void loadObjFile(std::string filename, std::string textureName, GLfloat red, GLfloat green, GLfloat blue, int x, int y, int z, int scaleX, int scaleY, int scaleZ)
 {
     std::vector<float> vertices;
     std::vector<float> textures;
@@ -34,8 +31,10 @@ void loadObjFile(const std::string& filename, const char* textureName, GLfloat r
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
     std::string err;
+    filename = "objects/" + filename;
     bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename.c_str());
-    GLuint textureID = loadTexture(textureName);
+    textureName = "textures/" + textureName;
+    GLuint textureID = loadTexture(textureName.c_str());
 
     for (const auto& shape : shapes) {
         for (const auto& index : shape.mesh.indices) {
