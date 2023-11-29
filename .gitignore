@@ -21,3 +21,6 @@ Release
 *.vbproj.user
 ipch
 *sdf
+*.vsidx
+.vs/lazik_solution/v17/Browse.VC.db
+.vs/lazik_solution/FileContentIndex/afb30baa-c0cf-4be2-b9fe-720f86f4f394.vsidx
