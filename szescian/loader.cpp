@@ -23,7 +23,7 @@ GLuint loadTexture(const char* filename) {
     return texture;
 }
 
-void loadObjFile(std::string filename, std::string textureName, GLfloat red, GLfloat green, GLfloat blue, int x, int y, int z, int scaleX, int scaleY, int scaleZ)
+void loadObjFile(std::string filename, std::string textureName, GLfloat red, GLfloat green, GLfloat blue, int x, int y, int z, int scaleX, int scaleY, int scaleZ, int repeatX, int repeatY)
 {
     std::vector<float> vertices;
     std::vector<float> textures;
@@ -56,7 +56,7 @@ void loadObjFile(std::string filename, std::string textureName, GLfloat red, GLf
     int textureIndex = 0;
     for (size_t i = 0; i < vertices.size(); i += 3) {
         if (textureIndex < textures.size()) {
-            glTexCoord2f(textures[textureIndex], textures[textureIndex + 1]);
+            glTexCoord2f(repeatX * textures[textureIndex], repeatY * textures[textureIndex + 1]);
             textureIndex += 2;
         }
         glVertex3f(scaleX * vertices[i] + x, scaleY * vertices[i + 1] + y, scaleZ * vertices[i + 2] + z);

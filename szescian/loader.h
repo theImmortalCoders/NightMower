@@ -8,4 +8,4 @@
 #include <math.h>
 #include <stdio.h>
 
-void loadObjFile(std::string filename, std::string textureName, GLfloat red, GLfloat green, GLfloat blue, int x, int y, int z, int sizeX, int sizeY, int sizeZ);
+void loadObjFile(std::string filename, std::string textureName, GLfloat red, GLfloat green, GLfloat blue, int x, int y, int z, int scaleX, int scaleY, int scaleZ, int repeatX, int repeatY);

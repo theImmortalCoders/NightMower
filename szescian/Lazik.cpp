@@ -17,7 +17,7 @@ Lazik::Lazik(int xSize, int ySize, int zSize)
 
 void Lazik::draw(int x, int y, int z)
 {
-    loadObjFile("core.obj", "floor.jpg", 1, 1, 1, x, y+5, z, xSize*0.5, zSize, ySize*0.78);
+    loadObjFile("core.obj", "floor.jpg", 1, 1, 1, x, y+5, z, xSize*0.5, zSize, ySize*0.78, 2, 2);
     Wheel wheel(x, y, z);
     Axle axle(x, y, z);
     Handle handle(x, y, z);
@@ -29,6 +29,6 @@ void Lazik::draw(int x, int y, int z)
     wheel.draw(x - 4 - this->xSize / 2, 0, x - this->ySize - 12);
     wheel.draw(x - 4 - this->xSize / 2, 0, x + this->ySize + 12, 1);
     for (int z = -2; z < 2; z++) {
-        loadObjFile("reflector.obj", "metal.jpg", 1, 1, 1, x + 5 + xSize / 2, y + 3 + ySize, z * 8 + 4, xSize*0.8, zSize*0.8, ySize*0.8);
+        loadObjFile("reflector.obj", "metal.jpg", 1, 1, 1, x + 5 + xSize / 2, y + 3 + ySize, z * 8 + 4, xSize*0.8, zSize*0.8, ySize*0.8, 2, 2);
     }
 }

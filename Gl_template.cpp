@@ -32,7 +32,8 @@ HPALETTE hPalette = NULL;
 static LPCTSTR lpszAppName = "Kosiarka";
 static HINSTANCE hInstance;
 
-
+bool dragging = false;
+POINTS prevMousePos = { 0, 0 };
 //camera
 double azimuth = GL_PI;   // K¹t poziomy
 double elevation = GL_PI/8; // K¹t pionowy
@@ -42,7 +43,7 @@ static GLfloat yCamPos;
 static GLfloat zCamPos;
 
 double camDistance = 200;
-double const angleJump = GL_PI / 16;
+double const angleJump = GL_PI / 128;
 double const radiusJump = 10;
 //camera
 
@@ -59,31 +60,22 @@ INT_PTR APIENTRY AboutDlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 void SetDCPixelFormat(HDC hDC);
 
 void ChangeSize(GLsizei w, GLsizei h) {
-
 	GLfloat fAspect;
 	GLfloat fFrustumScale = 1.0;
-
 	if (h == 0)
 		h = 1;
 	static GLsizei lastHeight;
 	static GLsizei lastWidth;
-
 	lastWidth = w;
 	lastHeight = h;
-
 	fAspect = (GLfloat)w / (GLfloat)h;
-
 	glViewport(0, 0, w, h);
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-
-	gluPerspective(45.0f, fAspect, 0.1f, 2000.0f);
-
+	gluPerspective(45.0f, fAspect, 0.1f, 1000.0f);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
-
 
 void SetupRC(){
 	glEnable(GL_DEPTH_TEST);	// Hidden surface removal
@@ -353,31 +345,49 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 				return 0;
 				}
 			break;
-		case WM_KEYDOWN:
-			{
-			if (wParam == VK_LEFT || wParam == VK_RIGHT) {
-				if (wParam == VK_LEFT) {
-					azimuth -= angleJump;
-				}
-				else {
-					azimuth += angleJump;
-				}
+		case WM_MOUSEWHEEL:
+		{
+			int delta = GET_WHEEL_DELTA_WPARAM(wParam);
+			if (delta > 0 && camDistance > 150) {
+				camDistance -= radiusJump;
+			}
+			else if (delta < 0 && camDistance < 500) {
+				camDistance += radiusJump;
+			}
+			InvalidateRect(hWnd, NULL, FALSE);
+		}
+		break;
+
+		case WM_RBUTTONDOWN:
+		{
+			prevMousePos = MAKEPOINTS(lParam);
+			dragging = true;
+		}
+		break;
+		case WM_RBUTTONUP:
+		{
+			dragging = false;
+		}
+		break;
+		case WM_MOUSEMOVE:
+		{
+			if (dragging) {
+				POINTS currentMousePos = MAKEPOINTS(lParam);
+				int deltaX = currentMousePos.x - prevMousePos.x;
+				azimuth += angleJump * deltaX / 5;
 				if (azimuth < 0) {
 					azimuth += 2 * GL_PI;
 				}
 				else if (azimuth >= 2 * GL_PI) {
 					azimuth -= 2 * GL_PI;
 				}
+
+				prevMousePos = currentMousePos;
+
+				InvalidateRect(hWnd, NULL, FALSE);
 			}
-			if (wParam == VK_UP && camDistance > 50) {
-				camDistance -= radiusJump;
-			}
-			else if (wParam == VK_DOWN) {
-				camDistance += radiusJump;
-			}
-			InvalidateRect(hWnd,NULL,FALSE);
-			}
-			break;
+		}
+		break;
 		case WM_COMMAND:
 			{
 			switch(LOWORD(wParam))

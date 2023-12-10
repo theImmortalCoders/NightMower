@@ -1,136 +1,15 @@
 ﻿  Gl_template.cpp
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(125,30): warning C4018: '<': signed/unsigned mismatch
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(138,14): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(139,24): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(140,14): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(149,33): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(149,24): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(149,15): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(279,12): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
-  Axle.cpp
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(13,16): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(17,24): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(17,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(17,18): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(22,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(25,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(26,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(27,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(29,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(35,25): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(38,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(39,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp(40,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-  Handle.cpp
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(13,16): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(17,24): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(17,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(17,18): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(25,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(28,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(29,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(30,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(32,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(38,25): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(41,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(42,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(43,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(49,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(52,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(53,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(54,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(56,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(62,25): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(65,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(66,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(67,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(75,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(78,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(79,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(80,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(82,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(88,30): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(88,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(88,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(89,38): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(89,32): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(89,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(90,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(93,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(94,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(95,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(97,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(103,44): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(103,37): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(103,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(104,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(104,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(104,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(105,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(108,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(109,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(110,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp(112,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-  Lazik.cpp
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(20,85): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(20,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(32,132): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(32,121): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(32,110): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  loader.cpp
-  Terrain.cpp
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,91): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,78): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,65): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,37): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  Wall.cpp
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(10,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(10,19): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(10,14): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(24,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(24,19): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(24,14): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(38,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(38,19): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(38,14): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(85,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(85,18): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp(85,15): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-  Wheel.cpp
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(2,12): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(20,20): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(21,20): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(25,23): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(26,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(27,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(29,19): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(30,29): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(31,29): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(42,23): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(43,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(44,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(46,19): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(53,15): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(59,23): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(60,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(61,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(63,33): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(64,33): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(77,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(78,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(87,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(88,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(100,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(104,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(104,20): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(104,15): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(118,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(119,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(143,30): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(143,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp(143,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(117,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(130,14): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(131,24): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(132,14): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(141,33): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(141,24): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(141,15): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(271,12): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
   Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 1352 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 1352 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   szescian.vcxproj -> C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\x64\Release\lazik.exe
