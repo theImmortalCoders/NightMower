@@ -1,15 +1,15 @@
-﻿  Gl_template.cpp
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(127,30): warning C4018: '<': signed/unsigned mismatch
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(140,17): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(141,24): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(142,17): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(278,12): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(386,23): warning C4244: 'argument': conversion from 'WPARAM' to 'int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(394,22): warning C4244: 'argument': conversion from 'WPARAM' to 'const int', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(474,17): warning C4244: '+=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp(475,17): warning C4244: '+=': conversion from 'double' to 'GLfloat', possible loss of data
+﻿  Lazik.cpp
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(20,85): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(20,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(27,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(28,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(29,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(30,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(32,132): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(32,121): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp(32,110): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Generating code
-  2 of 1445 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 1447 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

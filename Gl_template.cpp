@@ -52,7 +52,8 @@ static GLfloat xPos = 0;
 static GLfloat yPos = 0;
 static GLfloat zPos = 0;
 static GLfloat rot = 0;
-
+float speed = 0;
+float maxSpeed = 7;
 double camDistance = 200;
 double const angleJump = GL_PI / 128;
 double const radiusJump = 10;
@@ -153,7 +154,7 @@ void RenderScene(void){
 	glPolygonMode(GL_BACK, GL_LINE);
 
 	Lazik lazik(50, 20, 10);
-	lazik.draw(0, 0, 0);
+	lazik.draw(0, 0, 0, 360*(speed/maxSpeed));
 
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
@@ -430,57 +431,85 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
     return (0L);
 }
 
-INT_PTR APIENTRY AboutDlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+INT_PTR APIENTRY AboutDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
 	{
-    switch (message)
+	case WM_INITDIALOG:
 	{
-	    case WM_INITDIALOG:
-			{
-			int i;
-			GLenum glError;
-			SetDlgItemText(hDlg,IDC_OPENGL_VENDOR,(LPCSTR)glGetString(GL_VENDOR));
-			SetDlgItemText(hDlg,IDC_OPENGL_RENDERER, (LPCSTR)glGetString(GL_RENDERER));
-			SetDlgItemText(hDlg,IDC_OPENGL_VERSION, (LPCSTR)glGetString(GL_VERSION));
-			SetDlgItemText(hDlg,IDC_OPENGL_EXTENSIONS, (LPCSTR)glGetString(GL_EXTENSIONS));
-			SetDlgItemText(hDlg,IDC_GLU_VERSION, (LPCSTR)gluGetString(GLU_VERSION));
-			SetDlgItemText(hDlg,IDC_GLU_EXTENSIONS, (LPCSTR)gluGetString(GLU_EXTENSIONS));
-			i = 0;
-			do {
-				glError = glGetError();
-				SetDlgItemText(hDlg,IDC_ERROR1+i, (LPCSTR)gluErrorString(glError));
-				i++;
-				}
-			while(i < 6 && glError != GL_NO_ERROR);
+		int i;
+		GLenum glError;
+		SetDlgItemText(hDlg, IDC_OPENGL_VENDOR, (LPCSTR)glGetString(GL_VENDOR));
+		SetDlgItemText(hDlg, IDC_OPENGL_RENDERER, (LPCSTR)glGetString(GL_RENDERER));
+		SetDlgItemText(hDlg, IDC_OPENGL_VERSION, (LPCSTR)glGetString(GL_VERSION));
+		SetDlgItemText(hDlg, IDC_OPENGL_EXTENSIONS, (LPCSTR)glGetString(GL_EXTENSIONS));
+		SetDlgItemText(hDlg, IDC_GLU_VERSION, (LPCSTR)gluGetString(GLU_VERSION));
+		SetDlgItemText(hDlg, IDC_GLU_EXTENSIONS, (LPCSTR)gluGetString(GLU_EXTENSIONS));
+		i = 0;
+		do {
+			glError = glGetError();
+			SetDlgItemText(hDlg, IDC_ERROR1 + i, (LPCSTR)gluErrorString(glError));
+			i++;
+		} while (i < 6 && glError != GL_NO_ERROR);
 
 
-			return (TRUE);
-			}
-			break;
-	    case WM_COMMAND:      
-			{
-			if(LOWORD(wParam) == IDOK)
-				EndDialog(hDlg,TRUE);
-		    }
-			break;
-		case WM_CLOSE:
-			EndDialog(hDlg,TRUE);
-			break;
-		}
+		return (TRUE);
+	}
+	break;
+	case WM_COMMAND:
+	{
+		if (LOWORD(wParam) == IDOK)
+			EndDialog(hDlg, TRUE);
+	}
+	break;
+	case WM_CLOSE:
+		EndDialog(hDlg, TRUE);
+		break;
+	}
 	return FALSE;
 }
 void move() {
+	const float acceleration = 0.3f;
+	const float deceleration = 0.2f;
 	if (isWKeyPressed || isSKeyPressed) {
-		float speed = (isWKeyPressed) ? 5.0f : -5.0f;
+		if (isWKeyPressed && speed < maxSpeed) {
+			speed += acceleration;
+		}
+		else if (isSKeyPressed && speed > -maxSpeed) {
+			speed -= acceleration;
+		}
 		xPos += speed * sin(rot * (GL_PI / 180) + GL_PI / 2);
 		zPos += speed * cos(rot * (GL_PI / 180) + GL_PI / 2);
-		int multiplier = isWKeyPressed ? 1 : -1;
 		if (keysPressed.count('D') && !keysPressed.count('A')) {
-			azimuth += (multiplier*5.0 * (GL_PI / 180));
-			rot -= multiplier * 5.0f;
+			azimuth += (speed/2 * (GL_PI / 180));
+			rot -= speed/2;
 		}
 		else if (keysPressed.count('A') && !keysPressed.count('D')) {
-			azimuth -= (multiplier * 5.0 * (GL_PI / 180));
-			rot += multiplier * 5.0f;
+			azimuth -= (speed/2 * (GL_PI / 180));
+			rot += speed/2;
+		}
+	}
+	else {
+		if (speed > 0) {
+			speed -= deceleration;
+		}
+		else if (speed < 0) {
+			speed += deceleration;
+		}
+		if (abs(speed) > 0.1) {
+			xPos += speed * sin(rot * (GL_PI / 180) + GL_PI / 2);
+			zPos += speed * cos(rot * (GL_PI / 180) + GL_PI / 2);
+			if (keysPressed.count('D') && !keysPressed.count('A')) {
+				azimuth += (speed/2 * 1.0 * (GL_PI / 180));
+				rot -= speed/2 * 1.0f;
+			}
+			else if (keysPressed.count('A') && !keysPressed.count('D')) {
+				azimuth -= (speed/2 * 1.0 * (GL_PI / 180));
+				rot += speed/2 * 1.0f;
+			}
+		}
+		else {
+			speed = 0;
 		}
 	}
 }

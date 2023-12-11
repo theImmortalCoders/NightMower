@@ -11,5 +11,5 @@ Terrain::Terrain()
     loadObjFile("leaves.obj","", 0, 0.75, 0, 160, 150, 20, scale, scale, scale, 1, 1);
     loadObjFile("leaves.obj","", 0, 0.7, 0, 160, 150, 80, scale * 0.7, scale * 0.7, scale * 0.7, 1, 1);
     Wall wall(30,0, -20);
-    wall.draw(30, 0, 20 + 70, 5, 5);
+    wall.draw(30, -10, 20 + 70, 5, 5);
 }
