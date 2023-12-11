@@ -22,15 +22,20 @@
 #include "resource.h"           // About box resource identifiers.
 #include "szescian/Lazik.h"
 #include "szescian/Terrain.h"
-
+#include <set>
+#define TIMER_ID 1
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
 #define GL_PI 3.14159265359
 
 HPALETTE hPalette = NULL;
-
 static LPCTSTR lpszAppName = "Kosiarka";
 static HINSTANCE hInstance;
+
+//keys
+bool isWKeyPressed = false;
+bool isSKeyPressed = false;
+set<int> keysPressed;
 
 bool dragging = false;
 POINTS prevMousePos = { 0, 0 };
@@ -42,10 +47,15 @@ static GLfloat xCamPos;
 static GLfloat yCamPos;
 static GLfloat zCamPos;
 
+//lazik
+static GLfloat xPos = 0;
+static GLfloat yPos = 0;
+static GLfloat zPos = 0;
+static GLfloat rot = 0;
+
 double camDistance = 200;
 double const angleJump = GL_PI / 128;
 double const radiusJump = 10;
-//camera
 
 BITMAPINFOHEADER	bitmapInfoHeader;	// nag³ówek obrazu
 unsigned char*		bitmapData;			// dane tekstury
@@ -127,26 +137,23 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 void RenderScene(void){
 	glLoadIdentity(); //disables spinning
 	double a = camDistance * cos(elevation);
-	xCamPos = a * cos(azimuth);
+	xCamPos = xPos + a * cos(azimuth);
 	yCamPos = camDistance * sin(elevation);
-	zCamPos = a * sin(azimuth);
-	gluLookAt(xCamPos, yCamPos, zCamPos, 0, 0, 0, 0, 1, 0);
+	zCamPos = zPos + a * sin(azimuth);
+	gluLookAt(xCamPos, yCamPos, zCamPos, xPos, yPos, zPos, 0, 1, 0);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glPushMatrix();
-	int centerX = 0;
-	int centerY = 0;
-	int centerZ = 0;
 
-	glTranslatef(centerX, centerY, centerZ ); // Translate to position of Lazik
+	glTranslatef(xPos, yPos, zPos); // Translate to position of Lazik
 	glRotatef(0, 1.0f, 0.0f, 0.0f);
-	glRotatef(0, 0.0f, 1.0f, 0.0f);
+	glRotatef(rot, 0.0f, 1.0f, 0.0f);
 	glRotatef(0, 0.0f, 0.0f, 1.0f);
 
 	glPolygonMode(GL_BACK, GL_LINE);
 
-	Lazik prost(50, 20, 10);
-	prost.draw(0, 0, 0);
+	Lazik lazik(50, 20, 10);
+	lazik.draw(0, 0, 0);
 
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
@@ -270,7 +277,7 @@ int APIENTRY WinMain(   HINSTANCE       hInst,
 		}
 	return msg.wParam;
 }
-
+void move();
 LRESULT CALLBACK WndProc(   HWND    hWnd,
 							UINT    message,
 							WPARAM  wParam,
@@ -286,6 +293,7 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 			hRC = wglCreateContext(hDC);
 			wglMakeCurrent(hDC, hRC);
 			SetupRC();
+			SetTimer(hWnd, TIMER_ID, 16, NULL);
 			glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			
 			bitmapData = LoadBitmapFile("Bitmapy\\checker.bmp", &bitmapInfoHeader);
 			glBindTexture(GL_TEXTURE_2D, texture[0]);       // aktywuje obiekt tekstury
@@ -369,21 +377,33 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 			dragging = false;
 		}
 		break;
+		case WM_TIMER:
+			move();
+			InvalidateRect(hWnd, NULL, FALSE);
+			break;
+
+		case WM_KEYDOWN:
+			keysPressed.insert(wParam);
+			if (wParam == 'W') isWKeyPressed = true;
+			if (wParam == 'S') isSKeyPressed = true;
+			move();
+			InvalidateRect(hWnd, NULL, FALSE);
+			break;
+
+		case WM_KEYUP:
+			keysPressed.erase(wParam);
+			if (wParam == 'W') isWKeyPressed = false;
+			if (wParam == 'S') isSKeyPressed = false;
+			InvalidateRect(hWnd, NULL, FALSE);
+			break;
+
 		case WM_MOUSEMOVE:
 		{
 			if (dragging) {
 				POINTS currentMousePos = MAKEPOINTS(lParam);
 				int deltaX = currentMousePos.x - prevMousePos.x;
 				azimuth += angleJump * deltaX / 5;
-				if (azimuth < 0) {
-					azimuth += 2 * GL_PI;
-				}
-				else if (azimuth >= 2 * GL_PI) {
-					azimuth -= 2 * GL_PI;
-				}
-
 				prevMousePos = currentMousePos;
-
 				InvalidateRect(hWnd, NULL, FALSE);
 			}
 		}
@@ -447,4 +467,20 @@ INT_PTR APIENTRY AboutDlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 			break;
 		}
 	return FALSE;
+}
+void move() {
+	if (isWKeyPressed || isSKeyPressed) {
+		float speed = (isWKeyPressed) ? 5.0f : -5.0f;
+		xPos += speed * sin(rot * (GL_PI / 180) + GL_PI / 2);
+		zPos += speed * cos(rot * (GL_PI / 180) + GL_PI / 2);
+		int multiplier = isWKeyPressed ? 1 : -1;
+		if (keysPressed.count('D') && !keysPressed.count('A')) {
+			azimuth += (multiplier*5.0 * (GL_PI / 180));
+			rot -= multiplier * 5.0f;
+		}
+		else if (keysPressed.count('A') && !keysPressed.count('D')) {
+			azimuth -= (multiplier * 5.0 * (GL_PI / 180));
+			rot += multiplier * 5.0f;
+		}
+	}
 }
