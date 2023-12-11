@@ -135,13 +135,14 @@ Wheel::Wheel(int x, int y, int z)
     this->z = z;
 }
 
-void Wheel::draw(int x, int y, int z, bool mirror, GLfloat rotation)
+void Wheel::draw(int x, int y, int z, bool mirror, GLfloat rotation, float angle)
 {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     {
         glPushMatrix();
         glTranslatef(x,  y,  z);
         glRotatef(90, 0, 1.0, 0);
+        glRotatef(angle, 0, 1, 0);
 
         tire();
         rim(mirror, rotation);

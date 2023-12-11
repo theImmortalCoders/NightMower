@@ -154,7 +154,8 @@ void RenderScene(void){
 	glPolygonMode(GL_BACK, GL_LINE);
 
 	Lazik lazik(50, 20, 10);
-	lazik.draw(0, 0, 0, 360*(speed/maxSpeed));
+	float rotWheel = speed/2; //wheel rotation, not working
+	lazik.draw(0, 0, 0, 360*(speed/maxSpeed), rotWheel);
 
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
