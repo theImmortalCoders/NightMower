@@ -10,15 +10,15 @@
 #include <stdio.h>
 #include <vector>
 using namespace std;
+class HitWall;
 class Lazik
 {
 	int xSize;
 	int ySize;
 	int zSize;
-	void cow();
 public:
 	Lazik(int xSize, int ySize, int zSize);
 	void draw(int x, int y, int z, int wheelRot, float angle);
-	void grass();
+	bool isCollision(std::vector<HitWall*> walls, int posX, int posZ);
 };
 

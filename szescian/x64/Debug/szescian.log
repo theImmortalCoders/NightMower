@@ -1,1 +1,14 @@
-﻿LINK : fatal error LNK1104: cannot open file 'C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\glew-2.1.0'
+﻿  Lazik.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(23,85): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(23,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(30,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(31,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(32,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(33,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(35,132): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(35,121): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(35,110): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(51,22): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(52,22): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(63,43): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Debug\lazik.exe

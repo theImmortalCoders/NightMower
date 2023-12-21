@@ -1,4 +1,6 @@
 #include "Wall.h"
+#include "HitWall.h"
+#include <iostream>
 void cegla(int x, int z) {
 	x -= 30;
 	z -= 30;
@@ -47,39 +49,23 @@ void cegla(int x, int z) {
 	}
 }
 
-//void cegla(int x, int z) {
-//	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-//	for (int k = 0;k < 2;k++) {
-//		int width = 100;
-//		int height = width / 2;
-//		int length = width * 2;
-//		if (k) {
-//			length = -length;
-//			height = -height;
-//			width = -width;
-//		}
-//		glBegin(GL_TRIANGLE_STRIP);
-//		glColor3f(0.9, 0.1, 0.1);
-//		glVertex3f(x - length, width, z - height);
-//		glVertex3f(x - length, -width, z - height);
-//		glVertex3f(x + length, width, z - height);
-//		glVertex3f(x + length, -width, z - height);
-//		glVertex3f(x + length, width, z + height);
-//		glVertex3f(x + length, -width, z + height);
-//		glVertex3f(x - length, -width, z - height);
-//		glVertex3f(x - length, -width, z + height);
-//		glEnd();
-//	}
-//}
-
-Wall::Wall(int x, int y, int z)
+Wall::Wall(int x, int y, int z, int width, int height)
 {
     this->x = x;
     this->y = y;
     this->z = z;
+	this->height = height;
+	this->width = width;
+	this->hitWalls.push_back(new HitWall(x - width / 2, z, x + width / 2, z));
 }
 
-void Wall::draw(int x, int y, int z, int width, int height)
+std::vector<HitWall*> Wall::getHitWalls()
+{
+	std::cout << "xd";
+	return this->hitWalls;
+}
+
+void Wall::draw()
 {
 	glPushMatrix();
 	glTranslatef(x, y, z);

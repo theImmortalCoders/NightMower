@@ -1,10 +1,10 @@
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\Gl_template.cpp;C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\x64\Debug\Gl_template.obj
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Axle.cpp;C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\x64\Debug\Axle.obj
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Core.cpp;C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\x64\Debug\Core.obj
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Handle.cpp;C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\x64\Debug\Handle.obj
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Lazik.cpp;C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\x64\Debug\Lazik.obj
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\loader.cpp;C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\x64\Debug\loader.obj
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Reflector.cpp;C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\x64\Debug\Reflector.obj
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Terrain.cpp;C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\x64\Debug\Terrain.obj
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wall.cpp;C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\x64\Debug\Wall.obj
-C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\Wheel.cpp;C:\Users\marci\Desktop\Repozytorium\Projekty\Projekty desktopowe\C_CPP\Łazik\GK_Bator_Bosak\szescian\x64\Debug\Wheel.obj
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp;C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\x64\Debug\Gl_template.obj
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Axle.cpp;C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\x64\Debug\Axle.obj
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Coords.cpp;C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\x64\Debug\Coords.obj
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp;C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\x64\Debug\Handle.obj
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\HitWall.cpp;C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\x64\Debug\HitWall.obj
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp;C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\x64\Debug\Lazik.obj
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.cpp;C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\x64\Debug\loader.obj
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp;C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\x64\Debug\Terrain.obj
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp;C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\x64\Debug\Wall.obj
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp;C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\x64\Debug\Wheel.obj

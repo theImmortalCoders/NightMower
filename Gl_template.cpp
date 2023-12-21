@@ -23,6 +23,7 @@
 #include "szescian/Lazik.h"
 #include "szescian/Terrain.h"
 #include <set>
+#include <iostream>
 #define TIMER_ID 1
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -57,6 +58,8 @@ float maxSpeed = 7;
 double camDistance = 200;
 double const angleJump = GL_PI / 128;
 double const radiusJump = 10;
+Lazik lazik(50, 20, 10);
+Terrain terrain;
 
 BITMAPINFOHEADER	bitmapInfoHeader;	// nag³ówek obrazu
 unsigned char*		bitmapData;			// dane tekstury
@@ -135,42 +138,28 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 	return bitmapImage;
 }
 
-void RenderScene(void){
-	glLoadIdentity(); //disables spinning
+void RenderScene(void) {
+	glLoadIdentity();
 	double a = camDistance * cos(elevation);
 	xCamPos = xPos + a * cos(azimuth);
 	yCamPos = camDistance * sin(elevation);
 	zCamPos = zPos + a * sin(azimuth);
 	gluLookAt(xCamPos, yCamPos, zCamPos, xPos, yPos, zPos, 0, 1, 0);
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glPushMatrix();
-
-	glTranslatef(xPos, yPos, zPos); // Translate to position of Lazik
-	glRotatef(0, 1.0f, 0.0f, 0.0f);
+	glTranslatef(xPos, yPos, zPos);
 	glRotatef(rot, 0.0f, 1.0f, 0.0f);
-	glRotatef(0, 0.0f, 0.0f, 1.0f);
-
 	glPolygonMode(GL_BACK, GL_LINE);
-
-	Lazik lazik(50, 20, 10);
-	float rotWheel = speed/2; //wheel rotation, not working
-	lazik.draw(0, 0, 0, 360*(speed/maxSpeed), rotWheel);
-
+	float rotWheel = speed / 2;
+	lazik.draw(0, 0, 0, 360 * (speed / maxSpeed), rotWheel);
 	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glFlush();
-
 	glPushMatrix();
-	glRotatef(0, 1.0f, 0.0f, 0.0f);
-	glRotatef(0, 0.0f, 1.0f, 0.0f);
-	glRotatef(0, 0.0f, 0.0f, 1.0f);
 	glPolygonMode(GL_BACK, GL_LINE);
-	Terrain terrain;
+	terrain.draw();
 	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
 	glFlush();
 }
+
 
 void SetDCPixelFormat(HDC hDC){
 	int nPixelFormat;
@@ -470,6 +459,10 @@ INT_PTR APIENTRY AboutDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 	return FALSE;
 }
 void move() {
+	if (lazik.isCollision(terrain.getHitWalls(), xPos, zPos)) {
+		std::cout << "xd";
+		return;
+	}
 	const float acceleration = 0.3f;
 	const float deceleration = 0.2f;
 	if (isWKeyPressed || isSKeyPressed) {

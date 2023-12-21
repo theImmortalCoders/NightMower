@@ -105,11 +105,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)libraries\glew-2.1.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -154,7 +156,9 @@
   <ItemGroup>
     <ClCompile Include="..\Gl_template.cpp" />
     <ClCompile Include="Axle.cpp" />
+    <ClCompile Include="Coords.cpp" />
     <ClCompile Include="Handle.cpp" />
+    <ClCompile Include="HitWall.cpp" />
     <ClCompile Include="Lazik.cpp" />
     <ClCompile Include="loader.cpp" />
     <ClCompile Include="Terrain.cpp" />
@@ -168,7 +172,9 @@
   <ItemGroup>
     <ClInclude Include="..\RESOURCE.H" />
     <ClInclude Include="Axle.h" />
+    <ClInclude Include="Coords.h" />
     <ClInclude Include="Handle.h" />
+    <ClInclude Include="HitWall.h" />
     <ClInclude Include="Lazik.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="Terrain.h" />
