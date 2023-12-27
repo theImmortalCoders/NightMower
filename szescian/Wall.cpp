@@ -56,14 +56,14 @@ Wall::Wall(int x, int y, int z, int width, int height)
     this->z = z;
 	this->height = height;
 	this->width = width;
-	this->hitWalls.push_back(new HitWall(x - width / 2, z, x + width / 2, z));
+	//this->hitWalls.push_back(new HitWall(x - width / 2, z, x + width / 2, z));
 }
 
-std::vector<HitWall*> Wall::getHitWalls()
-{
-	std::cout << "xd";
-	return this->hitWalls;
-}
+//std::vector<HitWall*> Wall::getHitWalls()
+//{
+//	std::cout << "xd";
+//	return this->hitWalls;
+//}
 
 void Wall::draw()
 {

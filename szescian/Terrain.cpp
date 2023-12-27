@@ -5,9 +5,9 @@
 Terrain::Terrain()
 {
     wall = new Wall(30, -10, 20 + 70, 5, 5);
-    for (auto h : wall->getHitWalls()) {
+    /*for (auto h : wall->getHitWalls()) {
         this->hitWalls.push_back(h);
-    }
+    }*/
 }
 
 void Terrain::draw()
@@ -25,7 +25,7 @@ Terrain::~Terrain()
     delete wall;
 }
 
-std::vector<HitWall*> Terrain::getHitWalls()
-{
-    return this->hitWalls;
-}
+//std::vector<HitWall*> Terrain::getHitWalls()
+//{
+//    return this->hitWalls;
+//}

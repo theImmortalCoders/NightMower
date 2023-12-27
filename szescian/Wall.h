@@ -18,10 +18,10 @@ class Wall
 	int z;
 	int height;
 	int width;
-	std::vector<HitWall*> hitWalls;
+	//std::vector<HitWall*> hitWalls;
 public:
 	Wall(int x, int y, int z, int width, int height);
-	std::vector<HitWall*>getHitWalls();
+	//std::vector<HitWall*>getHitWalls();
 	void draw();
 };
 

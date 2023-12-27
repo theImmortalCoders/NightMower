@@ -19,6 +19,6 @@ class Lazik
 public:
 	Lazik(int xSize, int ySize, int zSize);
 	void draw(int x, int y, int z, int wheelRot, float angle);
-	bool isCollision(std::vector<HitWall*> walls, int posX, int posZ);
+	//bool isCollision(std::vector<HitWall*> walls, int posX, int posZ);
 };
 

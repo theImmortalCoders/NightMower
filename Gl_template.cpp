@@ -73,6 +73,16 @@ INT_PTR APIENTRY AboutDlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 
 void SetDCPixelFormat(HDC hDC);
 
+GLfloat dist(POINT col, POINT laz) {
+	return sqrt(pow((col.x - laz.x), 2) + pow((col.y - laz.y), 2));
+}
+boolean isCollision(POINT coords) {
+	POINT tree{ 160, 40 };
+	float treeDist = 10;
+	float lazikDist = 30;
+	return dist(tree, coords) < treeDist + lazikDist;
+}
+
 void ChangeSize(GLsizei w, GLsizei h) {
 	GLfloat fAspect;
 	GLfloat fFrustumScale = 1.0;
@@ -459,10 +469,10 @@ INT_PTR APIENTRY AboutDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 	return FALSE;
 }
 void move() {
-	if (lazik.isCollision(terrain.getHitWalls(), xPos, zPos)) {
+	/*if (lazik.isCollision(terrain.getHitWalls(), xPos, zPos)) {
 		std::cout << "xd";
 		return;
-	}
+	}*/
 	const float acceleration = 0.3f;
 	const float deceleration = 0.2f;
 	if (isWKeyPressed || isSKeyPressed) {
@@ -472,8 +482,7 @@ void move() {
 		else if (isSKeyPressed && speed > -maxSpeed) {
 			speed -= acceleration;
 		}
-		xPos += speed * sin(rot * (GL_PI / 180) + GL_PI / 2);
-		zPos += speed * cos(rot * (GL_PI / 180) + GL_PI / 2);
+
 		if (keysPressed.count('D') && !keysPressed.count('A')) {
 			azimuth += (speed/2 * (GL_PI / 180));
 			rot -= speed/2;
@@ -491,8 +500,7 @@ void move() {
 			speed += deceleration;
 		}
 		if (abs(speed) > 0.1) {
-			xPos += speed * sin(rot * (GL_PI / 180) + GL_PI / 2);
-			zPos += speed * cos(rot * (GL_PI / 180) + GL_PI / 2);
+
 			if (keysPressed.count('D') && !keysPressed.count('A')) {
 				azimuth += (speed/2 * 1.0 * (GL_PI / 180));
 				rot -= speed/2 * 1.0f;
@@ -505,5 +513,16 @@ void move() {
 		else {
 			speed = 0;
 		}
+	}
+
+	GLfloat nextX = xPos + speed * sin(rot * (GL_PI / 180) + GL_PI / 2);
+	GLfloat nextY = zPos + speed * cos(rot * (GL_PI / 180) + GL_PI / 2);
+	POINT next{nextX, nextY};
+	if (!isCollision(next)) {
+		xPos = nextX;
+		zPos = nextY;
+	}
+	else {
+		speed = 0;
 	}
 }
