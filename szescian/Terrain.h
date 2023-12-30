@@ -15,9 +15,9 @@ class HitWall;
 class Terrain
 {
 private:
-	Wall* wall;
 	std::vector<HitWall*> hitWalls;
 public:
+	Wall* wall;
 	int scale = 40;
 	Terrain();
 	~Terrain();

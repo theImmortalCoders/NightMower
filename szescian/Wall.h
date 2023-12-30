@@ -23,5 +23,6 @@ public:
 	Wall(int x, int y, int z, int width, int height);
 	//std::vector<HitWall*>getHitWalls();
 	void draw();
+	std::pair<std::pair<int, int>, std::pair<int, int>> Wall::getWallCoordinates();
 };
 

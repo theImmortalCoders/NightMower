@@ -48,7 +48,9 @@ double elevation = GL_PI/8; // K¹t pionowy
 static GLfloat xCamPos;
 static GLfloat yCamPos;
 static GLfloat zCamPos;
-
+//collisions
+float pointDist = 10;
+float lazikDist = 30;
 //lazik
 static GLfloat xPos = 0;
 static GLfloat yPos = 0;
@@ -78,10 +80,31 @@ GLfloat dist(POINT col, POINT laz) {
 	return sqrt(pow((col.x - laz.x), 2) + pow((col.y - laz.y), 2));
 }
 boolean isCollision(POINT coords) {
+	vector<POINT> points1;
+	vector<POINT> points2;
 	POINT tree{ 160, 40 };
-	float treeDist = 10;
-	float lazikDist = 30;
-	return dist(tree, coords) < treeDist + lazikDist;
+	points1.push_back(tree);
+	//
+	for (int i = 10; i <= 135; i += 25) {
+		POINT p{ i, 95 };
+		points2.push_back(p);
+	}
+	//
+	if (coords.y < 45) {
+		for (auto point : points1) {
+			if (dist(point, coords) < pointDist + lazikDist) {
+				return true;
+			}
+		}
+	}
+	else {
+		for (auto point : points2) {
+			if (dist(point, coords) < pointDist + lazikDist) {
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 void ChangeSize(GLsizei w, GLsizei h) {
