@@ -23,6 +23,7 @@
 #include "szescian/Lazik.h"
 #include "szescian/Terrain.h"
 #include <set>
+#include <chrono>
 #include <iostream>
 #define TIMER_ID 1
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
@@ -468,6 +469,7 @@ INT_PTR APIENTRY AboutDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 	}
 	return FALSE;
 }
+static auto lastCollisionCheckTime = std::chrono::high_resolution_clock::now();
 void move() {
 	/*if (lazik.isCollision(terrain.getHitWalls(), xPos, zPos)) {
 		std::cout << "xd";
@@ -517,12 +519,18 @@ void move() {
 
 	GLfloat nextX = xPos + speed * sin(rot * (GL_PI / 180) + GL_PI / 2);
 	GLfloat nextY = zPos + speed * cos(rot * (GL_PI / 180) + GL_PI / 2);
-	POINT next{nextX, nextY};
-	if (!isCollision(next)) {
-		xPos = nextX;
-		zPos = nextY;
-	}
-	else {
-		speed = 0;
+	auto currentTime = std::chrono::high_resolution_clock::now();
+	auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastCollisionCheckTime).count();
+
+	if (elapsedTime >= 10) {
+		POINT next{ nextX, nextY };
+		if (!isCollision(next)) {
+			xPos = nextX;
+			zPos = nextY;
+		}
+		else {
+			speed = 0;
+		}
+		lastCollisionCheckTime = currentTime;
 	}
 }

@@ -1,14 +1,13 @@
-﻿  Lazik.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(23,85): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(23,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(30,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(31,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(32,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(33,69): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(35,132): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(35,121): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(35,110): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(51,22): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(52,22): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(63,43): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  Gl_template.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(77,13): warning C4244: 'return': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(141,30): warning C4018: '<': signed/unsigned mismatch
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(154,17): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(155,24): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(156,17): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(164,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(279,12): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(387,23): warning C4244: 'argument': conversion from 'WPARAM' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(395,22): warning C4244: 'argument': conversion from 'WPARAM' to 'const int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(518,16): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(519,16): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
   szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Debug\lazik.exe
