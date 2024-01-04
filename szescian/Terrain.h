@@ -17,11 +17,15 @@ class Terrain
 private:
 	std::vector<HitWall*> hitWalls;
 public:
+	std::vector<int> randTreeX;
+	std::vector<int> randTreeZ;
 	Wall* wall;
+
 	int scale = 80;
 	Terrain();
 	~Terrain();
 	void draw();
+	void generateRandomTrees();
 	std::vector<HitWall*> getHitWalls();
 };
 

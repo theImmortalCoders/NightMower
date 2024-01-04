@@ -1,17 +1,13 @@
 ﻿  Gl_template.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(80,13): warning C4244: 'return': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(165,30): warning C4018: '<': signed/unsigned mismatch
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(178,17): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(179,24): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(180,17): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(188,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(303,12): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(411,23): warning C4244: 'argument': conversion from 'WPARAM' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(419,22): warning C4244: 'argument': conversion from 'WPARAM' to 'const int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(543,16): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(544,16): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(549,15): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(549,15): warning C4244: 'initializing': conversion from 'GLfloat' to 'LONG', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(549,22): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(549,22): warning C4244: 'initializing': conversion from 'GLfloat' to 'LONG', possible loss of data
-  szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Debug\lazik.exe
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(189,30): warning C4018: '<': signed/unsigned mismatch
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(602,15): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(602,22): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+  Terrain.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(19,94): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(19,81): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(19,66): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(19,38): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  Generating Code...
+Gl_template.obj : error LNK2019: unresolved external symbol __imp_glutBitmapCharacter referenced in function "void __cdecl DrawTextA(char const *,float,float)" (?DrawTextA@@YAXPEBDMM@Z)
+glut32.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Debug\lazik.exe : fatal error LNK1120: 1 unresolved externals

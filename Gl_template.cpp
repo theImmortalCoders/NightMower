@@ -25,6 +25,7 @@
 #include <set>
 #include <chrono>
 #include <iostream>
+#include "libraries/glut.h"
 #define TIMER_ID 1
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -63,6 +64,14 @@ double const angleJump = GL_PI / 128;
 double const radiusJump = 10;
 Lazik lazik(50, 20, 10);
 Terrain terrain;
+
+#define TIMER_COLLISION_COUNT_ID 2
+
+// Add the following line after the #define TIMER_ID 1 line
+#define COLLISION_COUNT_TIMER_INTERVAL 5000 // 10 seconds
+
+// Add the following line after the SetTimer(hWnd, TIMER_ID, 16, NULL); line in the WM_CREATE case
+
 
 BITMAPINFOHEADER	bitmapInfoHeader;	// nag³ówek obrazu
 unsigned char*		bitmapData;			// dane tekstury
@@ -123,6 +132,14 @@ void ChangeSize(GLsizei w, GLsizei h) {
 	gluPerspective(45.0f, fAspect, 0.1f, 1500.0f);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+void DrawText(const char* text, GLfloat x, GLfloat y) {
+	glRasterPos2f(x, y);
+
+	while (*text) {
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *text);
+		++text;
+	}
 }
 
 void SetupRC() {
@@ -186,7 +203,7 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 	fclose(filePtr);
 	return bitmapImage;
 }
-
+int collisionCount = 0;
 void RenderScene(void) {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
@@ -218,6 +235,24 @@ void RenderScene(void) {
 	glDisable(GL_LIGHTING);
 	glDisable(GL_COLOR_MATERIAL);
 	glDisable(GL_DEPTH_TEST);
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0, 1000, 0, 1000);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	glColor3f(1.0, 0.0, 0.0); // Kolor tekstu (czerwony)
+	char collisionCountText[50];
+	sprintf(collisionCountText, "Punkty: %d", collisionCount);
+	DrawText(collisionCountText, 10, 10);
+
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
 }
 
 
@@ -345,6 +380,7 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 			wglMakeCurrent(hDC, hRC);
 			SetupRC();
 			SetTimer(hWnd, TIMER_ID, 16, NULL);
+			SetTimer(hWnd, TIMER_COLLISION_COUNT_ID, COLLISION_COUNT_TIMER_INTERVAL, NULL);
 			glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			
 			bitmapData = LoadBitmapFile("Bitmapy\\checker.bmp", &bitmapInfoHeader);
 			glBindTexture(GL_TEXTURE_2D, texture[0]);       // aktywuje obiekt tekstury
@@ -429,8 +465,13 @@ LRESULT CALLBACK WndProc(   HWND    hWnd,
 		}
 		break;
 		case WM_TIMER:
-			move();
-			InvalidateRect(hWnd, NULL, FALSE);
+			if (wParam == TIMER_ID) {
+				move();
+				InvalidateRect(hWnd, NULL, FALSE);
+			}
+			else if (wParam == TIMER_COLLISION_COUNT_ID) {
+				collisionCount += 10; // Increase collisionCount by 10 every 10 seconds
+			}
 			break;
 
 		case WM_KEYDOWN:
@@ -520,10 +561,6 @@ INT_PTR APIENTRY AboutDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 }
 static auto lastCollisionCheckTime = std::chrono::high_resolution_clock::now();
 void move() {
-	/*if (lazik.isCollision(terrain.getHitWalls(), xPos, zPos)) {
-		std::cout << "xd";
-		return;
-	}*/
 	const float acceleration = 0.3f;
 	const float deceleration = 0.2f;
 	if (isWKeyPressed || isSKeyPressed) {
@@ -578,6 +615,7 @@ void move() {
 			zPos = nextY;
 		}
 		else {
+			collisionCount--;
 			speed = 0;
 		}
 		lastCollisionCheckTime = currentTime;

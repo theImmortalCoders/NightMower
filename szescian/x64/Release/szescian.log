@@ -1,21 +1,23 @@
-﻿  Gl_template.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(80,13): warning C4244: 'return': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(180,30): warning C4018: '<': signed/unsigned mismatch
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(196,17): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(197,24): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(198,17): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(208,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(329,12): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(437,23): warning C4244: 'argument': conversion from 'WPARAM' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(445,22): warning C4244: 'argument': conversion from 'WPARAM' to 'const int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(569,16): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(570,16): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(575,15): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(575,15): warning C4244: 'initializing': conversion from 'GLfloat' to 'LONG', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(575,22): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(575,22): warning C4244: 'initializing': conversion from 'GLfloat' to 'LONG', possible loss of data
+﻿  Terrain.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(16,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(36,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(36,32): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(36,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(37,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(37,32): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(37,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(38,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(39,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
   Generating code
-  2 of 1522 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 1532 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
