@@ -1,4 +1,4 @@
-#define  _CRT_SECURE_NO_WARNINGS
+#pragma once
 #ifdef _MSC_VER
 #  pragma comment(lib, "opengl32.lib")
 #  pragma comment(lib, "glu32.lib")
@@ -6,19 +6,19 @@
 #include <windows.h>
 #include <gl\gl.h>
 #include <gl\glu.h>
-#include <math.h>
-#include <stdio.h>
 #include <vector>
+#include <LoadedObject.h>
+
 using namespace std;
-class HitWall;
 class Lazik
 {
 	int xSize;
 	int ySize;
 	int zSize;
+	LoadedObject core;
+	LoadedObject reflectors [4];
 public:
 	Lazik(int xSize, int ySize, int zSize);
 	void draw(int x, int y, int z, int wheelRot, float angle);
-	//bool isCollision(std::vector<HitWall*> walls, int posX, int posZ);
 };
 

@@ -1,4 +1,6 @@
 #include "Wheel.h"
+#include <cmath>
+
 GLfloat PI = 3.14159;
 GLfloat deg90 = PI / 2;
 GLfloat deg9 = PI / 20;

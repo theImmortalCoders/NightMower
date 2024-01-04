@@ -1,12 +1,11 @@
 #include "axle.h"
+#include <cmath>
 
 Axle::Axle(int x, int y, int z)
 {
     this->x = x;
     this->y = y;
     this->z = z;
-    this->camDistance = 1;
-    this->length = 15;
 }
 
 void Axle::draw(int x, int y, int z) {

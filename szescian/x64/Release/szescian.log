@@ -1,24 +1,31 @@
-﻿  Terrain.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(16,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(36,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(36,32): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(36,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(37,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(37,32): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(37,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(38,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+﻿  Lazik.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(21,90): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(21,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(33,137): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(33,124): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(33,111): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Terrain.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(11,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(31,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(31,32): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(31,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(32,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(32,32): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(32,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(33,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
           with
           [
               _Ty=int
           ]
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(39,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(34,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
           with
           [
               _Ty=int
           ]
+  loader.cpp
   Generating code
-  2 of 1532 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    11 functions had inline decision re-evaluated but remain unchanged
+  48 of 1529 functions ( 3.1%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    72 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Release\lazik.exe

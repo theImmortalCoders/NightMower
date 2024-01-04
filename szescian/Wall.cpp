@@ -1,6 +1,5 @@
 #include "Wall.h"
-#include "HitWall.h"
-#include <iostream>
+
 void cegla(int x, int z) {
 	x -= 30;
 	z -= 30;
@@ -74,19 +73,4 @@ void Wall::draw()
 		for (int i = 0;i < width + j % 2;i++)
 			cegla(25 * i - j % 2 * 13, 7 * j);
 	glPopMatrix();
-}
-
-std::pair<std::pair<int, int>, std::pair<int, int>> Wall::getWallCoordinates()
-{
-	// Wspó³rzêdne pocz¹tkowe muru
-	int startX = x;
-	int startY = y;
-	int startZ = z;
-
-	// Wspó³rzêdne koñcowe muru
-	int endX = x + width * 25;
-	int endY = y + height * 7;
-	int endZ = z; // Zak³adam, ¿e mur nie ma wysokoœci w osi Z (z jest takie samo jak pocz¹tkowe)
-
-	return std::make_pair(std::make_pair(startX, startY), std::make_pair(endX, endY));
 }
