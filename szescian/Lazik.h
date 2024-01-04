@@ -7,7 +7,6 @@
 #include <gl\gl.h>
 #include <gl\glu.h>
 #include <vector>
-#include <LoadedObject.h>
 
 using namespace std;
 class Lazik
@@ -15,8 +14,6 @@ class Lazik
 	int xSize;
 	int ySize;
 	int zSize;
-	LoadedObject core;
-	LoadedObject reflectors [4];
 public:
 	Lazik(int xSize, int ySize, int zSize);
 	void draw(int x, int y, int z, int wheelRot, float angle);

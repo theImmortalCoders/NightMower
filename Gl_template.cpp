@@ -44,7 +44,7 @@ bool dragging = false;
 POINTS prevMousePos = { 0, 0 };
 //camera
 double azimuth = GL_PI;   // K¹t poziomy
-double elevation = GL_PI/8; // K¹t pionowy
+double elevation = GL_PI / 8; // K¹t pionowy
 
 static GLfloat xCamPos;
 static GLfloat yCamPos;
@@ -74,42 +74,54 @@ Terrain terrain;
 
 
 BITMAPINFOHEADER	bitmapInfoHeader;	// nag³ówek obrazu
-unsigned char*		bitmapData;			// dane tekstury
+unsigned char* bitmapData;			// dane tekstury
 unsigned int		texture[2];			// obiekt tekstury
 
-LRESULT CALLBACK WndProc(   HWND    hWnd,
-							UINT    message,
-							WPARAM  wParam,
-							LPARAM  lParam);
-INT_PTR APIENTRY AboutDlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProc(HWND    hWnd,
+	UINT    message,
+	WPARAM  wParam,
+	LPARAM  lParam);
+INT_PTR APIENTRY AboutDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 void SetDCPixelFormat(HDC hDC);
+vector<POINT> points1;
+vector<POINT> points2;
+vector<POINT> points3;
+vector<POINT> points4;
 
 GLfloat dist(POINT col, POINT laz) {
 	return sqrt(pow((col.x - laz.x), 2) + pow((col.y - laz.y), 2));
 }
 boolean isCollision(POINT coords) {
-	vector<POINT> points1;
-	vector<POINT> points2;
-	POINT tree{ 160, 40 };
-	points1.push_back(tree);
-	//
-	for (int i = 10; i <= 135; i += 25) {
-		POINT p{ i, 95 };
-		points2.push_back(p);
-	}
-	//
-	if (coords.y < 45) {
-		for (auto point : points1) {
-			if (dist(point, coords) < pointDist + lazikDist) {
-				return true;
+	if (coords.y < 0) {
+		if (coords.x > 0) {
+			for (auto point : points1) {
+				if (dist(point, coords) < pointDist + lazikDist) {
+					return true;
+				}
+			}
+		}
+		else {
+			for (auto point : points2) {
+				if (dist(point, coords) < pointDist + lazikDist) {
+					return true;
+				}
 			}
 		}
 	}
 	else {
-		for (auto point : points2) {
-			if (dist(point, coords) < pointDist + lazikDist) {
-				return true;
+		if (coords.x > 0) {
+			for (auto point : points3) {
+				if (dist(point, coords) < pointDist + lazikDist) {
+					return true;
+				}
+			}
+		}
+		else {
+			for (auto point : points4) {
+				if (dist(point, coords) < pointDist + lazikDist) {
+					return true;
+				}
 			}
 		}
 	}
@@ -143,31 +155,31 @@ void DrawText(const char* text, GLfloat x, GLfloat y) {
 }
 
 void SetupRC() {
-    glEnable(GL_DEPTH_TEST); // Hidden surface removal
-    glEnable(GL_LIGHTING);   // Enable lighting
-    glEnable(GL_LIGHT0);     // Enable light source 0
-    glEnable(GL_COLOR_MATERIAL);
-    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-    glShadeModel(GL_SMOOTH); // Enable smooth shading
-    // Set up light source 0 position
-    GLfloat lightPos[] = { 100.0f, 100.0f, 100.0f, 1.0f };
-    glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
-    // Set up light source 0 properties
-    GLfloat lightAmbient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-    GLfloat lightDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-    GLfloat lightSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-    glColor3f(0.0, 0.0, 0.0);
+	glEnable(GL_DEPTH_TEST); // Hidden surface removal
+	glEnable(GL_LIGHTING);   // Enable lighting
+	glEnable(GL_LIGHT0);     // Enable light source 0
+	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	glShadeModel(GL_SMOOTH); // Enable smooth shading
+	// Set up light source 0 position
+	GLfloat lightPos[] = { 100.0f, 100.0f, 100.0f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
+	// Set up light source 0 properties
+	GLfloat lightAmbient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+	GLfloat lightDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+	GLfloat lightSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glColor3f(0.0, 0.0, 0.0);
 }
 
 
-unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader){
-	FILE *filePtr;							// wskaŸnik pozycji pliku
+unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader) {
+	FILE* filePtr;							// wskaŸnik pozycji pliku
 	BITMAPFILEHEADER	bitmapFileHeader;		// nag³ówek pliku
-	unsigned char		*bitmapImage;			// dane obrazu
+	unsigned char* bitmapImage;			// dane obrazu
 	int					imageIdx = 0;		// licznik pikseli
 	unsigned char		tempRGB;				// zmienna zamiany sk³adowych
 	filePtr = fopen(filename, "rb");
@@ -194,7 +206,7 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 		fclose(filePtr);
 		return NULL;
 	}
-	for (imageIdx = 0; imageIdx < bitmapInfoHeader->biSizeImage; imageIdx+=3)
+	for (imageIdx = 0; imageIdx < bitmapInfoHeader->biSizeImage; imageIdx += 3)
 	{
 		tempRGB = bitmapImage[imageIdx];
 		bitmapImage[imageIdx] = bitmapImage[imageIdx + 2];
@@ -256,7 +268,7 @@ void RenderScene(void) {
 }
 
 
-void SetDCPixelFormat(HDC hDC){
+void SetDCPixelFormat(HDC hDC) {
 	int nPixelFormat;
 
 	static PIXELFORMATDESCRIPTOR pfd = {
@@ -280,31 +292,31 @@ void SetDCPixelFormat(HDC hDC){
 	SetPixelFormat(hDC, nPixelFormat, &pfd);
 }
 
-HPALETTE GetOpenGLPalette(HDC hDC){
+HPALETTE GetOpenGLPalette(HDC hDC) {
 	HPALETTE hRetPal = NULL;	// Handle to palette to be created
 	PIXELFORMATDESCRIPTOR pfd;	// Pixel Format Descriptor
-	LOGPALETTE *pPal;			// Pointer to memory for logical palette
+	LOGPALETTE* pPal;			// Pointer to memory for logical palette
 	int nPixelFormat;			// Pixel format index
 	int nColors;				// Number of entries in palette
 	int i;						// Counting variable
-	BYTE RedRange,GreenRange,BlueRange;
+	BYTE RedRange, GreenRange, BlueRange;
 	nPixelFormat = GetPixelFormat(hDC);
 	DescribePixelFormat(hDC, nPixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
-	if(!(pfd.dwFlags & PFD_NEED_PALETTE))
+	if (!(pfd.dwFlags & PFD_NEED_PALETTE))
 		return NULL;
-	nColors = 1 << pfd.cColorBits;	
-	pPal = (LOGPALETTE*)malloc(sizeof(LOGPALETTE) +nColors*sizeof(PALETTEENTRY));
+	nColors = 1 << pfd.cColorBits;
+	pPal = (LOGPALETTE*)malloc(sizeof(LOGPALETTE) + nColors * sizeof(PALETTEENTRY));
 	pPal->palVersion = 0x300;		// Windows 3.0
 	pPal->palNumEntries = nColors; // table size
-	RedRange = (1 << pfd.cRedBits) -1;
+	RedRange = (1 << pfd.cRedBits) - 1;
 	GreenRange = (1 << pfd.cGreenBits) - 1;
-	BlueRange = (1 << pfd.cBlueBits) -1;
-	for(i = 0; i < nColors; i++)
-		{
+	BlueRange = (1 << pfd.cBlueBits) - 1;
+	for (i = 0; i < nColors; i++)
+	{
 		// Fill in the 8-bit equivalents for each component
 		pPal->palPalEntry[i].peRed = (i >> pfd.cRedShift) & RedRange;
 		pPal->palPalEntry[i].peRed = (unsigned char)(
-			(double) pPal->palPalEntry[i].peRed * 255.0 / RedRange);
+			(double)pPal->palPalEntry[i].peRed * 255.0 / RedRange);
 
 		pPal->palPalEntry[i].peGreen = (i >> pfd.cGreenShift) & GreenRange;
 		pPal->palPalEntry[i].peGreen = (unsigned char)(
@@ -314,212 +326,253 @@ HPALETTE GetOpenGLPalette(HDC hDC){
 		pPal->palPalEntry[i].peBlue = (unsigned char)(
 			(double)pPal->palPalEntry[i].peBlue * 255.0 / BlueRange);
 
-		pPal->palPalEntry[i].peFlags = (unsigned char) NULL;
-		}
+		pPal->palPalEntry[i].peFlags = (unsigned char)NULL;
+	}
 	hRetPal = CreatePalette(pPal);
-	SelectPalette(hDC,hRetPal,FALSE);
+	SelectPalette(hDC, hRetPal, FALSE);
 	RealizePalette(hDC);
 	free(pPal);
 	return hRetPal;
 }
 
-int APIENTRY WinMain(   HINSTANCE       hInst,
-						HINSTANCE       hPrevInstance,
-						LPSTR           lpCmdLine,
-						int                     nCmdShow){
+int APIENTRY WinMain(HINSTANCE       hInst,
+	HINSTANCE       hPrevInstance,
+	LPSTR           lpCmdLine,
+	int                     nCmdShow) {
 	MSG                     msg;            // Windows message structure
 	WNDCLASS        wc;                     // Windows class structure
 	HWND            hWnd;           // Storeage for window handle
 	hInstance = hInst;
-	wc.style                        = CS_HREDRAW | CS_VREDRAW;
-	wc.lpfnWndProc          = (WNDPROC) WndProc;
-	wc.cbClsExtra           = 0;
-	wc.cbWndExtra           = 0;
-	wc.hInstance            = hInstance;
-	wc.hIcon                        = NULL;
-	wc.hCursor                      = LoadCursor(NULL, IDC_ARROW);
-	wc.hbrBackground        = NULL;         
-	wc.lpszMenuName         = MAKEINTRESOURCE(IDR_MENU);
-	wc.lpszClassName        = lpszAppName;
-	if(RegisterClass(&wc) == 0)
+	wc.style = CS_HREDRAW | CS_VREDRAW;
+	wc.lpfnWndProc = (WNDPROC)WndProc;
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = 0;
+	wc.hInstance = hInstance;
+	wc.hIcon = NULL;
+	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wc.hbrBackground = NULL;
+	wc.lpszMenuName = MAKEINTRESOURCE(IDR_MENU);
+	wc.lpszClassName = lpszAppName;
+	if (RegisterClass(&wc) == 0)
 		return FALSE;
 	hWnd = CreateWindow(
-				lpszAppName,
-				lpszAppName,
-				WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
-				50, 50,
-				400, 400,
-				NULL,
-				NULL,
-				hInstance,
-				NULL);
-	if(hWnd == NULL)
+		lpszAppName,
+		lpszAppName,
+		WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
+		50, 50,
+		400, 400,
+		NULL,
+		NULL,
+		hInstance,
+		NULL);
+	if (hWnd == NULL)
 		return FALSE;
-	ShowWindow(hWnd,SW_SHOW);
+	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
-	while( GetMessage(&msg, NULL, 0, 0)){
+	while (GetMessage(&msg, NULL, 0, 0)) {
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
-		}
+	}
 	return msg.wParam;
 }
 void move();
-LRESULT CALLBACK WndProc(   HWND    hWnd,
-							UINT    message,
-							WPARAM  wParam,
-							LPARAM  lParam){
+LRESULT CALLBACK WndProc(HWND    hWnd,
+	UINT    message,
+	WPARAM  wParam,
+	LPARAM  lParam) {
 	static HGLRC hRC;               // Permenant Rendering context
 	static HDC hDC;                 // Private GDI Device context
 	switch (message)
-		{
-		case WM_CREATE:
-			hDC = GetDC(hWnd);              
-			SetDCPixelFormat(hDC);          
-			hPalette = GetOpenGLPalette(hDC);
-			hRC = wglCreateContext(hDC);
-			wglMakeCurrent(hDC, hRC);
-			SetupRC();
-			SetTimer(hWnd, TIMER_ID, 16, NULL);
-			SetTimer(hWnd, TIMER_COLLISION_COUNT_ID, COLLISION_COUNT_TIMER_INTERVAL, NULL);
-			glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			
-			bitmapData = LoadBitmapFile("Bitmapy\\checker.bmp", &bitmapInfoHeader);
-			glBindTexture(GL_TEXTURE_2D, texture[0]);       // aktywuje obiekt tekstury
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bitmapInfoHeader.biWidth,
-						 bitmapInfoHeader.biHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bitmapData);
-			if(bitmapData)
+	{
+	case WM_CREATE:
+		hDC = GetDC(hWnd);
+		SetDCPixelFormat(hDC);
+		hPalette = GetOpenGLPalette(hDC);
+		hRC = wglCreateContext(hDC);
+		wglMakeCurrent(hDC, hRC);
+		SetupRC();
+		SetTimer(hWnd, TIMER_ID, 16, NULL);
+		SetTimer(hWnd, TIMER_COLLISION_COUNT_ID, COLLISION_COUNT_TIMER_INTERVAL, NULL);
+		glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			
+		bitmapData = LoadBitmapFile("Bitmapy\\checker.bmp", &bitmapInfoHeader);
+		glBindTexture(GL_TEXTURE_2D, texture[0]);       // aktywuje obiekt tekstury
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bitmapInfoHeader.biWidth,
+			bitmapInfoHeader.biHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bitmapData);
+		if (bitmapData)
 			free(bitmapData);
-			bitmapData = LoadBitmapFile("Bitmapy\\crate.bmp", &bitmapInfoHeader);
-			glBindTexture(GL_TEXTURE_2D, texture[1]);       // aktywuje obiekt tekstury
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bitmapInfoHeader.biWidth,
-						 bitmapInfoHeader.biHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bitmapData);
-			if(bitmapData)
+		bitmapData = LoadBitmapFile("Bitmapy\\crate.bmp", &bitmapInfoHeader);
+		glBindTexture(GL_TEXTURE_2D, texture[1]);       // aktywuje obiekt tekstury
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bitmapInfoHeader.biWidth,
+			bitmapInfoHeader.biHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bitmapData);
+		if (bitmapData)
 			free(bitmapData);
-			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_MODULATE);
-			break;
-		case WM_DESTROY:
-			wglMakeCurrent(hDC,NULL);
-			wglDeleteContext(hRC);
-			if(hPalette != NULL)
-				DeleteObject(hPalette);
-			PostQuitMessage(0);
-			break;
-		case WM_SIZE:
-			ChangeSize(LOWORD(lParam), HIWORD(lParam));
-			break;
-		case WM_PAINT:
-			{
-			RenderScene();
-			SwapBuffers(hDC);
-			ValidateRect(hWnd,NULL);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+		for (int i = 0; i < terrain.treesAmount; i++) {
+			POINT tree{ terrain.randTreeX[i], terrain.randTreeZ[i] };
+			if (tree.y < 0) {
+				if (tree.x > 0) {
+					points1.push_back(tree);
+				}
+				else {
+					points2.push_back(tree);
+				}
 			}
-			break;
-		case WM_QUERYNEWPALETTE:
-			if(hPalette)
-				{
-				int nRet;
-				SelectPalette(hDC, hPalette, FALSE);
-				nRet = RealizePalette(hDC);
-				InvalidateRect(hWnd,NULL,FALSE);
-				return nRet;
+			else {
+				if (tree.x > 0) {
+					points3.push_back(tree);
 				}
-			break;
-		case WM_PALETTECHANGED:
-			if((hPalette != NULL) && ((HWND)wParam != hWnd))
-				{
-				SelectPalette(hDC,hPalette,FALSE);
-				RealizePalette(hDC);
-				UpdateColors(hDC);
-				return 0;
+				else {
+					points4.push_back(tree);
 				}
-			break;
-		case WM_MOUSEWHEEL:
+			}
+		}
+
+		//
+		for (int i = 10; i <= 135; i += 25) {
+			POINT p{ i, 95 };
+			if (p.y < 0) {
+				if (p.x > 0) {
+					points1.push_back(p);
+				}
+				else {
+					points2.push_back(p);
+				}
+			}
+			else {
+				if (p.x > 0) {
+					points3.push_back(p);
+				}
+				else {
+					points4.push_back(p);
+				}
+			}
+		}
+		break;
+	case WM_DESTROY:
+		wglMakeCurrent(hDC, NULL);
+		wglDeleteContext(hRC);
+		if (hPalette != NULL)
+			DeleteObject(hPalette);
+		PostQuitMessage(0);
+		break;
+	case WM_SIZE:
+		ChangeSize(LOWORD(lParam), HIWORD(lParam));
+		break;
+	case WM_PAINT:
+	{
+		RenderScene();
+		SwapBuffers(hDC);
+		ValidateRect(hWnd, NULL);
+	}
+	break;
+	case WM_QUERYNEWPALETTE:
+		if (hPalette)
 		{
-			int delta = GET_WHEEL_DELTA_WPARAM(wParam);
-			if (delta > 0 && camDistance > 150) {
-				camDistance -= radiusJump;
-			}
-			else if (delta < 0 && camDistance < 500) {
-				camDistance += radiusJump;
-			}
+			int nRet;
+			SelectPalette(hDC, hPalette, FALSE);
+			nRet = RealizePalette(hDC);
 			InvalidateRect(hWnd, NULL, FALSE);
+			return nRet;
 		}
 		break;
-
-		case WM_RBUTTONDOWN:
+	case WM_PALETTECHANGED:
+		if ((hPalette != NULL) && ((HWND)wParam != hWnd))
 		{
-			prevMousePos = MAKEPOINTS(lParam);
-			dragging = true;
+			SelectPalette(hDC, hPalette, FALSE);
+			RealizePalette(hDC);
+			UpdateColors(hDC);
+			return 0;
 		}
 		break;
-		case WM_RBUTTONUP:
-		{
-			dragging = false;
+	case WM_MOUSEWHEEL:
+	{
+		int delta = GET_WHEEL_DELTA_WPARAM(wParam);
+		if (delta > 0 && camDistance > 150) {
+			camDistance -= radiusJump;
 		}
-		break;
-		case WM_TIMER:
-			if (wParam == TIMER_ID) {
-				move();
-				InvalidateRect(hWnd, NULL, FALSE);
-			}
-			else if (wParam == TIMER_COLLISION_COUNT_ID) {
-				collisionCount += 10; // Increase collisionCount by 10 every 10 seconds
-			}
-			break;
+		else if (delta < 0 && camDistance < 500) {
+			camDistance += radiusJump;
+		}
+		InvalidateRect(hWnd, NULL, FALSE);
+	}
+	break;
 
-		case WM_KEYDOWN:
-			keysPressed.insert(wParam);
-			if (wParam == 'W') isWKeyPressed = true;
-			if (wParam == 'S') isSKeyPressed = true;
+	case WM_RBUTTONDOWN:
+	{
+		prevMousePos = MAKEPOINTS(lParam);
+		dragging = true;
+	}
+	break;
+	case WM_RBUTTONUP:
+	{
+		dragging = false;
+	}
+	break;
+	case WM_TIMER:
+		if (wParam == TIMER_ID) {
 			move();
 			InvalidateRect(hWnd, NULL, FALSE);
-			break;
-
-		case WM_KEYUP:
-			keysPressed.erase(wParam);
-			if (wParam == 'W') isWKeyPressed = false;
-			if (wParam == 'S') isSKeyPressed = false;
-			InvalidateRect(hWnd, NULL, FALSE);
-			break;
-
-		case WM_MOUSEMOVE:
-		{
-			if (dragging) {
-				POINTS currentMousePos = MAKEPOINTS(lParam);
-				int deltaX = currentMousePos.x - prevMousePos.x;
-				azimuth += angleJump * deltaX / 5;
-				prevMousePos = currentMousePos;
-				InvalidateRect(hWnd, NULL, FALSE);
-			}
+		}
+		else if (wParam == TIMER_COLLISION_COUNT_ID) {
+			collisionCount += 10; // Increase collisionCount by 10 every 10 seconds
 		}
 		break;
-		case WM_COMMAND:
-			{
-			switch(LOWORD(wParam))
-				{
-				case ID_FILE_EXIT:
-					DestroyWindow(hWnd);
-					break;
-				case ID_HELP_ABOUT:
-					DialogBox (hInstance,
-						MAKEINTRESOURCE(IDD_DIALOG_ABOUT),
-						hWnd,
-						AboutDlgProc);
-					break;
-				}
-			}
-			break;
-	default:   // Passes it on if unproccessed
-	    return (DefWindowProc(hWnd, message, wParam, lParam));
+
+	case WM_KEYDOWN:
+		keysPressed.insert(wParam);
+		if (wParam == 'W') isWKeyPressed = true;
+		if (wParam == 'S') isSKeyPressed = true;
+		move();
+		InvalidateRect(hWnd, NULL, FALSE);
+		break;
+
+	case WM_KEYUP:
+		keysPressed.erase(wParam);
+		if (wParam == 'W') isWKeyPressed = false;
+		if (wParam == 'S') isSKeyPressed = false;
+		InvalidateRect(hWnd, NULL, FALSE);
+		break;
+
+	case WM_MOUSEMOVE:
+	{
+		if (dragging) {
+			POINTS currentMousePos = MAKEPOINTS(lParam);
+			int deltaX = currentMousePos.x - prevMousePos.x;
+			azimuth += angleJump * deltaX / 5;
+			prevMousePos = currentMousePos;
+			InvalidateRect(hWnd, NULL, FALSE);
+		}
 	}
-    return (0L);
+	break;
+	case WM_COMMAND:
+	{
+		switch (LOWORD(wParam))
+		{
+		case ID_FILE_EXIT:
+			DestroyWindow(hWnd);
+			break;
+		case ID_HELP_ABOUT:
+			DialogBox(hInstance,
+				MAKEINTRESOURCE(IDD_DIALOG_ABOUT),
+				hWnd,
+				AboutDlgProc);
+			break;
+		}
+	}
+	break;
+	default:   // Passes it on if unproccessed
+		return (DefWindowProc(hWnd, message, wParam, lParam));
+	}
+	return (0L);
 }
 
 INT_PTR APIENTRY AboutDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
@@ -572,12 +625,12 @@ void move() {
 		}
 
 		if (keysPressed.count('D') && !keysPressed.count('A')) {
-			azimuth += (speed/2 * (GL_PI / 180));
-			rot -= speed/2;
+			azimuth += (speed / 2 * (GL_PI / 180));
+			rot -= speed / 2;
 		}
 		else if (keysPressed.count('A') && !keysPressed.count('D')) {
-			azimuth -= (speed/2 * (GL_PI / 180));
-			rot += speed/2;
+			azimuth -= (speed / 2 * (GL_PI / 180));
+			rot += speed / 2;
 		}
 	}
 	else {
@@ -590,12 +643,12 @@ void move() {
 		if (abs(speed) > 0.1) {
 
 			if (keysPressed.count('D') && !keysPressed.count('A')) {
-				azimuth += (speed/2 * 1.0 * (GL_PI / 180));
-				rot -= speed/2 * 1.0f;
+				azimuth += (speed / 2 * 1.0 * (GL_PI / 180));
+				rot -= speed / 2 * 1.0f;
 			}
 			else if (keysPressed.count('A') && !keysPressed.count('D')) {
-				azimuth -= (speed/2 * 1.0 * (GL_PI / 180));
-				rot += speed/2 * 1.0f;
+				azimuth -= (speed / 2 * 1.0 * (GL_PI / 180));
+				rot += speed / 2 * 1.0f;
 			}
 		}
 		else {

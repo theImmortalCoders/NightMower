@@ -9,10 +9,6 @@ Lazik::Lazik(int xSize, int ySize, int zSize)
     this->xSize = xSize;
     this->ySize = zSize;
     this->zSize = ySize;
-    /*this->core = loadObjFile("core.obj", "floor.jpg");
-    for (int i = 0; i < 4; i++) {
-        this->reflectors[i] = loadObjFile("reflextor.obj", "metal.jpg");
-    }*/
 }
 
 void Lazik::draw(int x, int y, int z, int wheelRot, float angle)

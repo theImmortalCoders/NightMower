@@ -9,15 +9,11 @@
 #include <math.h>
 #include "Wall.h"
 #include <vector>
-#include <LoadedObject.h>
 
 class Terrain
 {
-	static const int treesAmount = 10;
-	LoadedObject plate;
-	LoadedObject mountains;
-	LoadedObject trees[treesAmount];
 public:
+	static const int treesAmount = 5;
 	std::vector<int> randTreeX;
 	std::vector<int> randTreeZ;
 	Wall* wall;
