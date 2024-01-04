@@ -120,17 +120,32 @@ void ChangeSize(GLsizei w, GLsizei h) {
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(45.0f, fAspect, 0.1f, 1000.0f);
+	gluPerspective(45.0f, fAspect, 0.1f, 1500.0f);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
 
-void SetupRC(){
-	glEnable(GL_DEPTH_TEST);	// Hidden surface removal
-	glFrontFace(GL_CCW);		// Counter clock-wise polygons face out
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f );
-	glColor3f(0.0,0.0,0.0);
+void SetupRC() {
+    glEnable(GL_DEPTH_TEST); // Hidden surface removal
+    glEnable(GL_LIGHTING);   // Enable lighting
+    glEnable(GL_LIGHT0);     // Enable light source 0
+    glEnable(GL_COLOR_MATERIAL);
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+    glShadeModel(GL_SMOOTH); // Enable smooth shading
+    // Set up light source 0 position
+    GLfloat lightPos[] = { 100.0f, 100.0f, 100.0f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
+    // Set up light source 0 properties
+    GLfloat lightAmbient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+    GLfloat lightDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+    GLfloat lightSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glColor3f(0.0, 0.0, 0.0);
 }
+
 
 unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader){
 	FILE *filePtr;							// wskaünik pozycji pliku
@@ -173,6 +188,9 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 }
 
 void RenderScene(void) {
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_COLOR_MATERIAL);
 	glLoadIdentity();
 	double a = camDistance * cos(elevation);
 	xCamPos = xPos + a * cos(azimuth);
@@ -183,15 +201,23 @@ void RenderScene(void) {
 	glPushMatrix();
 	glTranslatef(xPos, yPos, zPos);
 	glRotatef(rot, 0.0f, 1.0f, 0.0f);
+
 	glPolygonMode(GL_BACK, GL_LINE);
 	float rotWheel = speed / 2;
+
 	lazik.draw(0, 0, 0, 360 * (speed / maxSpeed), rotWheel);
 	glPopMatrix();
 	glPushMatrix();
 	glPolygonMode(GL_BACK, GL_LINE);
+	GLfloat lightPos[] = { 1000.0f, 1000.0f, 1000.0f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
 	terrain.draw();
 	glPopMatrix();
 	glFlush();
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_COLOR_MATERIAL);
+	glDisable(GL_DEPTH_TEST);
 }
 
 

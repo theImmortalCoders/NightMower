@@ -18,7 +18,7 @@ private:
 	std::vector<HitWall*> hitWalls;
 public:
 	Wall* wall;
-	int scale = 40;
+	int scale = 80;
 	Terrain();
 	~Terrain();
 	void draw();
