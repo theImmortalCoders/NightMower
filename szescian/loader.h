@@ -7,5 +7,10 @@
 #include <windows.h>
 #include <math.h>
 #include <stdio.h>
-
-void loadObjFile(std::string filename, std::string textureName, GLfloat red, GLfloat green, GLfloat blue, int x, int y, int z, int scaleX, int scaleY, int scaleZ, int repeatX, int repeatY);
+struct ObjectData {
+    std::vector<float> vertices;
+    std::vector<float> textures;
+    GLuint textureID;
+};
+ObjectData loadFile(const std::string& filename, const std::string& textureName);
+void drawObj(ObjectData* objectData, int x, int y, int z, int scaleX, int scaleY, int scaleZ, int repeatX, int repeatY);

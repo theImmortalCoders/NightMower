@@ -1,12 +1,43 @@
 ﻿  Gl_template.cpp
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(1,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(1,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(161,15): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(161,22): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(584,34): warning C4018: '<': signed/unsigned mismatch
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(162,15): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(162,22): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(590,34): warning C4018: '<': signed/unsigned mismatch
+  Lazik.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(24,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(24,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(36,114): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(36,101): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(36,88): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Terrain.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(10,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(32,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(32,32): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(32,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(33,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(33,32): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(33,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(34,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(35,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+  loader.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
   Generating code
-  2 of 1541 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  24 of 1556 functions ( 1.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    11 functions had inline decision re-evaluated but remain unchanged
+    20 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Release\lazik.exe

@@ -1,112 +1,19 @@
 ﻿  Gl_template.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(197,30): warning C4018: '<': signed/unsigned mismatch
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(612,15): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(612,22): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-  Axle.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Axle.cpp(12,16): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Axle.cpp(16,24): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Axle.cpp(16,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Axle.cpp(16,18): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Axle.cpp(21,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Axle.cpp(24,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Axle.cpp(28,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Axle.cpp(34,25): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Axle.cpp(39,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-  Handle.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(14,16): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(18,24): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(18,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(18,18): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(26,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(29,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(33,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(39,25): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(44,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(50,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(53,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(57,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(63,25): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(68,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(76,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(79,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(83,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(89,30): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(89,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(89,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(90,38): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(90,32): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(90,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(91,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(94,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(98,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(104,44): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(104,37): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(104,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(105,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(105,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(105,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(106,20): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(109,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.cpp(113,23): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(1,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(1,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(162,15): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(162,22): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(590,34): warning C4018: '<': signed/unsigned mismatch
   Lazik.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(21,71): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(21,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(33,124): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(33,113): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(33,102): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  LoadedObject.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(24,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(24,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(36,114): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(36,101): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(36,88): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   loader.cpp
-  Terrain.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(11,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(31,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(31,32): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(31,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(32,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(32,32): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(32,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(33,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(34,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-  Wall.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(11,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(11,19): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(11,14): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(25,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(25,19): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(25,14): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(39,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(39,19): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(39,14): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(70,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(70,18): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wall.cpp(70,15): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-  Wheel.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(4,12): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(27,23): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(31,19): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(44,23): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(48,19): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(55,15): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(61,23): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(79,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(80,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(89,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(90,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(102,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(106,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(106,20): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(106,15): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(145,30): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(145,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(145,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
   Generating Code...
-Gl_template.obj : error LNK2019: unresolved external symbol __imp_glutBitmapCharacter referenced in function "void __cdecl DrawTextA(char const *,float,float)" (?DrawTextA@@YAXPEBDMM@Z)
-glut32.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Debug\lazik.exe : fatal error LNK1120: 1 unresolved externals
+  szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Debug\lazik.exe

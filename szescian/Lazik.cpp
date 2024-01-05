@@ -1,4 +1,3 @@
-#include "loader.h" //must be here
 #include "Lazik.h"
 #include "Wheel.h"
 #include "Axle.h"
@@ -11,10 +10,18 @@ Lazik::Lazik(int xSize, int ySize, int zSize)
     this->zSize = ySize;
 }
 
+void Lazik::init()
+{
+    core = loadFile("core.obj", "floor.jpg");
+    for (int i = 0; i < 4; i++) {
+        reflectors[i] = loadFile("reflector.obj", "metal.jpg");
+    }
+}
+
 void Lazik::draw(int x, int y, int z, int wheelRot, float angle)
 
 {
-    loadObjFile("core.obj", "floor.jpg", 1, 1, 1, x, y + 5, z, xSize * 0.5, zSize, ySize * 0.78, 2, 2);
+    drawObj(&core, x, y + 5, z, xSize * 0.5, zSize, ySize * 0.78, 2, 2);
     Wheel wheel(x, y, z);
     Axle axle(x, y, z);
     Handle handle(x, y, z);
@@ -26,6 +33,6 @@ void Lazik::draw(int x, int y, int z, int wheelRot, float angle)
     wheel.draw(x - 4 - this->xSize / 2, 0, x - this->ySize - 12, 0);
     wheel.draw(x - 4 - this->xSize / 2, 0, x + this->ySize + 12, 1);
     for (int z = -2; z < 2; z++) {
-        loadObjFile("reflector.obj", "metal.jpg", 1, 1, 1, x + 5 + xSize / 2, y + 3 + ySize, z * 8 + 4, xSize * 0.8, zSize * 0.8, ySize * 0.8, 2, 2);
+        drawObj(&reflectors[z + 2], x + 5 + xSize / 2, y + 3 + ySize, z * 8 + 4, xSize * 0.8, zSize * 0.8, ySize * 0.8, 2, 2);
     }
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "loader.h"
 #ifdef _MSC_VER
 #  pragma comment(lib, "opengl32.lib")
 #  pragma comment(lib, "glu32.lib")
@@ -12,8 +13,12 @@
 
 class Terrain
 {
+	ObjectData plate;
+	ObjectData mountains;
 public:
-	static const int treesAmount = 5;
+	static const int treesAmount = 20;
+	ObjectData trees[treesAmount];
+	void init();
 	std::vector<int> randTreeX;
 	std::vector<int> randTreeZ;
 	Wall* wall;

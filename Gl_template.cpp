@@ -1,4 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include "szescian/Terrain.h"
+#include "szescian/Lazik.h"
 
 #ifdef _MSC_VER
 #pragma comment(lib, "opengl32.lib")
@@ -22,8 +24,6 @@
 #include <gl/glu.h>
 #include <cmath>
 #include "resource.h"
-#include "szescian/Lazik.h"
-#include "szescian/Terrain.h"
 #include <set>
 #include <chrono>
 #include "libraries/glut.h"
@@ -33,7 +33,8 @@
 #define BITMAP_ID 0x4D42
 #define GL_PI 3.14159265359
 HPALETTE hPalette = NULL;
-static LPCTSTR lpszAppName = "Kosiarka";
+std::string name = "Kosiarka";
+static LPCTSTR lpszAppName = (LPCTSTR)name.c_str();
 static HINSTANCE hInstance;
 BITMAPINFOHEADER bitmapInfoHeader;
 unsigned char* bitmapData;
@@ -481,6 +482,11 @@ void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 	hPalette = GetOpenGLPalette(hDC);
 	hRC = wglCreateContext(hDC);
 	wglMakeCurrent(hDC, hRC);
+
+	//
+	lazik.init();
+	terrain.init();
+
 	SetupRC();
 	SetTimer(hWnd, TIMER_ID, 16, NULL);
 	SetTimer(hWnd, TIMER_COLLISION_COUNT_ID, COLLISION_COUNT_TIMER_INTERVAL, NULL);

@@ -23,46 +23,46 @@ GLuint loadTexture(const char* filename) {
     return texture;
 }
 
-void loadObjFile(std::string filename, std::string textureName, GLfloat red, GLfloat green, GLfloat blue, int x, int y, int z, int scaleX, int scaleY, int scaleZ, int repeatX, int repeatY)
-{
-    std::vector<float> vertices;
-    std::vector<float> textures;
+ObjectData loadFile(const std::string& filename, const std::string& textureName) {
+    ObjectData objData;
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
     std::string err;
-    filename = "objects/" + filename;
-    bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename.c_str());
-    textureName = "textures/" + textureName;
-    GLuint textureID = loadTexture(textureName.c_str());
-
+    std::string objFilePath = "objects/" + filename;
+    bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, objFilePath.c_str());
+    std::string textureFilePath = "textures/" + textureName;
+    objData.textureID = loadTexture(textureFilePath.c_str());
     for (const auto& shape : shapes) {
         for (const auto& index : shape.mesh.indices) {
-            vertices.push_back(attrib.vertices[3 * index.vertex_index + 0]);
-            vertices.push_back(attrib.vertices[3 * index.vertex_index + 1]);
-            vertices.push_back(attrib.vertices[3 * index.vertex_index + 2]);
+            objData.vertices.push_back(attrib.vertices[3 * index.vertex_index + 0]);
+            objData.vertices.push_back(attrib.vertices[3 * index.vertex_index + 1]);
+            objData.vertices.push_back(attrib.vertices[3 * index.vertex_index + 2]);
 
             if (!attrib.texcoords.empty()) {
-                textures.push_back(attrib.texcoords[2 * index.texcoord_index + 0]);
-                textures.push_back(attrib.texcoords[2 * index.texcoord_index + 1]);
+                objData.textures.push_back(attrib.texcoords[2 * index.texcoord_index + 0]);
+                objData.textures.push_back(attrib.texcoords[2 * index.texcoord_index + 1]);
             }
         }
     }
 
+    return objData;
+}
+
+void drawObj(ObjectData* objectData, int x, int y, int z, int scaleX, int scaleY, int scaleZ, int repeatX, int repeatY) {
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, textureID);
+    glBindTexture(GL_TEXTURE_2D, objectData->textureID);
     glBegin(GL_TRIANGLES);
-    glColor3f(red, green, blue);
     int textureIndex = 0;
-    for (size_t i = 0; i < vertices.size(); i += 3) {
-        if (textureIndex < textures.size()) {
-            glTexCoord2f(repeatX * textures[textureIndex], repeatY * textures[textureIndex + 1]);
+
+    for (size_t i = 0; i < objectData->vertices.size(); i += 3) {
+        if (textureIndex < objectData->textures.size()) {
+            glTexCoord2f(repeatX * objectData->textures[textureIndex], repeatY * objectData->textures[textureIndex + 1]);
             textureIndex += 2;
         }
-        glVertex3f(scaleX * vertices[i] + x, scaleY * vertices[i + 1] + y, scaleZ * vertices[i + 2] + z);
+        glVertex3f(scaleX * objectData->vertices[i] + x, scaleY * objectData->vertices[i + 1] + y, scaleZ * objectData->vertices[i + 2] + z);
     }
+
     glEnd();
     glDisable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, 0);
-    glDeleteTextures(1, &textureID);
 }
