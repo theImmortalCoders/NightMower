@@ -84,6 +84,7 @@ static GLfloat rot = 0;
 float speed = 0;
 float maxSpeed = 7;
 Lazik lazik(50, 20, 10);
+float wheelAngle = 0;
 
 //terrain
 Terrain terrain;
@@ -118,9 +119,13 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, 
 void move() {
 	const float acceleration = 0.3f;
 	const float deceleration = 0.2f;
+	wheelAngle = 0;
 	if (isWKeyPressed || isSKeyPressed) {
-		if (isWKeyPressed && speed < maxSpeed) {
-			speed += acceleration;
+		if (isWKeyPressed) {
+			if (speed < maxSpeed) {
+				speed += acceleration;
+			}
+			else speed = maxSpeed;
 		}
 		else if (isSKeyPressed && speed > -maxSpeed) {
 			speed -= acceleration;
@@ -128,10 +133,22 @@ void move() {
 		if (keysPressed.count('D') && !keysPressed.count('A')) {
 			azimuth += (speed / 2 * (GL_PI / 180));
 			rot -= speed / 2;
+			if (speed > 0) {
+				wheelAngle = -speed*2;
+			}
+			else {
+				wheelAngle = speed*2;
+			}
 		}
 		else if (keysPressed.count('A') && !keysPressed.count('D')) {
 			azimuth -= (speed / 2 * (GL_PI / 180));
 			rot += speed / 2;
+			if (speed > 0) {
+				wheelAngle = speed*2;
+			}
+			else {
+				wheelAngle = -speed*2;
+			}
 		}
 	}
 	else {
@@ -146,10 +163,24 @@ void move() {
 			if (keysPressed.count('D') && !keysPressed.count('A')) {
 				azimuth += (speed / 2 * 1.0 * (GL_PI / 180));
 				rot -= speed / 2 * 1.0f;
+				if (speed > 0) {
+					if (speed > 0) {
+						wheelAngle = -speed*2;
+					}
+					else {
+						wheelAngle = speed*2;
+					}
+				}
 			}
 			else if (keysPressed.count('A') && !keysPressed.count('D')) {
 				azimuth -= (speed / 2 * 1.0 * (GL_PI / 180));
 				rot += speed / 2 * 1.0f;
+				if (speed > 0) {
+					wheelAngle = speed*2;
+				}
+				else {
+					wheelAngle = -speed*2;
+				}
 			}
 		}
 		else {
@@ -303,7 +334,7 @@ void DrawVehicle() {
 	glTranslatef(xPos, yPos, zPos);
 	glRotatef(rot, 0.0f, 1.0f, 0.0f);
 	glPolygonMode(GL_BACK, GL_LINE);
-	lazik.draw(0, 0, 0, 360 * (speed / maxSpeed), speed);
+	lazik.draw(0, 0, 0, speed, wheelAngle);
 	glPopMatrix();
 }
 
@@ -473,7 +504,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				int deltaX = currentMousePos.x - prevMousePos.x;
 				azimuth += angleJump * deltaX / 5;
 				prevMousePos = currentMousePos;
-				InvalidateRect(hWnd, NULL, FALSE);
 			}
 			break;
 		}

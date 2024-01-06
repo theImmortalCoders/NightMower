@@ -28,10 +28,10 @@ void Lazik::draw(int x, int y, int z, int wheelRot, float angle)
     handle.draw(x - this->xSize + 10, y - 10 + 3 * this->ySize, z, this->zSize);
     axle.draw(x + 4 + this->xSize / 2, y, z);
     axle.draw(x - 4 - this->xSize / 2, y, z);
-    wheel.draw(x + 4 + this->xSize / 2, 0, x - this->ySize - 12, 0, angle = angle);
-    wheel.draw(x + 4 + this->xSize / 2, 0, x + this->ySize + 12, 1, angle = angle);
-    wheel.draw(x - 4 - this->xSize / 2, 0, x - this->ySize - 12, 0);
-    wheel.draw(x - 4 - this->xSize / 2, 0, x + this->ySize + 12, 1);
+    wheel.draw(x + 4 + this->xSize / 2, 0, x - this->ySize - 12, 0, wheelRot, angle);
+    wheel.draw(x + 4 + this->xSize / 2, 0, x + this->ySize + 12, 1, wheelRot, angle);
+    wheel.draw(x - 4 - this->xSize / 2, 0, x - this->ySize - 12, 0, wheelRot, 0);
+    wheel.draw(x - 4 - this->xSize / 2, 0, x + this->ySize + 12, 1, wheelRot, 0);
     for (int z = -2; z < 2; z++) {
         drawObj(&reflectors[z + 2], x + 5 + xSize / 2, y + 3 + ySize, z * 8 + 4, xSize * 0.8, zSize * 0.8, ySize * 0.8, 2, 2);
     }

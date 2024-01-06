@@ -1,5 +1,6 @@
 #include "Wheel.h"
 #include <cmath>
+#include <thread>
 
 GLfloat PI = 3.14159;
 GLfloat deg90 = PI / 2;
@@ -137,6 +138,17 @@ Wheel::Wheel(int x, int y, int z)
     this->z = z;
 }
 
+int randoma(int min, int max)
+{
+    static bool first = true;
+    if (first)
+    {
+        srand(time(NULL));
+        first = false;
+    }
+    return min + rand() % ((max + 1) - min);
+}
+
 void Wheel::draw(int x, int y, int z, bool mirror, GLfloat rotation, float angle)
 {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -147,7 +159,8 @@ void Wheel::draw(int x, int y, int z, bool mirror, GLfloat rotation, float angle
         glRotatef(angle, 0, 1, 0);
 
         tire();
-        rim(mirror, rotation);
+        rot += rotation * randoma(90, 180);
+        rim(mirror, rot);
 
         glPopMatrix();
     }
