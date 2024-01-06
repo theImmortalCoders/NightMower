@@ -13,4 +13,4 @@ struct ObjectData {
     GLuint textureID;
 };
 ObjectData loadFile(const std::string& filename, const std::string& textureName);
-void drawObj(ObjectData* objectData, int x, int y, int z, int scaleX, int scaleY, int scaleZ, int repeatX, int repeatY);
+void drawObj(ObjectData* objectData, int x, int y, int z, int scaleX, int scaleY, int scaleZ, int repeatX, int repeatY, int r =1, int g=1, int b=1);

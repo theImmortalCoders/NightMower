@@ -61,7 +61,10 @@ static GLfloat zCamPos;
 double camDistance = 200;
 double const angleJump = GL_PI / 128;
 double const radiusJump = 10;
-int const renderDistance = 1500;
+int const renderDistance = 3000;
+
+//light
+double lightPos = elevation*0.3;
 
 //collisions
 int collisionCount = 0;
@@ -102,7 +105,6 @@ void ResetOpenGLStates();
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 void ChangeSize(GLsizei w, GLsizei h);
-void SetupRC();
 
 //GL setup
 void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC);
@@ -229,7 +231,7 @@ void sortCollisionPoints()
 			}
 		}
 	}
-	for (int i = 10; i <= 135; i += 25) {
+	for (int i = 0; i <= 125; i += 25) {
 		POINT p{ i, 95 };
 		if (p.y < 0) {
 			if (p.x > 0) {
@@ -251,10 +253,40 @@ void sortCollisionPoints()
 }
 
 void SetOpenGLStates() {
+
+	glNormal3f(0, 1, 0);
+	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	glShadeModel(GL_SMOOTH);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glClearColor(0.04, 0, 0.16, 1.0f);
+	glColor3f(0.8f, 0.8f, 0.8f);
+
+	GLfloat lightDir[] = { xPos, yPos, zPos, 1.0f };
+	glLightfv(GL_LIGHT0, GL_POSITION, lightDir);
+
+	GLfloat spotCutoff = 60.0;
+	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 30);
+	glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, &spotCutoff);
+
+	GLfloat spotDirection[] = {
+		static_cast<GLfloat>(sin((rot + 90) * GL_PI / 180) * cos(lightPos)),
+		static_cast<GLfloat>(sin(lightPos)),
+		static_cast<GLfloat>(cos((rot + 90) * GL_PI / 180) * cos(lightPos))
+	};
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spotDirection);
+
+	GLfloat increasedAmbient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_AMBIENT, increasedAmbient);
+	GLfloat increasedDiffuse[] = { 1.2f, 1.2f, 1.2f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, increasedDiffuse);
+	GLfloat increasedSpecular[] = { 1.0f, 1.0f, 1.0f, 3.0f };
+	glLightfv(GL_LIGHT0, GL_SPECULAR, increasedSpecular);
 }
 
 void SetCamera() {
@@ -278,8 +310,6 @@ void DrawVehicle() {
 void DrawTerrain() {
 	glPushMatrix();
 	glPolygonMode(GL_BACK, GL_LINE);
-	GLfloat lightPos[] = { 1000.0f, 1000.0f, 1000.0f, 1.0f };
-	glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
 	terrain.draw();
 	glPopMatrix();
 }
@@ -292,10 +322,10 @@ void DisplayCollisionCount() {
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glLoadIdentity();
-	glColor3f(1.0, 0.0, 0.0);
-	char collisionCountText[50];
+	glColor3f(1.0, 1.0, 1.0);
+	char collisionCountText[100];
 	sprintf(collisionCountText, "Punkty: %d", collisionCount);
-	DrawText(collisionCountText, 10, 10);
+	DrawText(collisionCountText, 20, 20);
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
@@ -412,6 +442,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			keysPressed.insert(wParam);
 			if (wParam == 'W') isWKeyPressed = true;
 			if (wParam == 'S') isSKeyPressed = true;
+			switch (wParam){
+				case VK_UP:
+				{
+					lightPos += 2 * GL_PI / 180;
+					break;
+				}
+				case VK_DOWN:
+				{
+					lightPos -= 2 * GL_PI / 180;
+					break;
+				}
+			}
 			move();
 			InvalidateRect(hWnd, NULL, FALSE);
 			break;
@@ -450,28 +492,6 @@ void ChangeSize(GLsizei w, GLsizei h) {
 	glLoadIdentity();
 }
 
-void SetupRC() {
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	glEnable(GL_COLOR_MATERIAL);
-	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-	glShadeModel(GL_SMOOTH);
-
-	GLfloat lightPos[] = { 100.0f, 100.0f, 100.0f, 1.0f };
-	glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
-
-	GLfloat lightAmbient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-	GLfloat lightDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-	GLfloat lightSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
-
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	glColor3f(0.0f, 0.0f, 0.0f);
-}
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -487,7 +507,6 @@ void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 	lazik.init();
 	terrain.init();
 
-	SetupRC();
 	SetTimer(hWnd, TIMER_ID, 16, NULL);
 	SetTimer(hWnd, TIMER_COLLISION_COUNT_ID, COLLISION_COUNT_TIMER_INTERVAL, NULL);
 	glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			

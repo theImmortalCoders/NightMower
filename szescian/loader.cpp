@@ -49,12 +49,12 @@ ObjectData loadFile(const std::string& filename, const std::string& textureName)
     return objData;
 }
 
-void drawObj(ObjectData* objectData, int x, int y, int z, int scaleX, int scaleY, int scaleZ, int repeatX, int repeatY) {
+void drawObj(ObjectData* objectData, int x, int y, int z, int scaleX, int scaleY, int scaleZ, int repeatX, int repeatY, int r, int g, int b) {
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, objectData->textureID);
     glBegin(GL_TRIANGLES);
     int textureIndex = 0;
-
+    glColor3f(r, g, b);
     for (size_t i = 0; i < objectData->vertices.size(); i += 3) {
         if (textureIndex < objectData->textures.size()) {
             glTexCoord2f(repeatX * objectData->textures[textureIndex], repeatY * objectData->textures[textureIndex + 1]);

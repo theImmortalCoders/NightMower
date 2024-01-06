@@ -67,7 +67,7 @@ Wall::Wall(int x, int y, int z, int width, int height)
 void Wall::draw()
 {
 	glPushMatrix();
-	glTranslatef(x, y, z);
+	glTranslatef(x, y-5, z);
 	glRotatef(90,1,0,0);
 	for (int j = 0;j < height;j++)
 		for (int i = 0;i < width + j % 2;i++)

@@ -16,8 +16,10 @@ class Terrain
 	ObjectData plate;
 	ObjectData mountains;
 public:
-	static const int treesAmount = 20;
+	static const int treesAmount = 10;
 	ObjectData trees[treesAmount];
+	ObjectData leaves1[treesAmount];
+	ObjectData leaves2[treesAmount];
 	void init();
 	std::vector<int> randTreeX;
 	std::vector<int> randTreeZ;

@@ -18,16 +18,18 @@ void Terrain::init() {
     mountains = loadFile("mountains.obj", "rock.jpg");
     for (int i = 0; i < treesAmount; i++) {
         trees[i] = loadFile("tree3.obj", "bark.jpg");
+        leaves1[i] = loadFile("leaves.obj", "bark.jpg");
+        leaves2[i] = loadFile("leaves.obj", "bark.jpg"); 
     }
 }
 
 Terrain::Terrain()
 {
     wall = new Wall(30, -10, 20 + 70, 5, 5);
-    const float minX = -300;
-    const float maxX = 300;
-    const float minZ = -300;
-    const float maxZ = 300;
+    const float minX = -500;
+    const float maxX = 500;
+    const float minZ = -500;
+    const float maxZ = 500;
     for (int i = 0; i < treesAmount; ++i) {
         float randomX = random(minX, maxX);
         float randomZ = random(minZ, maxZ);
@@ -44,7 +46,8 @@ void Terrain::draw()
     for (int i = 0; i < treesAmount; i++) {
         int randomX = randTreeX[i];
         int randomZ = randTreeZ[i];
-        drawObj(&trees[i], randomX, -10, randomZ, scale, scale / 2, scale, 5, 5);
+        drawObj(&trees[i], randomX, -10, randomZ, scale, scale / 2, scale, 1, 1);
+        drawObj(&leaves1[i], randomX, 180, randomZ, scale/3, scale/3, scale / 3, 1, 1, 0, 1, 0);
     }
     wall->draw();
 }
