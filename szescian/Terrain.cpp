@@ -10,7 +10,11 @@ int random(int min, int max)
         srand(time(NULL));
         first = false;
     }
-    return min + rand() % ((max + 1) - min);
+    int liczba = min + rand() % ((max + 1) - min);
+    while (abs(liczba) < 30) {
+        liczba = min + rand() % ((max + 1) - min);
+    }
+    return liczba;
 }
 
 void Terrain::init() {

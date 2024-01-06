@@ -1,19 +1,7 @@
 ﻿  Gl_template.cpp
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(1,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(1,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(162,15): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(162,22): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(590,34): warning C4018: '<': signed/unsigned mismatch
-  Lazik.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(24,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(24,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(36,114): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(36,101): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(36,88): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  loader.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\loader.h(6,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
-  Generating Code...
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(196,15): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(196,22): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(719,34): warning C4018: '<': signed/unsigned mismatch
   szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Debug\lazik.exe

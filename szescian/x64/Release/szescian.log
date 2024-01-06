@@ -1,27 +1,11 @@
-﻿  Wheel.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(5,12): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(28,23): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(32,19): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(45,23): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(49,19): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(56,15): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(62,23): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(80,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(81,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(90,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(91,27): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(103,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(107,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(107,20): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(107,15): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(146,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(157,30): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(157,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(157,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(162,25): warning C4244: '+=': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.cpp(163,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+﻿  Gl_template.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(1,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(1,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(196,15): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(196,22): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(719,34): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  3 of 1558 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  3 of 1608 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

@@ -33,8 +33,9 @@
 #define BITMAP_ID 0x4D42
 #define GL_PI 3.14159265359
 HPALETTE hPalette = NULL;
-std::string name = "Kosiarka";
-static LPCTSTR lpszAppName = (LPCTSTR)name.c_str();
+string s = "Nocne koszenie";
+std::wstring stemp = std::wstring(s.begin(), s.end());
+LPCWSTR lpszAppName = stemp.c_str();
 static HINSTANCE hInstance;
 BITMAPINFOHEADER bitmapInfoHeader;
 unsigned char* bitmapData;
@@ -68,8 +69,8 @@ double lightPos = elevation*0.3;
 
 //collisions
 int collisionCount = 0;
-float pointDist = 10;
-float lazikDist = 30;
+float pointDist = 15;
+float lazikDist = 27;
 vector<POINT> points1;
 vector<POINT> points2;
 vector<POINT> points3;
@@ -243,6 +244,7 @@ boolean isCollision(POINT coords) {
 
 void sortCollisionPoints()
 {
+	//trees
 	for (int i = 0; i < terrain.treesAmount; i++) {
 		POINT tree{ terrain.randTreeX[i], terrain.randTreeZ[i] };
 		if (tree.y < 0) {
@@ -262,8 +264,86 @@ void sortCollisionPoints()
 			}
 		}
 	}
+	//wall
 	for (int i = 0; i <= 125; i += 25) {
 		POINT p{ i, 95 };
+		if (p.y < 0) {
+			if (p.x > 0) {
+				points1.push_back(p);
+			}
+			else {
+				points2.push_back(p);
+			}
+		}
+		else {
+			if (p.x > 0) {
+				points3.push_back(p);
+			}
+			else {
+				points4.push_back(p);
+			}
+		}
+	}
+	//walls
+	for (int i = -500; i < 500; i++) {
+		POINT p{ i, 500 };
+		if (p.y < 0) {
+			if (p.x > 0) {
+				points1.push_back(p);
+			}
+			else {
+				points2.push_back(p);
+			}
+		}
+		else {
+			if (p.x > 0) {
+				points3.push_back(p);
+			}
+			else {
+				points4.push_back(p);
+			}
+		}
+	}
+	for (int i = -500; i < 500; i++) {
+		POINT p{ i, -500 };
+		if (p.y < 0) {
+			if (p.x > 0) {
+				points1.push_back(p);
+			}
+			else {
+				points2.push_back(p);
+			}
+		}
+		else {
+			if (p.x > 0) {
+				points3.push_back(p);
+			}
+			else {
+				points4.push_back(p);
+			}
+		}
+	}
+	for (int i = -500; i < 500; i++) {
+		POINT p{ 500, i };
+		if (p.y < 0) {
+			if (p.x > 0) {
+				points1.push_back(p);
+			}
+			else {
+				points2.push_back(p);
+			}
+		}
+		else {
+			if (p.x > 0) {
+				points3.push_back(p);
+			}
+			else {
+				points4.push_back(p);
+			}
+		}
+	}
+	for (int i = -500; i < 500; i++) {
+		POINT p{ -500, i };
 		if (p.y < 0) {
 			if (p.x > 0) {
 				points1.push_back(p);
@@ -440,7 +520,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			if (delta > 0 && camDistance > 150) {
 				camDistance -= radiusJump;
 			}
-			else if (delta < 0 && camDistance < 500) {
+			else if (delta < 0 && camDistance < 3500) {
 				camDistance += radiusJump;
 			}
 			InvalidateRect(hWnd, NULL, FALSE);
