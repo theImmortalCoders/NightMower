@@ -28,6 +28,7 @@
 #include <chrono>
 #include "libraries/glut.h"
 
+#define IDC_CLOSE_BUTTON 101
 //gl
 #define glRGB(x, y, z) glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42
@@ -84,13 +85,11 @@ float speed = 0;
 float maxSpeed = 4;
 Lazik lazik(50, 20, 10);
 float wheelAngle = 0;
+int level = 1;
 
 //terrain
 Terrain terrain;
-float potatoAngle[Terrain::potatoesAmount]{};
-bool isPotatoVisible[Terrain::potatoesAmount]{true};
-int potatoCounter = 0;
-bool isWin = false;
+int potatoCounter = Terrain::potatoesAmount;
 
 //functions:
 //lazik
@@ -213,18 +212,25 @@ void move() {
 }
 
 void checkPotatoes(POINT coords) {
-	for (int i = 0; i < Terrain::potatoesAmount; i++) {
-		if (isPotatoVisible[i]) {
-			POINT point{ terrain.randPotatoeX[i], terrain.randPotatoeY[i] };
-			if (dist(point, coords) < pointDist + lazikDist) {
-				isPotatoVisible[i] = false;
-				collisionCount += 30;
-				potatoCounter++;
-				if (potatoCounter == Terrain::potatoesAmount) {
-					isWin = true;
-				}
+	std::vector<int> toRm;
+	int counter = 0;
+	for (auto& potato : terrain.potatoes) {
+		POINT point{ potato.x, potato.z };
+		if (dist(point, coords) < pointDist + lazikDist) {
+			collisionCount += 30;
+			potatoCounter--;
+			toRm.push_back(counter);
+			if (potatoCounter == 0) {
+				level++;
+				Terrain::potatoesAmount += 3;
+				terrain.init();
+				potatoCounter = Terrain::potatoesAmount;
 			}
 		}
+		counter++;
+	}
+	for (auto i : toRm) {
+		terrain.potatoes.erase(terrain.potatoes.begin() + i);
 	}
 }
 
@@ -446,17 +452,15 @@ void DrawTerrain() {
 	terrain.draw();
 	glPopMatrix();
 	
-	for (int i = 0; i < Terrain::potatoesAmount; i++) {
-		if (isPotatoVisible[i]) {
-			glPushMatrix();
-			glTranslatef(terrain.randPotatoeX[i], 10, terrain.randPotatoeY[i]);
-			glPolygonMode(GL_BACK, GL_LINE);
-			glRotatef(potatoAngle[i], 0, 1, 0);
-			potatoAngle[i] += 1;
-			if (potatoAngle[i] > 360) potatoAngle[i] = 0;
-			terrain.drawPotatoe(0, 0, i);
-			glPopMatrix();
-		}
+	for (auto& potato : terrain.potatoes) {
+		glPushMatrix();
+		glTranslatef(potato.x, 10, potato.z);
+		glPolygonMode(GL_BACK, GL_LINE);
+		glRotatef(potato.angle, 0, 1, 0);
+		potato.angle += 1;
+		if (potato.angle > 360) potato.angle = 0;
+		potato.draw();
+		glPopMatrix();
 	}
 }
 
@@ -469,14 +473,16 @@ void DisplayCollisionCount() {
 	glPushMatrix();
 	glLoadIdentity();
 	glColor3f(1.0, 1.0, 1.0);
+
 	char collisionCountText[100];
-	if (isWin) {
-		sprintf(collisionCountText, "Wygrales!");
-	}
-	else {
-		sprintf(collisionCountText, "Punkty: %d", collisionCount);
-	}
+	char levelText[100];
+	char left[100];
+	sprintf(collisionCountText, "Punkty: %d", collisionCount);
+	sprintf(levelText, "Poziom %d", level);
+	sprintf(left, "Pozosta³o %d ziemniakow", potatoCounter);
 	DrawText(collisionCountText, 20, 20);
+	DrawText(levelText, 20, 50);
+	DrawText(left, 20, 80);
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
@@ -503,11 +509,41 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 { 
 	static HGLRC hRC; 
 	static HDC hDC;
+	static HWND closeButton;
 	switch (message)
 	{
 		case WM_CREATE:
 		{
 			createScene(hDC, hWnd, hRC);
+			closeButton = CreateWindow(
+				L"BUTTON",      // predefined class
+				L"X",           // button text
+				WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // styles
+				10,             // x position
+				840,            // y position
+				30,             // button width
+				30,             // button height
+				hWnd,           // parent window
+				(HMENU)IDC_CLOSE_BUTTON,  // button identifier
+				hInstance,      // instance handle
+				NULL            // no additional data
+			);
+
+			break;
+
+			break;
+			break;
+		}
+		case WM_COMMAND:
+		{
+			switch (LOWORD(wParam))
+			{
+				case IDC_CLOSE_BUTTON:
+				{
+					PostMessage(hWnd, WM_CLOSE, 0, 0);
+					break;
+				}
+			}
 			break;
 		}
 		case WM_DESTROY:
@@ -522,6 +558,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case WM_SIZE:
 		{
 			ChangeSize(LOWORD(lParam), HIWORD(lParam));
+			RECT clientRect;
+			GetClientRect(hWnd, &clientRect);
+
+			// Update the position of the close button based on the window size
+			SetWindowPos(
+				closeButton,         // handle of the button
+				NULL,                // handle of the window to insert the button
+				clientRect.right - 40,                  // x position
+				clientRect.bottom - 40,  // y position (adjust as needed)
+				30,                  // button width
+				30,                  // button height
+				SWP_NOZORDER | SWP_NOACTIVATE // window positioning flags
+			);
+
+			break;
 			break;
 		}
 		case WM_PAINT:
@@ -644,12 +695,7 @@ void ChangeSize(GLsizei w, GLsizei h) {
 
 void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 {
-	for (int i = 0; i < Terrain::potatoesAmount; i++) {
-		potatoAngle[i] = random(1, 360);
-	}
-	for (int i = 0; i < Terrain::potatoesAmount; i++) {
-		isPotatoVisible[i] = true;
-	}
+
 	hDC = GetDC(hWnd);
 	SetDCPixelFormat(hDC);
 	hPalette = GetOpenGLPalette(hDC);
@@ -790,7 +836,7 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, 
 	wc.lpszMenuName = MAKEINTRESOURCE(IDR_MENU);
 	wc.lpszClassName = lpszAppName;
 	if (RegisterClass(&wc) == 0) return FALSE;
-	HWND hWnd = CreateWindow(lpszAppName, lpszAppName, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, 50, 50, 400, 400, NULL, NULL, hInstance, NULL);
+	HWND hWnd = CreateWindow(lpszAppName, lpszAppName, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, 50, 50, 900, 900, NULL, NULL, hInstance, NULL);
 	if (hWnd == NULL) return FALSE;
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);

@@ -173,6 +173,7 @@
     <ClInclude Include="Handle.h" />
     <ClInclude Include="Lazik.h" />
     <ClInclude Include="loader.h" />
+    <ClInclude Include="Potato.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Wheel.h" />
