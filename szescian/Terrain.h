@@ -17,16 +17,21 @@ class Terrain
 	ObjectData mountains;
 public:
 	static const int treesAmount = 50;
+	static const int potatoesAmount = 20;
 	ObjectData trees[treesAmount];
 	ObjectData leaves1[treesAmount];
 	ObjectData leaves2[treesAmount];
+	ObjectData potatoes[potatoesAmount];
 	void init();
 	std::vector<int> randTreeX;
 	std::vector<int> randTreeZ;
+	std::vector<int> randPotatoeX;
+	std::vector<int> randPotatoeY;
 	Wall* wall;
 	int scale = 80;
 	Terrain();
 	~Terrain();
 	void draw();
+	void drawPotatoe(int x, int y, int i);
 };
-
+int random(int min, int max);

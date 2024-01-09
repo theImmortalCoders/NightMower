@@ -43,8 +43,6 @@ unsigned int texture[2];
 
 //timer
 #define TIMER_ID 1
-#define TIMER_COLLISION_COUNT_ID 2
-#define COLLISION_COUNT_TIMER_INTERVAL 5000
 
 //keys
 bool isWKeyPressed = false;
@@ -62,7 +60,7 @@ static GLfloat zCamPos;
 double camDistance = 200;
 double const angleJump = GL_PI / 128;
 double const radiusJump = 10;
-int const renderDistance = 3000;
+int const renderDistance = 2000;
 
 //light
 double lightPos = elevation*0.3;
@@ -83,16 +81,21 @@ static GLfloat yPos = 0;
 static GLfloat zPos = 0;
 static GLfloat rot = 0;
 float speed = 0;
-float maxSpeed = 7;
+float maxSpeed = 4;
 Lazik lazik(50, 20, 10);
 float wheelAngle = 0;
 
 //terrain
 Terrain terrain;
+float potatoAngle[Terrain::potatoesAmount]{};
+bool isPotatoVisible[Terrain::potatoesAmount]{true};
+int potatoCounter = 0;
+bool isWin = false;
 
 //functions:
 //lazik
 void move();
+void checkPotatoes(POINT coords);
 boolean isCollision(POINT coords);
 void sortCollisionPoints();
 //render
@@ -199,10 +202,29 @@ void move() {
 			zPos = nextY;
 		}
 		else {
-			collisionCount--;
+			if (abs(speed)>2) {
+				collisionCount-=50;
+			}
 			speed = 0;
 		}
 		lastCollisionCheckTime = currentTime;
+		checkPotatoes(next);
+	}
+}
+
+void checkPotatoes(POINT coords) {
+	for (int i = 0; i < Terrain::potatoesAmount; i++) {
+		if (isPotatoVisible[i]) {
+			POINT point{ terrain.randPotatoeX[i], terrain.randPotatoeY[i] };
+			if (dist(point, coords) < pointDist + lazikDist) {
+				isPotatoVisible[i] = false;
+				collisionCount += 30;
+				potatoCounter++;
+				if (potatoCounter == Terrain::potatoesAmount) {
+					isWin = true;
+				}
+			}
+		}
 	}
 }
 
@@ -365,12 +387,12 @@ void sortCollisionPoints()
 
 void SetOpenGLStates() {
 
-	glNormal3f(0, 1, 0);
+	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_DEPTH_TEST);
+	glNormal3f(0, 1, 0);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	glEnable(GL_COLOR_MATERIAL);
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 	glShadeModel(GL_SMOOTH);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -423,6 +445,19 @@ void DrawTerrain() {
 	glPolygonMode(GL_BACK, GL_LINE);
 	terrain.draw();
 	glPopMatrix();
+	
+	for (int i = 0; i < Terrain::potatoesAmount; i++) {
+		if (isPotatoVisible[i]) {
+			glPushMatrix();
+			glTranslatef(terrain.randPotatoeX[i], 10, terrain.randPotatoeY[i]);
+			glPolygonMode(GL_BACK, GL_LINE);
+			glRotatef(potatoAngle[i], 0, 1, 0);
+			potatoAngle[i] += 1;
+			if (potatoAngle[i] > 360) potatoAngle[i] = 0;
+			terrain.drawPotatoe(0, 0, i);
+			glPopMatrix();
+		}
+	}
 }
 
 void DisplayCollisionCount() {
@@ -435,7 +470,12 @@ void DisplayCollisionCount() {
 	glLoadIdentity();
 	glColor3f(1.0, 1.0, 1.0);
 	char collisionCountText[100];
-	sprintf(collisionCountText, "Punkty: %d", collisionCount);
+	if (isWin) {
+		sprintf(collisionCountText, "Wygrales!");
+	}
+	else {
+		sprintf(collisionCountText, "Punkty: %d", collisionCount);
+	}
 	DrawText(collisionCountText, 20, 20);
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
@@ -543,9 +583,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				move();
 				InvalidateRect(hWnd, NULL, FALSE);
 			}
-			else if (wParam == TIMER_COLLISION_COUNT_ID) {
-				collisionCount += 10;
-			}
 			break;
 		}
 		case WM_KEYDOWN:
@@ -607,6 +644,12 @@ void ChangeSize(GLsizei w, GLsizei h) {
 
 void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 {
+	for (int i = 0; i < Terrain::potatoesAmount; i++) {
+		potatoAngle[i] = random(1, 360);
+	}
+	for (int i = 0; i < Terrain::potatoesAmount; i++) {
+		isPotatoVisible[i] = true;
+	}
 	hDC = GetDC(hWnd);
 	SetDCPixelFormat(hDC);
 	hPalette = GetOpenGLPalette(hDC);
@@ -616,9 +659,8 @@ void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 	//
 	lazik.init();
 	terrain.init();
-
+	
 	SetTimer(hWnd, TIMER_ID, 16, NULL);
-	SetTimer(hWnd, TIMER_COLLISION_COUNT_ID, COLLISION_COUNT_TIMER_INTERVAL, NULL);
 	glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			
 	bitmapData = LoadBitmapFile("Bitmapy\\checker.bmp", &bitmapInfoHeader);
 	glBindTexture(GL_TEXTURE_2D, texture[0]);       // aktywuje obiekt tekstury

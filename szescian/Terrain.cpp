@@ -25,6 +25,9 @@ void Terrain::init() {
         leaves1[i] = loadFile("leaves.obj", "bark.jpg");
         leaves2[i] = loadFile("leaves.obj", "bark.jpg"); 
     }
+    for (int i = 0; i < potatoesAmount; i++) {
+        potatoes[i] = loadFile("potato.obj", "potato.jpg");
+    }
 }
 
 Terrain::Terrain()
@@ -40,6 +43,12 @@ Terrain::Terrain()
         this->randTreeX.push_back(randomX);
         this->randTreeZ.push_back(randomZ);
     }
+    for (int i = 0; i < potatoesAmount; i++) {
+        float randomX = random(minX+100, maxX-100);
+        float randomZ = random(minZ+100, maxZ-100);
+        this->randPotatoeX.push_back(randomX);
+        this->randPotatoeY.push_back(randomZ);
+    }
 }
 
 void Terrain::draw()
@@ -54,6 +63,11 @@ void Terrain::draw()
         drawObj(&leaves1[i], randomX, 180, randomZ, scale/3, scale/3, scale / 3, 1, 1, 0, 1, 0);
     }
     wall->draw();
+}
+
+void Terrain::drawPotatoe(int x, int y, int i)
+{
+    drawObj(&potatoes[i], x, 0, y, 2, 2, 2, 1, 1);
 }
 
 Terrain::~Terrain()
