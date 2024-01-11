@@ -28,7 +28,6 @@
 #include <chrono>
 #include "libraries/glut.h"
 
-#define IDC_CLOSE_BUTTON 101
 //gl
 #define glRGB(x, y, z) glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42
@@ -44,6 +43,9 @@ unsigned int texture[2];
 
 //timer
 #define TIMER_ID 1
+std::chrono::high_resolution_clock::time_point startTime;
+int gameTimeSeconds = 0;
+bool pause = false;
 
 //keys
 bool isWKeyPressed = false;
@@ -69,12 +71,13 @@ double lightPos = elevation*0.3;
 //collisions
 int collisionCount = 0;
 float pointDist = 15;
-float lazikDist = 27;
+float lazikDist = 25;
 vector<POINT> points1;
 vector<POINT> points2;
 vector<POINT> points3;
 vector<POINT> points4;
 static auto lastCollisionCheckTime = std::chrono::high_resolution_clock::now();
+bool isCollision = false;
 
 //lazik
 static GLfloat xPos = 0;
@@ -83,7 +86,7 @@ static GLfloat zPos = 0;
 static GLfloat rot = 0;
 float speed = 0;
 float maxSpeed = 4;
-Lazik lazik(50, 20, 10);
+Lazik lazik(40, 20, 10);
 float wheelAngle = 0;
 int level = 1;
 
@@ -95,7 +98,7 @@ int potatoCounter = Terrain::potatoesAmount;
 //lazik
 void move();
 void checkPotatoes(POINT coords);
-boolean isCollision(POINT coords);
+boolean checkCollision(POINT coords);
 void sortCollisionPoints();
 //render
 void SetOpenGLStates();
@@ -115,7 +118,7 @@ void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC);
 void SetDCPixelFormat(HDC hDC);
 HPALETTE GetOpenGLPalette(HDC hDC);
 unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader);
-void DrawText(const char* text, GLfloat x, GLfloat y);
+void DrawText(const char* text, GLfloat x, GLfloat y, GLfloat fontSize = 18.0f);
 GLfloat dist(POINT col, POINT laz);
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
 
@@ -192,22 +195,24 @@ void move() {
 	}
 	GLfloat nextX = xPos + speed * sin(rot * (GL_PI / 180) + GL_PI / 2);
 	GLfloat nextY = zPos + speed * cos(rot * (GL_PI / 180) + GL_PI / 2);
+	POINT next{ nextX, nextY };
 	auto currentTime = std::chrono::high_resolution_clock::now();
+	if (!checkCollision(next)) {
+		xPos = nextX;
+		zPos = nextY;
+	}
+	else {
+		if (abs(speed) > 2) {
+			collisionCount -= 50;
+			isCollision = true;
+			lastCollisionCheckTime = currentTime;
+		}
+		speed = 0;
+	}
+	checkPotatoes(next);
 	auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastCollisionCheckTime).count();
-	if (elapsedTime >= 10) {
-		POINT next{ nextX, nextY };
-		if (!isCollision(next)) {
-			xPos = nextX;
-			zPos = nextY;
-		}
-		else {
-			if (abs(speed)>2) {
-				collisionCount-=50;
-			}
-			speed = 0;
-		}
-		lastCollisionCheckTime = currentTime;
-		checkPotatoes(next);
+	if (elapsedTime > 2000) {
+		isCollision = false;
 	}
 }
 
@@ -234,7 +239,7 @@ void checkPotatoes(POINT coords) {
 	}
 }
 
-boolean isCollision(POINT coords) {
+boolean checkCollision(POINT coords) {
 	if (coords.y < 0) {
 		if (coords.x > 0) {
 			for (auto point : points1) {
@@ -477,12 +482,20 @@ void DisplayCollisionCount() {
 	char collisionCountText[100];
 	char levelText[100];
 	char left[100];
+	char timeText[100];
+	char collText[100];
 	sprintf(collisionCountText, "Punkty: %d", collisionCount);
 	sprintf(levelText, "Poziom %d", level);
-	sprintf(left, "Pozosta³o %d ziemniakow", potatoCounter);
-	DrawText(collisionCountText, 20, 20);
-	DrawText(levelText, 20, 50);
-	DrawText(left, 20, 80);
+	sprintf(left, "Pozostalo %d ziemniakow", potatoCounter);
+	sprintf(timeText, "Czas gry: %d sekund", gameTimeSeconds);
+	sprintf(collText, "Kolizja!");
+	DrawText(timeText, 20, 170, 20);
+	DrawText(collisionCountText, 20, 20, 20);
+	DrawText(levelText, 20, 70, 20);
+	DrawText(left, 20, 120, 20);
+	if (isCollision) {
+		DrawText(collText, 700, 20, 20);
+	}
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
@@ -497,6 +510,11 @@ void ResetOpenGLStates() {
 }
 
 void RenderScene() {
+	if (!pause) {
+		auto currentTime = std::chrono::high_resolution_clock::now();
+		auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime).count();
+		gameTimeSeconds = static_cast<int>(elapsedTime);
+	}
 	SetOpenGLStates();
 	SetCamera();
 	DrawVehicle();
@@ -510,40 +528,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	static HGLRC hRC; 
 	static HDC hDC;
 	static HWND closeButton;
+	static HWND leaderboardButton;
 	switch (message)
 	{
 		case WM_CREATE:
 		{
 			createScene(hDC, hWnd, hRC);
-			closeButton = CreateWindow(
-				L"BUTTON",      // predefined class
-				L"X",           // button text
-				WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // styles
-				10,             // x position
-				840,            // y position
-				30,             // button width
-				30,             // button height
-				hWnd,           // parent window
-				(HMENU)IDC_CLOSE_BUTTON,  // button identifier
-				hInstance,      // instance handle
-				NULL            // no additional data
-			);
 
 			break;
 
 			break;
-			break;
-		}
-		case WM_COMMAND:
-		{
-			switch (LOWORD(wParam))
-			{
-				case IDC_CLOSE_BUTTON:
-				{
-					PostMessage(hWnd, WM_CLOSE, 0, 0);
-					break;
-				}
-			}
 			break;
 		}
 		case WM_DESTROY:
@@ -558,19 +552,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case WM_SIZE:
 		{
 			ChangeSize(LOWORD(lParam), HIWORD(lParam));
-			RECT clientRect;
-			GetClientRect(hWnd, &clientRect);
-
-			// Update the position of the close button based on the window size
-			SetWindowPos(
-				closeButton,         // handle of the button
-				NULL,                // handle of the window to insert the button
-				clientRect.right - 40,                  // x position
-				clientRect.bottom - 40,  // y position (adjust as needed)
-				30,                  // button width
-				30,                  // button height
-				SWP_NOZORDER | SWP_NOACTIVATE // window positioning flags
-			);
 
 			break;
 			break;
@@ -675,7 +656,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			}
 			break;
 		}
-		default: return (DefWindowProc(hWnd, message, wParam, lParam));
+		default:
+			return (DefWindowProc(hWnd, message, wParam, lParam));
 	}
 	return (0L);
 }
@@ -812,12 +794,33 @@ unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader
 	return bitmapImage;
 }
 
-void DrawText(const char* text, GLfloat x, GLfloat y) {
-	glRasterPos2f(x, y);
-	while (*text) {
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *text);
-		++text;
+void DrawText(const char* text, GLfloat x, GLfloat y, GLfloat fontSize) {
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0, 1000, 0, 1000);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	glColor3f(0.0, 0.0, 0.0);
+	glRasterPos2i(static_cast<int>(x + 5), static_cast<int>(y + 20));
+	for (const char* c = text; *c != '\0'; ++c) {
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
 	}
+
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_QUADS);
+	glVertex2i(static_cast<int>(x), static_cast<int>(y));
+	glVertex2i(static_cast<int>(x) + 200, static_cast<int>(y));
+	glVertex2i(static_cast<int>(x) + 200, static_cast<int>(y) + 60);
+	glVertex2i(static_cast<int>(x), static_cast<int>(y) + 60);
+	glEnd();
+
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
 }
 
 GLfloat dist(POINT col, POINT laz) {
@@ -825,6 +828,7 @@ GLfloat dist(POINT col, POINT laz) {
 }
 
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) { 
+	startTime = std::chrono::high_resolution_clock::now();
 	MSG msg;
 	WNDCLASS wc;
 	hInstance = hInst;
