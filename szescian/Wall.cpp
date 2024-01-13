@@ -1,6 +1,27 @@
 #include "Wall.h"
 
-void cegla(int x, int z) {
+Wall::Wall(int x, int y, int z, int width, int height)
+{
+    this->x = x;
+    this->y = y;
+    this->z = z;
+	this->height = height;
+	this->width = width;
+}
+
+void Wall::draw()
+{
+	glPushMatrix();
+	glTranslatef(x, y-5, z);
+	glRotatef(90,1,0,0);
+	for (int j = 0;j < height;j++)
+		for (int i = 0;i < width + j % 2;i++)
+			drawCegla(25 * i - j % 2 * 13, 7 * j);
+	glPopMatrix();
+}
+
+////
+void Wall::drawCegla(int x, int z) {
 	x -= 30;
 	z -= 30;
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -46,31 +67,4 @@ void cegla(int x, int z) {
 			glEnd();
 		}
 	}
-}
-
-Wall::Wall(int x, int y, int z, int width, int height)
-{
-    this->x = x;
-    this->y = y;
-    this->z = z;
-	this->height = height;
-	this->width = width;
-	//this->hitWalls.push_back(new HitWall(x - width / 2, z, x + width / 2, z));
-}
-
-//std::vector<HitWall*> Wall::getHitWalls()
-//{
-//	std::cout << "xd";
-//	return this->hitWalls;
-//}
-
-void Wall::draw()
-{
-	glPushMatrix();
-	glTranslatef(x, y-5, z);
-	glRotatef(90,1,0,0);
-	for (int j = 0;j < height;j++)
-		for (int i = 0;i < width + j % 2;i++)
-			cegla(25 * i - j % 2 * 13, 7 * j);
-	glPopMatrix();
 }

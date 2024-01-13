@@ -1,6 +1,8 @@
 ﻿  Gl_template.cpp
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(1,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(1,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.h(13,21): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.h(12,24): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(207,14): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(207,21): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(334,22): warning C4838: conversion from 'const float' to 'LONG' requires a narrowing conversion
@@ -8,9 +10,33 @@ C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(353,22): warni
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(372,19): warning C4838: conversion from 'const float' to 'LONG' requires a narrowing conversion
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(391,19): warning C4838: conversion from 'const float' to 'LONG' requires a narrowing conversion
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(870,34): warning C4018: '<': signed/unsigned mismatch
+  Terrain.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(11,44): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(11,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(11,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,44): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(12,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(13,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(14,35): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(35,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(35,32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(36,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(36,32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(37,30): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(38,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(61,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Generating code
-  1 of 1678 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    11 functions had inline decision re-evaluated but remain unchanged
+  64 of 1675 functions ( 3.8%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    14 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Release\lazik.exe

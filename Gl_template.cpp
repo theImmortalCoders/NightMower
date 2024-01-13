@@ -239,7 +239,7 @@ void checkPotatoes(POINT coords) {
 			if (potatoCounter == 0) {
 				level++;
 				Terrain::potatoesAmount += 3;
-				terrain.initPotatoes();
+				terrain.loadPotatoes();
 				potatoCounter = Terrain::potatoesAmount;
 				SoundEngine->play2D("audio/level.mp3", false);
 			}
@@ -690,7 +690,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				level = 1;
 				terrain.potatoesAmount = Terrain::beginPotatoesAmount;
 				potatoCounter = terrain.potatoesAmount;
-				terrain.initPotatoes();
+				terrain.loadPotatoes();
 			}
 			if (wParam == VK_ESCAPE) {
 				pause = !pause;
@@ -765,8 +765,8 @@ void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 	wglMakeCurrent(hDC, hRC);
 
 	//
-	lazik.init();
-	terrain.init();
+	lazik.load();
+	terrain.load();
 	SoundEngine->play2D("audio/breakout.mp3", true);
 
 	SetTimer(hWnd, TIMER_ID, 16, NULL);

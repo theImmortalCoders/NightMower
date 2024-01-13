@@ -9,12 +9,16 @@
 
 class Wheel
 {
-	int x;
-	int y;
-	int z;
 	int rot = 0;
+	const GLfloat PI = 3.14159;
+	const GLfloat deg90 = PI / 2;
+	const GLfloat deg9 = PI / 20;
+	const GLfloat deg1 = deg90 / 90;
+	const int width = 6;
+	void drawTire();
+	void drawSpokes();
+	void drawRim(bool flip, GLfloat someDegree);
 public:
-	Wheel(int x, int y, int z);
 	void draw(int xSize, int ySize, int zSize, bool mirror = 0, GLfloat rotation = 0, float angle=0);
 };
 

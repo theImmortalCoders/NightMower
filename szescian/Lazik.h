@@ -1,13 +1,7 @@
 #pragma once
 #include "loader.h"
-#ifdef _MSC_VER
-#  pragma comment(lib, "opengl32.lib")
-#  pragma comment(lib, "glu32.lib")
-#endif
-#include <windows.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
-#include <vector>
+#include <Wheel.h>
+#include <Handle.h>
 
 using namespace std;
 class Lazik
@@ -15,11 +9,14 @@ class Lazik
 	int xSize;
 	int ySize;
 	int zSize;
+	Handle handle;
 	ObjectData core;
+	Wheel wheels[4];
 	ObjectData reflectors[4];
+	void drawAxle(int x, int y, int z);
 public:
 	Lazik(int xSize, int ySize, int zSize);
-	void init();
+	void load();
 	void draw(int x, int y, int z, int wheelRot, float angle);
 };
 

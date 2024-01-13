@@ -1,16 +1,27 @@
 #include "Wheel.h"
 #include <cmath>
-#include <thread>
+#include "random.h"
 
-GLfloat PI = 3.14159;
-GLfloat deg90 = PI / 2;
-GLfloat deg9 = PI / 20;
-GLfloat deg1 = deg90 / 90;
-//width probably shouldnt be higher than 10
-const int width = 6; //must be even value
+void Wheel::draw(int x, int y, int z, bool mirror, GLfloat rotation, float angle)
+{
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    {
+        glPushMatrix();
+        glTranslatef(x, y, z);
+        glRotatef(90, 0, 1.0, 0);
+        glRotatef(angle, 0, 1, 0);
 
+        drawTire();
+        rot += rotation * random(90, 180);
+        drawRim(mirror, rot);
 
-void tire() {
+        glPopMatrix();
+    }
+}
+
+///
+
+void Wheel::drawTire() {
     GLfloat bend = 10 * deg1;
     int stripes = width / 2;   // num of stripes in a half a tire
     int outRds = 12; // outer radius
@@ -71,7 +82,7 @@ void tire() {
     }
 }
 
-void spokes() { // szprycha i guess
+void Wheel::drawSpokes() { // szprycha i guess
     for (int rot = 0;rot < 6;rot++) {
         glRotatef(60, 1.0, 0, 0);
         for (int k = 0; k < 2; k++) {
@@ -98,7 +109,7 @@ void spokes() { // szprycha i guess
     }
 }
 
-void rim(bool flip, GLfloat someDegree) {
+void Wheel::drawRim(bool flip, GLfloat someDegree) {
 
     glScalef(flip?-1:1,1,1);
 
@@ -128,40 +139,5 @@ void rim(bool flip, GLfloat someDegree) {
     }
     //-----szprychy czy jakos tak-----
     glRotatef(someDegree, 1, 0, 0);
-    spokes();
-}
-
-Wheel::Wheel(int x, int y, int z)
-{
-    this->x = x;
-    this->y = y;
-    this->z = z;
-}
-
-int randoma(int min, int max)
-{
-    static bool first = true;
-    if (first)
-    {
-        srand(time(NULL));
-        first = false;
-    }
-    return min + rand() % ((max + 1) - min);
-}
-
-void Wheel::draw(int x, int y, int z, bool mirror, GLfloat rotation, float angle)
-{
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    {
-        glPushMatrix();
-        glTranslatef(x,  y,  z);
-        glRotatef(90, 0, 1.0, 0);
-        glRotatef(angle, 0, 1, 0);
-
-        tire();
-        rot += rotation * randoma(90, 180);
-        rim(mirror, rot);
-
-        glPopMatrix();
-    }
+    drawSpokes();
 }

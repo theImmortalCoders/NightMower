@@ -1,5 +1,6 @@
 #pragma once
 #include <loader.h>
+
 struct Potato
 {
 	ObjectData object;
@@ -11,4 +12,3 @@ struct Potato
 		drawObj(&object, 0, 0, 0, 2, 2, 2, 1, 1);
 	}
 };
-

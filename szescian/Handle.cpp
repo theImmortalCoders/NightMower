@@ -1,19 +1,7 @@
 #include "handle.h"
 #include <cmath>
 
-Handle::Handle(int x, int y, int z)
-{
-    this->x = x;
-    this->y = y;
-    this->z = z;
-    this->camDistance = 1;
-    this->length = 13;
-}
-
 void Handle::draw(int x, int y, int z, int zSize) {
-    GLfloat PI = 3.14159;
-    GLfloat deg9 = PI / 20;
-
     glPushMatrix();
     glTranslatef(x, y, z);
     
@@ -116,7 +104,5 @@ void Handle::draw(int x, int y, int z, int zSize) {
             glEnd();
         }
     }
-
     glPopMatrix();
-    
 }

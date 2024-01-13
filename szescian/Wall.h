@@ -14,6 +14,7 @@ class Wall
 	int z;
 	int height;
 	int width;
+	void drawCegla(int x, int z);
 public:
 	Wall(int x, int y, int z, int width, int height);
 	void draw();

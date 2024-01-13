@@ -9,13 +9,11 @@
 
 class Handle
 {
-	int x;
-	int y;
-	int z;
-	GLfloat camDistance;
-	GLfloat length;
+    const GLfloat PI = 3.14159;
+    const GLfloat deg9 = PI / 20;
+    const GLfloat camDistance = 1;
+    const GLfloat length = 13;
 public:
-	Handle(int x, int y, int z);
 	void draw(int x, int y, int z, int zSize);
 };
 

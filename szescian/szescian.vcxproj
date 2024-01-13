@@ -155,10 +155,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Gl_template.cpp" />
-    <ClCompile Include="Axle.cpp" />
     <ClCompile Include="Handle.cpp" />
     <ClCompile Include="Lazik.cpp" />
     <ClCompile Include="loader.cpp" />
+    <ClCompile Include="random.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Wheel.cpp" />
@@ -169,11 +169,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\RESOURCE.H" />
-    <ClInclude Include="Axle.h" />
     <ClInclude Include="Handle.h" />
     <ClInclude Include="Lazik.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="Potato.h" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Wheel.h" />
