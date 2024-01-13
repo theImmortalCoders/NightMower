@@ -16,13 +16,19 @@ class Terrain
 	ObjectData plate;
 	ObjectData mountains;
 public:
+	static const int beginPotatoesAmount = 10;
+	const float minX = -1000;
+	const float maxX = 1000;
+	const float minZ = -1000;
+	const float maxZ = 1000;
 	static int potatoesAmount;
-	static const int treesAmount = 20;
+	static const int treesAmount = 40;
 	std::vector<Potato> potatoes;
 	ObjectData trees[treesAmount];
 	ObjectData leaves1[treesAmount];
 	ObjectData leaves2[treesAmount];
 	void init();
+	void initPotatoes();
 	std::vector<int> randTreeX;
 	std::vector<int> randTreeZ;
 	Wall* wall;

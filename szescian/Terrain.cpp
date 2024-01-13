@@ -1,7 +1,7 @@
 #include "Terrain.h"
 #include "Wall.h"
 #include <chrono>
-int Terrain::potatoesAmount = 10;
+int Terrain::potatoesAmount = Terrain::beginPotatoesAmount;
 int random(int min, int max)
 {
     static bool first = true;
@@ -25,32 +25,31 @@ void Terrain::init() {
         leaves1[i] = loadFile("leaves.obj", "bark.jpg");
         leaves2[i] = loadFile("leaves.obj", "bark.jpg"); 
     }
-    const float minX = -500;
-    const float maxX = 500;
-    const float minZ = -500;
-    const float maxZ = 500;
+    initPotatoes();
+}
+
+Terrain::Terrain()
+{
+    wall = new Wall(30, -10, 20 + 70, 5, 5);
+    for (int i = 0; i < treesAmount; ++i) {
+        float randomX = random(minX, maxX);
+        float randomZ = random(minZ, maxZ);
+        this->randTreeX.push_back(randomX);
+        this->randTreeZ.push_back(randomZ);
+    }
+}
+
+void Terrain::initPotatoes()
+{
+    potatoes.clear();
     for (int i = 0; i < potatoesAmount; i++) {
         Potato potato;
         potato.object = loadFile("potato.obj", "potato.jpg");
         potato.x = random(minX + 100, maxX - 100);
         potato.z = random(minZ + 100, maxZ - 100);
         potato.angle = random(0, 360);
+        potato.heightArgument = random(0, 200) / 100.0;
         potatoes.push_back(potato);
-    }
-}
-
-Terrain::Terrain()
-{
-    wall = new Wall(30, -10, 20 + 70, 5, 5);
-    const float minX = -500;
-    const float maxX = 500;
-    const float minZ = -500;
-    const float maxZ = 500;
-    for (int i = 0; i < treesAmount; ++i) {
-        float randomX = random(minX, maxX);
-        float randomZ = random(minZ, maxZ);
-        this->randTreeX.push_back(randomX);
-        this->randTreeZ.push_back(randomZ);
     }
 }
 

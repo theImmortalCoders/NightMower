@@ -27,6 +27,12 @@
 #include <set>
 #include <chrono>
 #include "libraries/glut.h"
+#include "szescian//libraries//irrKlang/irrKlang.h"
+
+
+//music
+using namespace irrklang;
+ISoundEngine* SoundEngine = createIrrKlangDevice();
 
 //gl
 #define glRGB(x, y, z) glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
@@ -56,14 +62,14 @@ POINTS prevMousePos = { 0, 0 };
 
 //camera
 double azimuth = GL_PI;
-double elevation = GL_PI / 8;
+double elevation = GL_PI / 12;
 static GLfloat xCamPos;
 static GLfloat yCamPos;
 static GLfloat zCamPos;
 double camDistance = 200;
 double const angleJump = GL_PI / 128;
 double const radiusJump = 10;
-int const renderDistance = 2000;
+int const renderDistance = 5000;
 
 //light
 double lightPos = elevation*0.3;
@@ -123,6 +129,9 @@ GLfloat dist(POINT col, POINT laz);
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
 
 void move() {
+	if (pause) {
+		return;
+	}
 	const float acceleration = 0.3f;
 	const float deceleration = 0.2f;
 	wheelAngle = 0;
@@ -137,8 +146,8 @@ void move() {
 			speed -= acceleration;
 		}
 		if (keysPressed.count('D') && !keysPressed.count('A')) {
-			azimuth += (speed / 2 * (GL_PI / 180));
-			rot -= speed / 2;
+			azimuth += (speed / 3 * (GL_PI / 180));
+			rot -= speed / 3;
 			if (speed > 0) {
 				wheelAngle = -speed*2;
 			}
@@ -147,8 +156,8 @@ void move() {
 			}
 		}
 		else if (keysPressed.count('A') && !keysPressed.count('D')) {
-			azimuth -= (speed / 2 * (GL_PI / 180));
-			rot += speed / 2;
+			azimuth -= (speed / 3 * (GL_PI / 180));
+			rot += speed / 3;
 			if (speed > 0) {
 				wheelAngle = speed*2;
 			}
@@ -167,8 +176,8 @@ void move() {
 		if (abs(speed) > 0.1) {
 
 			if (keysPressed.count('D') && !keysPressed.count('A')) {
-				azimuth += (speed / 2 * 1.0 * (GL_PI / 180));
-				rot -= speed / 2 * 1.0f;
+				azimuth += (speed / 3 * (GL_PI / 180));
+				rot -= speed / 3;
 				if (speed > 0) {
 					if (speed > 0) {
 						wheelAngle = -speed*2;
@@ -179,8 +188,8 @@ void move() {
 				}
 			}
 			else if (keysPressed.count('A') && !keysPressed.count('D')) {
-				azimuth -= (speed / 2 * 1.0 * (GL_PI / 180));
-				rot += speed / 2 * 1.0f;
+				azimuth -= (speed / 3 * (GL_PI / 180));
+				rot += speed / 3;
 				if (speed > 0) {
 					wheelAngle = speed*2;
 				}
@@ -206,6 +215,7 @@ void move() {
 			collisionCount -= 50;
 			isCollision = true;
 			lastCollisionCheckTime = currentTime;
+			SoundEngine->play2D("audio/explosion.wav", false);
 		}
 		speed = 0;
 	}
@@ -225,11 +235,13 @@ void checkPotatoes(POINT coords) {
 			collisionCount += 30;
 			potatoCounter--;
 			toRm.push_back(counter);
+			SoundEngine->play2D("audio/collect.mp3", false);
 			if (potatoCounter == 0) {
 				level++;
 				Terrain::potatoesAmount += 3;
-				terrain.init();
+				terrain.initPotatoes();
 				potatoCounter = Terrain::potatoesAmount;
+				SoundEngine->play2D("audio/level.mp3", false);
 			}
 		}
 		counter++;
@@ -318,8 +330,8 @@ void sortCollisionPoints()
 		}
 	}
 	//walls
-	for (int i = -500; i < 500; i++) {
-		POINT p{ i, 500 };
+	for (int i = terrain.minX; i < terrain.maxX; i++) {
+		POINT p{ i, terrain.maxZ };
 		if (p.y < 0) {
 			if (p.x > 0) {
 				points1.push_back(p);
@@ -337,8 +349,8 @@ void sortCollisionPoints()
 			}
 		}
 	}
-	for (int i = -500; i < 500; i++) {
-		POINT p{ i, -500 };
+	for (int i = terrain.minZ; i < terrain.maxZ; i++) {
+		POINT p{ i, terrain.minX };
 		if (p.y < 0) {
 			if (p.x > 0) {
 				points1.push_back(p);
@@ -356,8 +368,8 @@ void sortCollisionPoints()
 			}
 		}
 	}
-	for (int i = -500; i < 500; i++) {
-		POINT p{ 500, i };
+	for (int i = terrain.minX; i < terrain.maxX; i++) {
+		POINT p{ terrain.maxZ, i };
 		if (p.y < 0) {
 			if (p.x > 0) {
 				points1.push_back(p);
@@ -375,8 +387,8 @@ void sortCollisionPoints()
 			}
 		}
 	}
-	for (int i = -500; i < 500; i++) {
-		POINT p{ -500, i };
+	for (int i = terrain.minZ; i < terrain.maxZ; i++) {
+		POINT p{ terrain.minX, i };
 		if (p.y < 0) {
 			if (p.x > 0) {
 				points1.push_back(p);
@@ -414,8 +426,8 @@ void SetOpenGLStates() {
 	GLfloat lightDir[] = { xPos, yPos, zPos, 1.0f };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightDir);
 
-	GLfloat spotCutoff = 60.0;
-	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 30);
+	GLfloat spotCutoff = 40.0;
+	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 20);
 	glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, &spotCutoff);
 
 	GLfloat spotDirection[] = {
@@ -459,9 +471,11 @@ void DrawTerrain() {
 	
 	for (auto& potato : terrain.potatoes) {
 		glPushMatrix();
-		glTranslatef(potato.x, 10, potato.z);
 		glPolygonMode(GL_BACK, GL_LINE);
+		glTranslatef(potato.x, 2*sin(potato.heightArgument), potato.z);
 		glRotatef(potato.angle, 0, 1, 0);
+		potato.heightArgument += 0.1;
+		if (potato.heightArgument > 1000) potato.heightArgument = 0;
 		potato.angle += 1;
 		if (potato.angle > 360) potato.angle = 0;
 		potato.draw();
@@ -484,15 +498,41 @@ void DisplayCollisionCount() {
 	char left[100];
 	char timeText[100];
 	char collText[100];
+	char pauseText[100];
+	char steeringText1[20];
+	char steeringText2[50];
+	char steeringText3[20];
+	char steeringText4[20];
+	char steeringText5[20];
+	char steeringText6[20];
+	char steeringText7[20];
 	sprintf(collisionCountText, "Punkty: %d", collisionCount);
 	sprintf(levelText, "Poziom %d", level);
 	sprintf(left, "Pozostalo %d ziemniakow", potatoCounter);
 	sprintf(timeText, "Czas gry: %d sekund", gameTimeSeconds);
-	sprintf(collText, "Kolizja!");
+	sprintf(collText, "Kolizja! -50");
+	sprintf(steeringText1, "Pauza [ESC]");
+	sprintf(steeringText4, "Od nowa [R]");
+	sprintf(steeringText2, "Przod [W], tyl [S], lewo [A], prawo [D]");
+	sprintf(steeringText3, "Przyspiesz [Shift]");
+	sprintf(steeringText5, "Swiatla [UP]/[DOWN]");
+	sprintf(steeringText6, "Kamera [PPM + mouse]");
+	sprintf(steeringText7, "Reset pozycji [SPACE]");
 	DrawText(timeText, 20, 170, 20);
 	DrawText(collisionCountText, 20, 20, 20);
 	DrawText(levelText, 20, 70, 20);
 	DrawText(left, 20, 120, 20);
+	DrawText(steeringText1, 20, 580, 20);
+	DrawText(steeringText4, 20, 540, 20);
+	DrawText(steeringText2, 20, 500, 20);
+	DrawText(steeringText3, 20, 460, 20);
+	DrawText(steeringText5, 20, 420, 20);
+	DrawText(steeringText6, 20, 380, 20);
+	DrawText(steeringText7, 20, 340, 20);
+	if (pause) {
+		sprintf(pauseText, "Pauza");
+		DrawText(pauseText, 700, 120, 20);
+	}
 	if (isCollision) {
 		DrawText(collText, 700, 20, 20);
 	}
@@ -575,6 +615,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			}
 			break;
 		}
+		case WM_GETMINMAXINFO:
+		{
+			MINMAXINFO* lpMMI = (MINMAXINFO*)lParam;
+
+			lpMMI->ptMinTrackSize.x = 1700;
+			lpMMI->ptMinTrackSize.y = 900;
+
+			return 0;
+		}
 		case WM_PALETTECHANGED:
 		{
 			if ((hPalette != NULL) && ((HWND)wParam != hWnd))
@@ -622,15 +671,45 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			keysPressed.insert(wParam);
 			if (wParam == 'W') isWKeyPressed = true;
 			if (wParam == 'S') isSKeyPressed = true;
+			if (wParam == VK_SPACE) {
+				xPos = 0;
+				zPos = 0;
+				rot = 0;
+				azimuth = GL_PI;
+				speed = 0;
+			}
+			if (wParam == 'R') {
+				xPos = 0; 
+				zPos = 0;
+				rot = 0;
+				azimuth = GL_PI;
+				speed = 0;
+				collisionCount = 0;
+				gameTimeSeconds = 0;
+				startTime = std::chrono::high_resolution_clock::now();
+				level = 1;
+				terrain.potatoesAmount = Terrain::beginPotatoesAmount;
+				potatoCounter = terrain.potatoesAmount;
+				terrain.initPotatoes();
+			}
+			if (wParam == VK_ESCAPE) {
+				pause = !pause;
+			}
+			if (wParam == VK_SHIFT) maxSpeed =8;
 			switch (wParam){
 				case VK_UP:
 				{
-					lightPos += 2 * GL_PI / 180;
+					if (lightPos < 12 * GL_PI / 180)
+					{
+						lightPos += 2 * GL_PI / 180;
+					}
 					break;
 				}
 				case VK_DOWN:
 				{
-					lightPos -= 2 * GL_PI / 180;
+					if (lightPos > -8 * GL_PI / 180) {
+						lightPos -= 2 * GL_PI / 180;
+					}
 					break;
 				}
 			}
@@ -643,6 +722,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			keysPressed.erase(wParam);
 			if (wParam == 'W') isWKeyPressed = false;
 			if (wParam == 'S') isSKeyPressed = false;
+			if (wParam == VK_SHIFT) maxSpeed =4;
 			InvalidateRect(hWnd, NULL, FALSE);
 			break;
 		}
@@ -687,7 +767,8 @@ void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 	//
 	lazik.init();
 	terrain.init();
-	
+	SoundEngine->play2D("audio/breakout.mp3", true);
+
 	SetTimer(hWnd, TIMER_ID, 16, NULL);
 	glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			
 	bitmapData = LoadBitmapFile("Bitmapy\\checker.bmp", &bitmapInfoHeader);
@@ -795,6 +876,33 @@ unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader
 }
 
 void DrawText(const char* text, GLfloat x, GLfloat y, GLfloat fontSize) {
+	// Enable lighting
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT1);
+
+	// Set up light position and properties
+	GLfloat light_position[] = { 0.0f, 0.0f, 1.0f, 0.0f };
+	GLfloat light_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+	GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+	glLightfv(GL_LIGHT1, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+
+	// Set up material properties
+	GLfloat mat_ambient[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+	GLfloat mat_diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+	GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat shininess = 100.0f;
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	glMaterialf(GL_FRONT, GL_SHININESS, shininess);
+
+	// Your existing drawing code
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
@@ -821,7 +929,12 @@ void DrawText(const char* text, GLfloat x, GLfloat y, GLfloat fontSize) {
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
+
+	// Disable lighting after rendering
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT1);
 }
+
 
 GLfloat dist(POINT col, POINT laz) {
 	return sqrt(pow((col.x - laz.x), 2) + pow((col.y - laz.y), 2));
@@ -840,7 +953,7 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, 
 	wc.lpszMenuName = MAKEINTRESOURCE(IDR_MENU);
 	wc.lpszClassName = lpszAppName;
 	if (RegisterClass(&wc) == 0) return FALSE;
-	HWND hWnd = CreateWindow(lpszAppName, lpszAppName, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, 50, 50, 900, 900, NULL, NULL, hInstance, NULL);
+	HWND hWnd = CreateWindow(lpszAppName, lpszAppName, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, 50, 50, 1700, 900, NULL, NULL, hInstance, NULL);
 	if (hWnd == NULL) return FALSE;
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
