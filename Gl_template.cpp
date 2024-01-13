@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include "szescian/Terrain.h"
 #include "szescian/Lazik.h"
 
@@ -27,8 +26,7 @@
 #include <set>
 #include <chrono>
 #include "libraries/glut.h"
-#include "szescian//libraries//irrKlang/irrKlang.h"
-
+#include "libraries//irrKlang/irrKlang.h"
 
 //music
 using namespace irrklang;
@@ -46,12 +44,15 @@ static HINSTANCE hInstance;
 BITMAPINFOHEADER bitmapInfoHeader;
 unsigned char* bitmapData;
 unsigned int texture[2];
+const int screenX = 1700;
+const int screenY = 900;
 
 //timer
 #define TIMER_ID 1
 std::chrono::high_resolution_clock::time_point startTime;
 int gameTimeSeconds = 0;
 bool pause = false;
+bool isHelp = false;
 
 //keys
 bool isWKeyPressed = false;
@@ -107,24 +108,27 @@ void checkPotatoes(POINT coords);
 boolean checkCollision(POINT coords);
 void sortCollisionPoints();
 //render
-void SetOpenGLStates();
-void SetCamera();
-void DrawVehicle();
-void DrawTerrain();
-void DisplayCollisionCount();
-void ResetOpenGLStates();
+void updateLight();
+void updateCamera();
+void drawVehicle();
+void drawTerrain();
+void drawDashboard();
+void disableLight();
 void RenderScene();
-void ResetOpenGLStates();
+void updateTime();
+void disableLight();
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 void ChangeSize(GLsizei w, GLsizei h);
 
 //GL setup
 void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC);
+void initBitmap(HDC& hDC, const HWND& hWnd, HGLRC& hRC);
 void SetDCPixelFormat(HDC hDC);
-HPALETTE GetOpenGLPalette(HDC hDC);
 unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader);
-void DrawText(const char* text, GLfloat x, GLfloat y, GLfloat fontSize = 18.0f);
+void DrawText(const char* text, GLfloat x, GLfloat y);
+void defaultLightDisable();
+void defaultLightSetup();
 GLfloat dist(POINT col, POINT laz);
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
 
@@ -408,35 +412,30 @@ void sortCollisionPoints()
 	}
 }
 
-void SetOpenGLStates() {
+void updateLight() {
 
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_DEPTH_TEST);
-	glNormal3f(0, 1, 0);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glNormal3f(0, 1, 0);
+	glColor3f(0.8f, 0.8f, 0.8f);
+	glClearColor(0.04, 0, 0.16, 1.0f);
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 	glShadeModel(GL_SMOOTH);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glClearColor(0.04, 0, 0.16, 1.0f);
-	glColor3f(0.8f, 0.8f, 0.8f);
-
 	GLfloat lightDir[] = { xPos, yPos, zPos, 1.0f };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightDir);
-
 	GLfloat spotCutoff = 40.0;
 	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 20);
 	glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, &spotCutoff);
-
 	GLfloat spotDirection[] = {
 		static_cast<GLfloat>(sin((rot + 90) * GL_PI / 180) * cos(lightPos)),
 		static_cast<GLfloat>(sin(lightPos)),
 		static_cast<GLfloat>(cos((rot + 90) * GL_PI / 180) * cos(lightPos))
 	};
 	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spotDirection);
-
 	GLfloat increasedAmbient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	glLightfv(GL_LIGHT0, GL_AMBIENT, increasedAmbient);
 	GLfloat increasedDiffuse[] = { 1.2f, 1.2f, 1.2f, 1.0f };
@@ -445,7 +444,7 @@ void SetOpenGLStates() {
 	glLightfv(GL_LIGHT0, GL_SPECULAR, increasedSpecular);
 }
 
-void SetCamera() {
+void updateCamera() {
 	glLoadIdentity();
 	double a = camDistance * cos(elevation);
 	xCamPos = xPos + a * cos(azimuth);
@@ -454,7 +453,7 @@ void SetCamera() {
 	gluLookAt(xCamPos, yCamPos, zCamPos, xPos, yPos, zPos, 0, 1, 0);
 }
 
-void DrawVehicle() {
+void drawVehicle() {
 	glPushMatrix();
 	glTranslatef(xPos, yPos, zPos);
 	glRotatef(rot, 0.0f, 1.0f, 0.0f);
@@ -463,12 +462,11 @@ void DrawVehicle() {
 	glPopMatrix();
 }
 
-void DrawTerrain() {
+void drawTerrain() {
 	glPushMatrix();
 	glPolygonMode(GL_BACK, GL_LINE);
 	terrain.draw();
 	glPopMatrix();
-	
 	for (auto& potato : terrain.potatoes) {
 		glPushMatrix();
 		glPolygonMode(GL_BACK, GL_LINE);
@@ -483,16 +481,7 @@ void DrawTerrain() {
 	}
 }
 
-void DisplayCollisionCount() {
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	gluOrtho2D(0, 1000, 0, 1000);
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-	glColor3f(1.0, 1.0, 1.0);
-
+void drawDashboard() {
 	char collisionCountText[100];
 	char levelText[100];
 	char left[100];
@@ -506,6 +495,7 @@ void DisplayCollisionCount() {
 	char steeringText5[20];
 	char steeringText6[20];
 	char steeringText7[20];
+	char helpText[20];
 	sprintf(collisionCountText, "Punkty: %d", collisionCount);
 	sprintf(levelText, "Poziom %d", level);
 	sprintf(left, "Pozostalo %d ziemniakow", potatoCounter);
@@ -518,49 +508,53 @@ void DisplayCollisionCount() {
 	sprintf(steeringText5, "Swiatla [UP]/[DOWN]");
 	sprintf(steeringText6, "Kamera [PPM + mouse]");
 	sprintf(steeringText7, "Reset pozycji [SPACE]");
-	DrawText(timeText, 20, 170, 20);
-	DrawText(collisionCountText, 20, 20, 20);
-	DrawText(levelText, 20, 70, 20);
-	DrawText(left, 20, 120, 20);
-	DrawText(steeringText1, 20, 580, 20);
-	DrawText(steeringText4, 20, 540, 20);
-	DrawText(steeringText2, 20, 500, 20);
-	DrawText(steeringText3, 20, 460, 20);
-	DrawText(steeringText5, 20, 420, 20);
-	DrawText(steeringText6, 20, 380, 20);
-	DrawText(steeringText7, 20, 340, 20);
+	sprintf(helpText, "Sterowanie [H]");
+	DrawText(timeText, 20, 170);
+	DrawText(collisionCountText, 20, 20);
+	DrawText(levelText, 20, 70);
+	DrawText(left, 20, 120);
+	DrawText(helpText, 20, 920);
 	if (pause) {
 		sprintf(pauseText, "Pauza");
-		DrawText(pauseText, 700, 120, 20);
+		DrawText(pauseText, 700, 120);
 	}
 	if (isCollision) {
-		DrawText(collText, 700, 20, 20);
+		DrawText(collText, 700, 20);
 	}
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
+	if (isHelp) {
+		DrawText(steeringText1, 20, 580);
+		DrawText(steeringText4, 20, 540);
+		DrawText(steeringText2, 20, 500);
+		DrawText(steeringText3, 20, 460);
+		DrawText(steeringText5, 20, 420);
+		DrawText(steeringText6, 20, 380);
+		DrawText(steeringText7, 20, 340);
+	}
 }
 
-void ResetOpenGLStates() {
+void disableLight() {
 	glDisable(GL_LIGHTING);
-	glDisable(GL_COLOR_MATERIAL);
-	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHT0);
 	glFlush();
 }
 
 void RenderScene() {
+	updateTime();
+	updateLight();
+	updateCamera();
+	drawVehicle();
+	drawTerrain();
+	drawDashboard();
+	disableLight();
+}
+
+void updateTime()
+{
 	if (!pause) {
 		auto currentTime = std::chrono::high_resolution_clock::now();
 		auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime).count();
 		gameTimeSeconds = static_cast<int>(elapsedTime);
 	}
-	SetOpenGLStates();
-	SetCamera();
-	DrawVehicle();
-	DrawTerrain();
-	DisplayCollisionCount();
-	ResetOpenGLStates();
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
@@ -619,8 +613,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			MINMAXINFO* lpMMI = (MINMAXINFO*)lParam;
 
-			lpMMI->ptMinTrackSize.x = 1700;
-			lpMMI->ptMinTrackSize.y = 900;
+			lpMMI->ptMinTrackSize.x = screenX;
+			lpMMI->ptMinTrackSize.y = screenY;
 
 			return 0;
 		}
@@ -671,6 +665,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			keysPressed.insert(wParam);
 			if (wParam == 'W') isWKeyPressed = true;
 			if (wParam == 'S') isSKeyPressed = true;
+			if (wParam == 'H') isHelp = !isHelp;
 			if (wParam == VK_SPACE) {
 				xPos = 0;
 				zPos = 0;
@@ -752,37 +747,29 @@ void ChangeSize(GLsizei w, GLsizei h) {
 	glLoadIdentity();
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 {
 
-	hDC = GetDC(hWnd);
-	SetDCPixelFormat(hDC);
-	hPalette = GetOpenGLPalette(hDC);
-	hRC = wglCreateContext(hDC);
-	wglMakeCurrent(hDC, hRC);
+	initBitmap(hDC, hWnd, hRC);
 
-	//
 	lazik.load();
 	terrain.load();
 	SoundEngine->play2D("audio/breakout.mp3", true);
-
 	SetTimer(hWnd, TIMER_ID, 16, NULL);
-	glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			
-	bitmapData = LoadBitmapFile("Bitmapy\\checker.bmp", &bitmapInfoHeader);
-	glBindTexture(GL_TEXTURE_2D, texture[0]);       // aktywuje obiekt tekstury
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bitmapInfoHeader.biWidth,
-		bitmapInfoHeader.biHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bitmapData);
-	if (bitmapData)
-		free(bitmapData);
+	sortCollisionPoints();
+}
+
+void initBitmap(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
+{
+	hDC = GetDC(hWnd);
+	SetDCPixelFormat(hDC);
+	hRC = wglCreateContext(hDC);
+	wglMakeCurrent(hDC, hRC);
+	glGenTextures(2, &texture[0]);
 	bitmapData = LoadBitmapFile("Bitmapy\\crate.bmp", &bitmapInfoHeader);
-	glBindTexture(GL_TEXTURE_2D, texture[1]);       // aktywuje obiekt tekstury
+	glBindTexture(GL_TEXTURE_2D, texture[1]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
@@ -792,7 +779,6 @@ void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 	if (bitmapData)
 		free(bitmapData);
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	sortCollisionPoints();
 }
 
 void SetDCPixelFormat(HDC hDC) {
@@ -815,37 +801,6 @@ void SetDCPixelFormat(HDC hDC) {
 	};
 	nPixelFormat = ChoosePixelFormat(hDC, &pfd);
 	SetPixelFormat(hDC, nPixelFormat, &pfd);
-}
-
-HPALETTE GetOpenGLPalette(HDC hDC) {
-	PIXELFORMATDESCRIPTOR pfd;
-	int nPixelFormat;
-	int nColors;
-	BYTE RedRange, GreenRange, BlueRange;
-	nPixelFormat = GetPixelFormat(hDC);
-	DescribePixelFormat(hDC, nPixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
-	if (!(pfd.dwFlags & PFD_NEED_PALETTE)) return NULL;
-	nColors = 1 << pfd.cColorBits;
-	LOGPALETTE* pPal = (LOGPALETTE*)malloc(sizeof(LOGPALETTE) + nColors * sizeof(PALETTEENTRY));
-	pPal->palVersion = 0x300;
-	pPal->palNumEntries = nColors;
-	RedRange = (1 << pfd.cRedBits) - 1;
-	GreenRange = (1 << pfd.cGreenBits) - 1;
-	BlueRange = (1 << pfd.cBlueBits) - 1;
-	for (int i = 0; i < nColors; i++) {
-		pPal->palPalEntry[i].peRed = (i >> pfd.cRedShift) & RedRange;
-		pPal->palPalEntry[i].peRed = (unsigned char)((double)pPal->palPalEntry[i].peRed * 255.0 / RedRange);
-		pPal->palPalEntry[i].peGreen = (i >> pfd.cGreenShift) & GreenRange;
-		pPal->palPalEntry[i].peGreen = (unsigned char)((double)pPal->palPalEntry[i].peGreen * 255.0 / GreenRange);
-		pPal->palPalEntry[i].peBlue = (i >> pfd.cBlueShift) & BlueRange;
-		pPal->palPalEntry[i].peBlue = (unsigned char)((double)pPal->palPalEntry[i].peBlue * 255.0 / BlueRange);
-		pPal->palPalEntry[i].peFlags = (unsigned char)NULL;
-	}
-	HPALETTE hRetPal = CreatePalette(pPal);
-	SelectPalette(hDC, hRetPal, FALSE);
-	RealizePalette(hDC);
-	free(pPal);
-	return hRetPal;
 }
 
 unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader) {
@@ -875,34 +830,7 @@ unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader
 	return bitmapImage;
 }
 
-void DrawText(const char* text, GLfloat x, GLfloat y, GLfloat fontSize) {
-	// Enable lighting
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT1);
-
-	// Set up light position and properties
-	GLfloat light_position[] = { 0.0f, 0.0f, 1.0f, 0.0f };
-	GLfloat light_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-	GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-
-	glLightfv(GL_LIGHT1, GL_POSITION, light_position);
-	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
-
-	// Set up material properties
-	GLfloat mat_ambient[] = { 0.7f, 0.7f, 0.7f, 1.0f };
-	GLfloat mat_diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-	GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	GLfloat shininess = 100.0f;
-
-	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-	glMaterialf(GL_FRONT, GL_SHININESS, shininess);
-
-	// Your existing drawing code
+void DrawText(const char* text, GLfloat x, GLfloat y) {
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
@@ -910,9 +838,9 @@ void DrawText(const char* text, GLfloat x, GLfloat y, GLfloat fontSize) {
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glLoadIdentity();
-
 	glColor3f(0.0, 0.0, 0.0);
 	glRasterPos2i(static_cast<int>(x + 5), static_cast<int>(y + 20));
+
 	for (const char* c = text; *c != '\0'; ++c) {
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
 	}
@@ -929,10 +857,6 @@ void DrawText(const char* text, GLfloat x, GLfloat y, GLfloat fontSize) {
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
-
-	// Disable lighting after rendering
-	glDisable(GL_LIGHTING);
-	glDisable(GL_LIGHT1);
 }
 
 
@@ -940,12 +864,11 @@ GLfloat dist(POINT col, POINT laz) {
 	return sqrt(pow((col.x - laz.x), 2) + pow((col.y - laz.y), 2));
 }
 
-int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) { 
+int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	startTime = std::chrono::high_resolution_clock::now();
 	MSG msg;
-	WNDCLASS wc;
+	WNDCLASS wc = { 0 };
 	hInstance = hInst;
-	wc = { 0 };
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = WndProc;
 	wc.hInstance = hInstance;
@@ -953,7 +876,7 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, 
 	wc.lpszMenuName = MAKEINTRESOURCE(IDR_MENU);
 	wc.lpszClassName = lpszAppName;
 	if (RegisterClass(&wc) == 0) return FALSE;
-	HWND hWnd = CreateWindow(lpszAppName, lpszAppName, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, 50, 50, 1700, 900, NULL, NULL, hInstance, NULL);
+	HWND hWnd = CreateWindow(lpszAppName, lpszAppName, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, 50, 50, screenX, screenY, NULL, NULL, hInstance, NULL);
 	if (hWnd == NULL) return FALSE;
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
