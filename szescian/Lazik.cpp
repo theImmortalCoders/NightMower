@@ -1,6 +1,7 @@
 #include "Lazik.h"
 #include "Wheel.h"
 #include "Handle.h"
+#include <Camera.h>
 
 Lazik::Lazik(int xSize, int ySize, int zSize)
 {
@@ -17,22 +18,138 @@ void Lazik::load()
     }
 }
 
-void Lazik::draw(int x, int y, int z, int wheelRot, float angle)
+void Lazik::draw()
 {
-    drawObj(&core, x, y + 5, z, xSize * 0.5, zSize, ySize * 0.78, 2, 2);
-    handle.draw(x - this->xSize + 10, y - 10 + 3 * this->ySize, z, this->zSize);
-    drawAxle(x + 4 + this->xSize / 2, y, z);
-    drawAxle(x - 4 - this->xSize / 2, y, z);
-    wheels[0].draw(x + 4 + this->xSize / 2, 0, x - this->ySize - 12, 0, wheelRot, angle);
-    wheels[1].draw(x + 4 + this->xSize / 2, 0, x + this->ySize + 12, 1, wheelRot, angle);
-    wheels[2].draw(x - 4 - this->xSize / 2, 0, x - this->ySize - 12, 0, wheelRot, 0);
-    wheels[3].draw(x - 4 - this->xSize / 2, 0, x + this->ySize + 12, 1, wheelRot, 0);
+    updateLight();
+    glPushMatrix();
+    glTranslatef(xPos, yPos, zPos);
+    glRotatef(rot, 0.0f, 1.0f, 0.0f);
+    glPolygonMode(GL_BACK, GL_LINE);
+    drawObj(&core, 0,  5, 0, xSize * 0.5, zSize, ySize * 0.78, 2, 2);
+    handle.draw(-this->xSize + 10, - 10 + 3 * this->ySize, 0, this->zSize);
+    drawAxle(4 + this->xSize / 2, 0, 0);
+    drawAxle(- 4 - this->xSize / 2, 0, 0);
+    wheels[0].draw(  4 + this->xSize / 2, 0,  - this->ySize - 12, 0, speed, wheelAngle);
+    wheels[1].draw(  4 + this->xSize / 2, 0,  this->ySize + 12, 1, speed, wheelAngle);
+    wheels[2].draw( - 4 - this->xSize / 2, 0,  - this->ySize - 12, 0, speed, 0);
+    wheels[3].draw( - 4 - this->xSize / 2, 0,  this->ySize + 12, 1, speed, 0);
     for (int z = -2; z < 2; z++) {
-        drawObj(&reflectors[z + 2], x + 5 + xSize / 2, y + 3 + ySize, z * 8 + 4, xSize * 0.8, zSize * 0.8, ySize * 0.8, 2, 2);
+        drawObj(&reflectors[z + 2],  5 + xSize / 2,  3 + ySize, z * 8 + 4, xSize * 0.8, zSize * 0.8, ySize * 0.8, 2, 2);
+    }
+    glPopMatrix();
+}
+
+void Lazik::move(bool pause, bool& isWKeyPressed, bool& isSKeyPressed, Camera* camera, set<int>& keysPressed)
+{
+    if (pause) {
+        return;
+    }
+    const float acceleration = 0.3f;
+    const float deceleration = 0.2f;
+    wheelAngle = 0;
+    if (isWKeyPressed || isSKeyPressed) {
+        if (isWKeyPressed) {
+            if (speed < maxSpeed) {
+                speed += acceleration;
+            }
+            else speed = maxSpeed;
+        }
+        else if (isSKeyPressed && speed > -maxSpeed) {
+            speed -= acceleration;
+        }
+        if (keysPressed.count('D') && !keysPressed.count('A')) {
+            camera->azimuth += (speed / 3 * (GL_PI / 180));
+            rot -= speed / 3;
+            if (speed > 0) {
+                wheelAngle = -speed * 2;
+            }
+            else {
+                wheelAngle = speed * 2;
+            }
+        }
+        else if (keysPressed.count('A') && !keysPressed.count('D')) {
+            camera->azimuth -= (speed / 3 * (GL_PI / 180));
+            rot += speed / 3;
+            if (speed > 0) {
+                wheelAngle = speed * 2;
+            }
+            else {
+                wheelAngle = -speed * 2;
+            }
+        }
+    }
+    else {
+        if (speed > 0) {
+            speed -= deceleration;
+        }
+        else if (speed < 0) {
+            speed += deceleration;
+        }
+        if (abs(speed) > 0.1) {
+
+            if (keysPressed.count('D') && !keysPressed.count('A')) {
+                camera->azimuth += (speed / 3 * (GL_PI / 180));
+                rot -= speed / 3;
+                if (speed > 0) {
+                    if (speed > 0) {
+                        wheelAngle = -speed * 2;
+                    }
+                    else {
+                        wheelAngle = speed * 2;
+                    }
+                }
+            }
+            else if (keysPressed.count('A') && !keysPressed.count('D')) {
+                camera->azimuth -= (speed / 3 * (GL_PI / 180));
+                rot += speed / 3;
+                if (speed > 0) {
+                    wheelAngle = speed * 2;
+                }
+                else {
+                    wheelAngle = -speed * 2;
+                }
+            }
+        }
+        else {
+            speed = 0;
+        }
     }
 }
 
 ////
+
+void Lazik::updateLight() 
+{
+    glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_MULTISAMPLE);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glNormal3f(0, 1, 0);
+    glColor3f(0.8f, 0.8f, 0.8f);
+    glClearColor(0.04, 0, 0.16, 1.0f);
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+    glShadeModel(GL_SMOOTH);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    GLfloat lightDir[] = { xPos, yPos, zPos, 1.0f };
+    glLightfv(GL_LIGHT0, GL_POSITION, lightDir);
+    GLfloat spotCutoff = 40.0;
+    glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 20);
+    glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, &spotCutoff);
+    GLfloat spotDirection[] = {
+        static_cast<GLfloat>(sin((rot + 90) * GL_PI / 180) * cos(lightPos)),
+        static_cast<GLfloat>(sin(lightPos)),
+        static_cast<GLfloat>(cos((rot + 90) * GL_PI / 180) * cos(lightPos))
+    };
+    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spotDirection);
+    GLfloat increasedAmbient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_AMBIENT, increasedAmbient);
+    GLfloat increasedDiffuse[] = { 1.2f, 1.2f, 1.2f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, increasedDiffuse);
+    GLfloat increasedSpecular[] = { 1.0f, 1.0f, 1.0f, 3.0f };
+    glLightfv(GL_LIGHT0, GL_SPECULAR, increasedSpecular);
+}
+
 void Lazik::drawAxle(int x, int y, int z)
 {
     GLfloat PI = 3.14159;

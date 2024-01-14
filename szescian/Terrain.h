@@ -13,6 +13,8 @@
 #include "Wall.h"
 #include <vector>
 #include <libraries/irrKlang/ik_ISoundEngine.h>
+#include <fstream>
+
 using namespace irrklang;
 using namespace std;
 
@@ -24,11 +26,12 @@ class Terrain
 	GLfloat dist(POINT col, POINT laz);
 	void sortWallsCollisions();
 public:
+	int personalBest = 0;
+
 	static const int collisionPointDistance = 15;
 	static const int beginPotatoesAmount = 10;
 	static const int treesAmount = 40;
 	static int potatoesAmount;
-	int potatoCounter = beginPotatoesAmount;
 
 	static const int scale = 80;
 	static const int minX = -1000;

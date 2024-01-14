@@ -1,15 +1,14 @@
-﻿  Gl_template.cpp
+﻿  Game.cpp
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.h(13,21): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.h(12,24): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
-  Game.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.h(13,21): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.h(12,24): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(84,14): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(84,21): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(546,34): warning C4018: '<': signed/unsigned mismatch
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(245,16): warning C4477: 'sprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(245,16): message : consider using '%zd' in the format string
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(288,14): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(288,21): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(416,34): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  0 of 1708 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  1 of 1725 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Release\lazik.exe

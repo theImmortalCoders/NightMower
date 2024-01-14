@@ -27,6 +27,14 @@ Terrain::Terrain() : wall(30, -10, 20 + 70, 5, 5)
 		}
     }
 	sortWallsCollisions();
+    fstream in;
+    in.open("data.txt", ios::in);
+    string a;
+    in >> a;
+    if (a != "") {
+        personalBest = stoi(a);
+    }
+    in.close();
 }
 
 void Terrain::load() {
@@ -54,12 +62,27 @@ void Terrain::loadPotatoes()
 
 void Terrain::draw()
 {
+    glPushMatrix();
+    glPolygonMode(GL_BACK, GL_LINE);
     drawObj(&plate, 0, -20, 0, scale, scale / 2, scale, 10, 10);
     drawObj(&mountains, 0, -20, 0, scale, scale / 2, scale, 10, 10);
     for (int i = 0; i < treesAmount; i++) {
 		trees[i].draw();
     }
     wall.draw();
+    glPopMatrix();
+    for (auto& potato : potatoes) {
+        glPushMatrix();
+        glPolygonMode(GL_BACK, GL_LINE);
+        glTranslatef(potato.x, 2 * sin(potato.heightArgument), potato.z);
+        glRotatef(potato.angle, 0, 1, 0);
+        potato.heightArgument += 0.1;
+        if (potato.heightArgument > 1000) potato.heightArgument = 0;
+        potato.angle += 1;
+        if (potato.angle > 360) potato.angle = 0;
+        potato.draw();
+        glPopMatrix();
+    }
 }
 
 void Terrain::checkPotatoes(POINT coords, int& points, ISoundEngine* soundEngine, int& level) {
@@ -69,15 +92,20 @@ void Terrain::checkPotatoes(POINT coords, int& points, ISoundEngine* soundEngine
         POINT point{ potato.x, potato.z };
         if (dist(point, coords) < collisionPointDistance + Lazik::collisionDistance) {
             points += 30;
-            potatoCounter--;
             toRm.push_back(counter);
             soundEngine->play2D("audio/collect.mp3", false);
-            if (potatoCounter == 0) {
+            if (toRm.size() == 1 && potatoes.size() == 1) {
                 level++;
                 Terrain::potatoesAmount += 3;
                 loadPotatoes();
-                potatoCounter = Terrain::potatoesAmount;
                 soundEngine->play2D("audio/level.mp3", false);
+                if (points > personalBest) {
+                    personalBest = points;
+                    fstream out;
+                    out.open("data.txt", ios::out);
+                    out << personalBest;
+                    out.close();
+                }
             }
         }
         counter++;
