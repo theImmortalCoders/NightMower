@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Gl_template.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Handle.cpp" />
     <ClCompile Include="Lazik.cpp" />
     <ClCompile Include="loader.cpp" />
@@ -170,6 +171,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\RESOURCE.H" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Handle.h" />
     <ClInclude Include="Lazik.h" />
     <ClInclude Include="loader.h" />
