@@ -15,6 +15,7 @@ class Lazik
 	ObjectData reflectors[4];
 	void drawAxle(int x, int y, int z);
 public:
+	static const int collisionDistance = 25;
 	Lazik(int xSize, int ySize, int zSize);
 	void load();
 	void draw(int x, int y, int z, int wheelRot, float angle);

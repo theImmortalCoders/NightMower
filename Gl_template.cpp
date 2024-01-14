@@ -79,10 +79,6 @@ double lightPos = elevation*0.3;
 int collisionCount = 0;
 float pointDist = 15;
 float lazikDist = 25;
-vector<POINT> points1;
-vector<POINT> points2;
-vector<POINT> points3;
-vector<POINT> points4;
 static auto lastCollisionCheckTime = std::chrono::high_resolution_clock::now();
 bool isCollision = false;
 
@@ -99,14 +95,10 @@ int level = 1;
 
 //terrain
 Terrain terrain;
-int potatoCounter = Terrain::potatoesAmount;
 
 //functions:
 //lazik
 void move();
-void checkPotatoes(POINT coords);
-boolean checkCollision(POINT coords);
-void sortCollisionPoints();
 //render
 void updateLight();
 void updateCamera();
@@ -127,8 +119,6 @@ void initBitmap(HDC& hDC, const HWND& hWnd, HGLRC& hRC);
 void SetDCPixelFormat(HDC hDC);
 unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader);
 void DrawText(const char* text, GLfloat x, GLfloat y);
-void defaultLightDisable();
-void defaultLightSetup();
 GLfloat dist(POINT col, POINT laz);
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
 
@@ -210,7 +200,7 @@ void move() {
 	GLfloat nextY = zPos + speed * cos(rot * (GL_PI / 180) + GL_PI / 2);
 	POINT next{ nextX, nextY };
 	auto currentTime = std::chrono::high_resolution_clock::now();
-	if (!checkCollision(next)) {
+	if (!terrain.checkCollision(next)) {
 		xPos = nextX;
 		zPos = nextY;
 	}
@@ -223,192 +213,10 @@ void move() {
 		}
 		speed = 0;
 	}
-	checkPotatoes(next);
+	terrain.checkPotatoes(next, collisionCount, SoundEngine, level);
 	auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastCollisionCheckTime).count();
 	if (elapsedTime > 2000) {
 		isCollision = false;
-	}
-}
-
-void checkPotatoes(POINT coords) {
-	std::vector<int> toRm;
-	int counter = 0;
-	for (auto& potato : terrain.potatoes) {
-		POINT point{ potato.x, potato.z };
-		if (dist(point, coords) < pointDist + lazikDist) {
-			collisionCount += 30;
-			potatoCounter--;
-			toRm.push_back(counter);
-			SoundEngine->play2D("audio/collect.mp3", false);
-			if (potatoCounter == 0) {
-				level++;
-				Terrain::potatoesAmount += 3;
-				terrain.loadPotatoes();
-				potatoCounter = Terrain::potatoesAmount;
-				SoundEngine->play2D("audio/level.mp3", false);
-			}
-		}
-		counter++;
-	}
-	for (auto i : toRm) {
-		terrain.potatoes.erase(terrain.potatoes.begin() + i);
-	}
-}
-
-boolean checkCollision(POINT coords) {
-	if (coords.y < 0) {
-		if (coords.x > 0) {
-			for (auto point : points1) {
-				if (dist(point, coords) < pointDist + lazikDist) {
-					return true;
-				}
-			}
-		}
-		else {
-			for (auto point : points2) {
-				if (dist(point, coords) < pointDist + lazikDist) {
-					return true;
-				}
-			}
-		}
-	}
-	else {
-		if (coords.x > 0) {
-			for (auto point : points3) {
-				if (dist(point, coords) < pointDist + lazikDist) {
-					return true;
-				}
-			}
-		}
-		else {
-			for (auto point : points4) {
-				if (dist(point, coords) < pointDist + lazikDist) {
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-
-void sortCollisionPoints()
-{
-	//trees
-	for (int i = 0; i < terrain.treesAmount; i++) {
-		POINT tree{ terrain.randTreeX[i], terrain.randTreeZ[i] };
-		if (tree.y < 0) {
-			if (tree.x > 0) {
-				points1.push_back(tree);
-			}
-			else {
-				points2.push_back(tree);
-			}
-		}
-		else {
-			if (tree.x > 0) {
-				points3.push_back(tree);
-			}
-			else {
-				points4.push_back(tree);
-			}
-		}
-	}
-	//wall
-	for (int i = 0; i <= 125; i += 25) {
-		POINT p{ i, 95 };
-		if (p.y < 0) {
-			if (p.x > 0) {
-				points1.push_back(p);
-			}
-			else {
-				points2.push_back(p);
-			}
-		}
-		else {
-			if (p.x > 0) {
-				points3.push_back(p);
-			}
-			else {
-				points4.push_back(p);
-			}
-		}
-	}
-	//walls
-	for (int i = terrain.minX; i < terrain.maxX; i++) {
-		POINT p{ i, terrain.maxZ };
-		if (p.y < 0) {
-			if (p.x > 0) {
-				points1.push_back(p);
-			}
-			else {
-				points2.push_back(p);
-			}
-		}
-		else {
-			if (p.x > 0) {
-				points3.push_back(p);
-			}
-			else {
-				points4.push_back(p);
-			}
-		}
-	}
-	for (int i = terrain.minZ; i < terrain.maxZ; i++) {
-		POINT p{ i, terrain.minX };
-		if (p.y < 0) {
-			if (p.x > 0) {
-				points1.push_back(p);
-			}
-			else {
-				points2.push_back(p);
-			}
-		}
-		else {
-			if (p.x > 0) {
-				points3.push_back(p);
-			}
-			else {
-				points4.push_back(p);
-			}
-		}
-	}
-	for (int i = terrain.minX; i < terrain.maxX; i++) {
-		POINT p{ terrain.maxZ, i };
-		if (p.y < 0) {
-			if (p.x > 0) {
-				points1.push_back(p);
-			}
-			else {
-				points2.push_back(p);
-			}
-		}
-		else {
-			if (p.x > 0) {
-				points3.push_back(p);
-			}
-			else {
-				points4.push_back(p);
-			}
-		}
-	}
-	for (int i = terrain.minZ; i < terrain.maxZ; i++) {
-		POINT p{ terrain.minX, i };
-		if (p.y < 0) {
-			if (p.x > 0) {
-				points1.push_back(p);
-			}
-			else {
-				points2.push_back(p);
-			}
-		}
-		else {
-			if (p.x > 0) {
-				points3.push_back(p);
-			}
-			else {
-				points4.push_back(p);
-			}
-		}
 	}
 }
 
@@ -498,7 +306,7 @@ void drawDashboard() {
 	char helpText[20];
 	sprintf(collisionCountText, "Punkty: %d", collisionCount);
 	sprintf(levelText, "Poziom %d", level);
-	sprintf(left, "Pozostalo %d ziemniakow", potatoCounter);
+	sprintf(left, "Pozostalo %d ziemniakow", terrain.potatoCounter);
 	sprintf(timeText, "Czas gry: %d sekund", gameTimeSeconds);
 	sprintf(collText, "Kolizja! -50");
 	sprintf(steeringText1, "Pauza [ESC]");
@@ -684,7 +492,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				startTime = std::chrono::high_resolution_clock::now();
 				level = 1;
 				terrain.potatoesAmount = Terrain::beginPotatoesAmount;
-				potatoCounter = terrain.potatoesAmount;
+				terrain.potatoCounter = terrain.potatoesAmount;
 				terrain.loadPotatoes();
 			}
 			if (wParam == VK_ESCAPE) {
@@ -751,14 +559,12 @@ void ChangeSize(GLsizei w, GLsizei h) {
 
 void createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 {
-
 	initBitmap(hDC, hWnd, hRC);
 
 	lazik.load();
 	terrain.load();
 	SoundEngine->play2D("audio/breakout.mp3", true);
 	SetTimer(hWnd, TIMER_ID, 16, NULL);
-	sortCollisionPoints();
 }
 
 void initBitmap(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
@@ -857,11 +663,6 @@ void DrawText(const char* text, GLfloat x, GLfloat y) {
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
-}
-
-
-GLfloat dist(POINT col, POINT laz) {
-	return sqrt(pow((col.x - laz.x), 2) + pow((col.y - laz.y), 2));
 }
 
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {

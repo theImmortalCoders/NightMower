@@ -160,6 +160,7 @@
     <ClCompile Include="loader.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Wheel.cpp" />
   </ItemGroup>
@@ -175,6 +176,7 @@
     <ClInclude Include="Potato.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="Tree.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Wheel.h" />
   </ItemGroup>

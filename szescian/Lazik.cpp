@@ -18,7 +18,6 @@ void Lazik::load()
 }
 
 void Lazik::draw(int x, int y, int z, int wheelRot, float angle)
-
 {
     drawObj(&core, x, y + 5, z, xSize * 0.5, zSize, ySize * 0.78, 2, 2);
     handle.draw(x - this->xSize + 10, y - 10 + 3 * this->ySize, z, this->zSize);

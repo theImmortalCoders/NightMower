@@ -1,16 +1,12 @@
 ﻿  Gl_template.cpp
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.h(13,21): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.h(12,24): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(211,14): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(211,21): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(338,22): warning C4838: conversion from 'const float' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(357,22): warning C4838: conversion from 'const float' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(376,19): warning C4838: conversion from 'const float' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(395,19): warning C4838: conversion from 'const float' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(825,34): warning C4018: '<': signed/unsigned mismatch
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(201,14): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(201,21): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(632,34): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  2 of 1676 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    11 functions had inline decision re-evaluated but remain unchanged
+  759 of 1703 functions (44.6%) were compiled, the rest were copied from previous compilation.
+    52 functions were new in current compilation
+    192 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Release\lazik.exe
