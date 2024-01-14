@@ -26,6 +26,7 @@ Terrain::Terrain() : wall(30, -10, 20 + 70, 5, 5)
 			break;
 		}
     }
+	sortWallsCollisions();
 }
 
 void Terrain::load() {
@@ -88,36 +89,16 @@ void Terrain::checkPotatoes(POINT coords, int& points, ISoundEngine* soundEngine
 
 bool Terrain::checkCollision(POINT coords) {
     int distance = Terrain::collisionPointDistance + Lazik::collisionDistance;
+    std::vector<POINT>* pointsToCheck;
     if (coords.y < 0) {
-        if (coords.x > 0) {
-            for (auto point : points1) {
-                if (dist(point, coords) < distance) {
-                    return true;
-                }
-            }
-        }
-        else {
-            for (auto point : points2) {
-                if (dist(point, coords) < distance) {
-                    return true;
-                }
-            }
-        }
+        pointsToCheck = (coords.x > 0) ? &points1 : &points2;
     }
     else {
-        if (coords.x > 0) {
-            for (auto point : points3) {
-                if (dist(point, coords) < distance) {
-                    return true;
-                }
-            }
-        }
-        else {
-            for (auto point : points4) {
-                if (dist(point, coords) < distance) {
-                    return true;
-                }
-            }
+        pointsToCheck = (coords.x > 0) ? &points3 : &points4;
+    }
+    for (auto point : *pointsToCheck) {
+        if (dist(point, coords) < distance) {
+            return true;
         }
     }
     return false;
@@ -127,4 +108,43 @@ bool Terrain::checkCollision(POINT coords) {
 
 GLfloat Terrain::dist(POINT col, POINT laz) {
     return sqrt(pow((col.x - laz.x), 2) + pow((col.y - laz.y), 2));
+}
+
+void Terrain::sortWallsCollisions()
+{
+    auto addPoint = [&](const POINT& p) {
+        if (p.y < 0) {
+            if (p.x > 0) {
+                points1.push_back(p);
+            }
+            else {
+                points2.push_back(p);
+            }
+        }
+        else {
+            if (p.x > 0) {
+                points3.push_back(p);
+            }
+            else {
+                points4.push_back(p);
+            }
+        }
+    };
+    // Wall
+    for (int i = 0; i <= 125; i += 25) {
+        addPoint({ i, 95 });
+    }
+    // Walls
+    for (int i = minX; i < maxX; i++) {
+        addPoint({ i, maxZ });
+    }
+    for (int i = minZ; i < maxZ; i++) {
+        addPoint({ i, minX });
+    }
+    for (int i = minX; i < maxX; i++) {
+        addPoint({ maxZ, i });
+    }
+    for (int i = minZ; i < maxZ; i++) {
+        addPoint({ minX, i });
+    }
 }

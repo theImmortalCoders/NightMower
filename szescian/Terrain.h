@@ -22,6 +22,7 @@ class Terrain
 	ObjectData mountains;
 
 	GLfloat dist(POINT col, POINT laz);
+	void sortWallsCollisions();
 public:
 	static const int collisionPointDistance = 15;
 	static const int beginPotatoesAmount = 10;

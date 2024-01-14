@@ -1,12 +1,12 @@
-﻿  Gl_template.cpp
+﻿  Terrain.cpp
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.h(13,21): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.h(12,24): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(201,14): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(201,21): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\Gl_template.cpp(632,34): warning C4018: '<': signed/unsigned mismatch
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(49,30): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(50,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(110,16): warning C4244: 'return': conversion from 'double' to 'GLfloat', possible loss of data
   Generating code
-  759 of 1703 functions (44.6%) were compiled, the rest were copied from previous compilation.
-    52 functions were new in current compilation
-    192 functions had inline decision re-evaluated but remain unchanged
+  3 of 1713 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    12 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Release\lazik.exe
