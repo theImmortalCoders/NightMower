@@ -18,6 +18,11 @@
 using namespace irrklang;
 using namespace std;
 
+struct exPoint {
+	POINT point;
+	int potatoesIndex;
+};
+
 class Terrain
 {
 	ObjectData plate;
@@ -44,8 +49,11 @@ public:
 	vector<POINT> points2;
 	vector<POINT> points3;
 	vector<POINT> points4;
-	std::vector<Potato> potatoes;
-
+	vector<Potato> pointsPot1;
+	vector<Potato> pointsPot2;
+	vector<Potato> pointsPot3;
+	vector<Potato> pointsPot4;
+	int potatoesCounter = beginPotatoesAmount;
 	Wall wall;
 
 	Terrain();

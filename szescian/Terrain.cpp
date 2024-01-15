@@ -48,15 +48,26 @@ void Terrain::load() {
 
 void Terrain::loadPotatoes()
 {
-    potatoes.clear();
+    pointsPot1.clear();
+    pointsPot2.clear();
+    pointsPot3.clear();
+    pointsPot4.clear();
     for (int i = 0; i < potatoesAmount; i++) {
-        Potato potato;
-        potato.object = loadFile("potato.obj", "potato.jpg");
-        potato.x = random(minX + 100, maxX - 100);
-        potato.z = random(minZ + 100, maxZ - 100);
-        potato.angle = random(0, 360);
-        potato.heightArgument = random(0, 200) / 100.0;
-        potatoes.push_back(potato);
+        Potato potato(Terrain::maxX, Terrain::maxZ, Terrain::minX, Terrain::minZ);
+        switch (potato.sphereID) {
+        case 1:
+            pointsPot1.push_back(potato);
+            break;
+        case 2:
+            pointsPot2.push_back(potato);
+            break;
+        case 3:
+            pointsPot3.push_back(potato);
+            break;
+        case 4:
+            pointsPot4.push_back(potato);
+            break;
+        }
     }
 }
 
@@ -71,7 +82,43 @@ void Terrain::draw()
     }
     wall.draw();
     glPopMatrix();
-    for (auto& potato : potatoes) {
+    for (auto& potato : pointsPot1) {
+        glPushMatrix();
+        glPolygonMode(GL_BACK, GL_LINE);
+        glTranslatef(potato.x, 2 * sin(potato.heightArgument), potato.z);
+        glRotatef(potato.angle, 0, 1, 0);
+        potato.heightArgument += 0.1;
+        if (potato.heightArgument > 1000) potato.heightArgument = 0;
+        potato.angle += 1;
+        if (potato.angle > 360) potato.angle = 0;
+        potato.draw();
+        glPopMatrix();
+    }
+    for (auto& potato : pointsPot2) {
+        glPushMatrix();
+        glPolygonMode(GL_BACK, GL_LINE);
+        glTranslatef(potato.x, 2 * sin(potato.heightArgument), potato.z);
+        glRotatef(potato.angle, 0, 1, 0);
+        potato.heightArgument += 0.1;
+        if (potato.heightArgument > 1000) potato.heightArgument = 0;
+        potato.angle += 1;
+        if (potato.angle > 360) potato.angle = 0;
+        potato.draw();
+        glPopMatrix();
+    }
+    for (auto& potato : pointsPot3) {
+        glPushMatrix();
+        glPolygonMode(GL_BACK, GL_LINE);
+        glTranslatef(potato.x, 2 * sin(potato.heightArgument), potato.z);
+        glRotatef(potato.angle, 0, 1, 0);
+        potato.heightArgument += 0.1;
+        if (potato.heightArgument > 1000) potato.heightArgument = 0;
+        potato.angle += 1;
+        if (potato.angle > 360) potato.angle = 0;
+        potato.draw();
+        glPopMatrix();
+    }
+    for (auto& potato : pointsPot4) {
         glPushMatrix();
         glPolygonMode(GL_BACK, GL_LINE);
         glTranslatef(potato.x, 2 * sin(potato.heightArgument), potato.z);
@@ -86,17 +133,26 @@ void Terrain::draw()
 }
 
 void Terrain::checkPotatoes(POINT coords, int& points, ISoundEngine* soundEngine, int& level) {
+    std::vector<Potato>* pointsToCheck;
+    if (coords.y < 0) {
+        pointsToCheck = (coords.x > 0) ? &pointsPot1 : &pointsPot2;
+    }
+    else {
+        pointsToCheck = (coords.x > 0) ? &pointsPot3 : &pointsPot4;
+    }
     std::vector<int> toRm;
     int counter = 0;
-    for (auto& potato : potatoes) {
-        POINT point{ potato.x, potato.z };
+    for (auto& pointPot : *pointsToCheck) {
+        POINT point{ pointPot.x, pointPot.z };
         if (dist(point, coords) < collisionPointDistance + Lazik::collisionDistance) {
             points += 30;
+            potatoesCounter--;
             toRm.push_back(counter);
             soundEngine->play2D("audio/collect.mp3", false);
-            if (toRm.size() == 1 && potatoes.size() == 1) {
+            if (toRm.size() == 1 && potatoesCounter == 1) {
                 level++;
                 Terrain::potatoesAmount += 3;
+                potatoesCounter = Terrain::potatoesAmount;
                 loadPotatoes();
                 soundEngine->play2D("audio/level.mp3", false);
                 if (points > personalBest) {
@@ -111,7 +167,7 @@ void Terrain::checkPotatoes(POINT coords, int& points, ISoundEngine* soundEngine
         counter++;
     }
     for (auto i : toRm) {
-        potatoes.erase(potatoes.begin() + i);
+        pointsToCheck->erase(pointsToCheck->begin() + i);
     }
 }
 

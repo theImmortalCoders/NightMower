@@ -1,26 +1,11 @@
-﻿  main.cpp
+﻿  Terrain.cpp
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Potato.h(33,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Potato.h(34,35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.h(13,21): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.h(12,24): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
-  Game.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.h(13,21): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.h(12,24): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(244,16): warning C4477: 'sprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(244,16): message : consider using '%zd' in the format string
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(285,14): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(285,21): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(413,34): warning C4018: '<': signed/unsigned mismatch
-  Terrain.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Wheel.h(13,21): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Handle.h(12,24): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(49,30): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(50,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(69,70): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(69,34): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(69,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(71,37): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(123,16): warning C4244: 'return': conversion from 'double' to 'GLfloat', possible loss of data
-  Tree.cpp
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Tree.cpp(45,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(86,70): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(86,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(88,37): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Terrain.cpp(163,16): warning C4244: 'return': conversion from 'double' to 'GLfloat', possible loss of data
 main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
   szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Debug\lazik.exe

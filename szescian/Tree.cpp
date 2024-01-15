@@ -4,8 +4,8 @@
 
 Tree::Tree()
 {
-    x = randomSelect(Terrain::minX, Terrain::maxX);
-    z = randomSelect(Terrain::minZ, Terrain::maxZ);
+    x = randomSelect(Terrain::minX+50, Terrain::maxX-50);
+    z = randomSelect(Terrain::minZ+50, Terrain::maxZ-50);
     if (z < 0) {
         if (x > 0) {
             sphereID = 1;
