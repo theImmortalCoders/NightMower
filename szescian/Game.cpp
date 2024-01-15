@@ -225,6 +225,13 @@ void Game::updateCamera() {
 }
 
 void Game::drawDashboard() {
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT1);
+	GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+	glLightfv(GL_LIGHT1, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+
 	char collisionCountText[100];
 	char levelText[100];
 	char left[100];
@@ -276,6 +283,9 @@ void Game::drawDashboard() {
 		DrawText(steeringText6, 20, 380);
 		DrawText(steeringText7, 20, 340);
 	}
+
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHTING);
 }
 
 void Game::checkCollisions()
