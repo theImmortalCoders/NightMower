@@ -302,13 +302,16 @@ void Game::checkCollisions()
 		lazik.zPos = nextY;
 	}
 	else {
-		if (abs(lazik.speed) > 2) {
+		if (abs(lazik.speed) > 2.2) {
 			points -= 50;
 			isCollision = true;
 			lastCollisionCheckTime = currentTime;
 			SoundEngine->play2D("audio/explosion.wav", false);
+			lazik.speed = -lazik.speed / 2;
 		}
-		lazik.speed = 0;
+		else {
+			lazik.speed = 0;
+		}
 	}
 	terrain.checkPotatoes(next, points, SoundEngine, level);
 	auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastCollisionCheckTime).count();

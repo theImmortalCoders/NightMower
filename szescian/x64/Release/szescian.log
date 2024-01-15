@@ -5,9 +5,10 @@ C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(252,16): war
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(252,16): message : consider using '%zd' in the format string
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(298,14): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(298,21): warning C4838: conversion from 'GLfloat' to 'LONG' requires a narrowing conversion
-C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(426,34): warning C4018: '<': signed/unsigned mismatch
+C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Game.cpp(429,34): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-  All 1725 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  2 of 1725 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   szescian.vcxproj -> C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\x64\Release\lazik.exe
