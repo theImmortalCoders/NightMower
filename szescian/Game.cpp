@@ -2,7 +2,7 @@
 
 Game::Game():lazik(40, 20, 10)
 {
-	string s = "Nocne koszenie";
+	string s = "NightMower";
 	wstring stemp = wstring(s.begin(), s.end());
 	lpszAppName = stemp.c_str();
 }
@@ -83,7 +83,7 @@ LRESULT CALLBACK Game::eventListener(HWND& hWnd, UINT& message, WPARAM& wParam, 
 		if (delta > 0 && camera.camDistance > 150) {
 			camera.camDistance -= camera.radiusJump;
 		}
-		else if (delta < 0 && camera.camDistance < 3500) {
+		else if (delta < 0 && camera.camDistance < 1000) {
 			camera.camDistance += camera.radiusJump;
 		}
 		InvalidateRect(hWnd, NULL, FALSE);
@@ -245,6 +245,7 @@ void Game::drawDashboard() {
 	char steeringText5[20];
 	char steeringText6[30];
 	char steeringText7[30];
+	char steeringText8[30];
 	char helpText[20];
 	char pbText[20];
 	sprintf(collisionCountText, "Punkty: %d", points);
@@ -258,6 +259,7 @@ void Game::drawDashboard() {
 	sprintf(steeringText3, "Przyspiesz [Shift]");
 	sprintf(steeringText5, "Swiatla [UP]/[DOWN]");
 	sprintf(steeringText6, "Kamera [PPM + mouse]");
+	sprintf(steeringText8, "ZOOM [Scroll]");
 	sprintf(steeringText7, "Reset pozycji [SPACE]");
 	sprintf(helpText, "Sterowanie [H]");
 	sprintf(pbText, "Rekord: %d", terrain.personalBest);
@@ -281,7 +283,8 @@ void Game::drawDashboard() {
 		DrawText(steeringText3, 20, 460);
 		DrawText(steeringText5, 20, 420);
 		DrawText(steeringText6, 20, 380);
-		DrawText(steeringText7, 20, 340);
+		DrawText(steeringText8, 20, 340);
+		DrawText(steeringText7, 20, 300);
 	}
 
 	glDisable(GL_LIGHT1);

@@ -29,7 +29,7 @@ public:
 	int personalBest = 0;
 
 	static const int collisionPointDistance = 15;
-	static const int beginPotatoesAmount = 10;
+	static const int beginPotatoesAmount = 5;
 	static const int treesAmount = 40;
 	static int potatoesAmount;
 
