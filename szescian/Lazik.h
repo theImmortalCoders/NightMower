@@ -31,7 +31,7 @@ public:
 	double lightPos = GL_PI / 12 * 0.3;
 	static const int collisionDistance = 25;
 	Lazik(int xSize, int ySize, int zSize);
-	void move(bool pause, bool& isWKeyPressed, bool& isSKeyPressed, Camera* camera, set<int>& keysPressed);
+	void move(bool pause, bool& isWKeyPressed, bool& isSKeyPressed, bool& isShiftKeyPressed, Camera* camera, set<int>& keysPressed);
 	void load();
 	void draw();
 };

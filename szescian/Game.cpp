@@ -103,7 +103,7 @@ LRESULT CALLBACK Game::eventListener(HWND& hWnd, UINT& message, WPARAM& wParam, 
 	case WM_TIMER:
 	{
 		if (wParam == TIMER_ID) {
-			lazik.move(pause, isWKeyPressed, isSKeyPressed, &camera, keysPressed);
+			lazik.move(pause, isWKeyPressed, isSKeyPressed, isShiftKeyPressed, &camera, keysPressed);
 			checkCollisions();
 			InvalidateRect(hWnd, NULL, FALSE);
 		}
@@ -138,7 +138,6 @@ LRESULT CALLBACK Game::eventListener(HWND& hWnd, UINT& message, WPARAM& wParam, 
 		if (wParam == VK_ESCAPE) {
 			pause = !pause;
 		}
-		if (wParam == VK_SHIFT) lazik.maxSpeed = 8;
 		switch (wParam) {
 		case VK_UP:
 		{
@@ -156,9 +155,6 @@ LRESULT CALLBACK Game::eventListener(HWND& hWnd, UINT& message, WPARAM& wParam, 
 			break;
 		}
 		}
-		lazik.move(pause, isWKeyPressed, isSKeyPressed, &camera, keysPressed);
-		checkCollisions();
-		InvalidateRect(hWnd, NULL, FALSE);
 		break;
 	}
 	case WM_KEYUP:
@@ -166,7 +162,7 @@ LRESULT CALLBACK Game::eventListener(HWND& hWnd, UINT& message, WPARAM& wParam, 
 		keysPressed.erase(wParam);
 		if (wParam == 'W') isWKeyPressed = false;
 		if (wParam == 'S') isSKeyPressed = false;
-		if (wParam == VK_SHIFT) lazik.maxSpeed = 4;
+		if (wParam == VK_SHIFT) isShiftKeyPressed = false;
 		InvalidateRect(hWnd, NULL, FALSE);
 		break;
 	}
@@ -194,7 +190,7 @@ void Game::createScene(HDC& hDC, const HWND& hWnd, HGLRC& hRC)
 	lazik.load();
 	terrain.load();
 	SoundEngine->play2D("audio/breakout.mp3", true);
-	SetTimer(hWnd, TIMER_ID, 16, NULL);
+	SetTimer(hWnd, TIMER_ID, 0, NULL);
 }
 
 void Game::renderScene() {
@@ -286,9 +282,8 @@ void Game::drawDashboard() {
 		DrawText(steeringText8, 20, 340);
 		DrawText(steeringText7, 20, 300);
 	}
-
-	glDisable(GL_LIGHT1);
 	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT1);
 }
 
 void Game::checkCollisions()

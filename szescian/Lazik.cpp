@@ -2,6 +2,7 @@
 #include "Wheel.h"
 #include "Handle.h"
 #include <Camera.h>
+#include <iostream>
 
 Lazik::Lazik(int xSize, int ySize, int zSize)
 {
@@ -39,42 +40,49 @@ void Lazik::draw()
     glPopMatrix();
 }
 
-void Lazik::move(bool pause, bool& isWKeyPressed, bool& isSKeyPressed, Camera* camera, set<int>& keysPressed)
+void Lazik::move(bool pause, bool& isWKeyPressed, bool& isSKeyPressed, bool& isShiftKeyPressed, Camera* camera, set<int>& keysPressed)
 {
     if (pause) {
         return;
     }
+    if (keysPressed.count(VK_SHIFT)) {
+        maxSpeed = 8;
+    }
+    else {
+        if (abs(speed - 8) <2 ) {
+            speed = 4;
+        }
+        maxSpeed = 4;
+    }
     const float acceleration = 0.3f;
     const float deceleration = 0.2f;
     wheelAngle = 0;
+    float rotJump = speed/3;
     if (isWKeyPressed || isSKeyPressed) {
-        if (isWKeyPressed) {
-            if (speed < maxSpeed) {
-                speed += acceleration;
-            }
-            else speed = maxSpeed;
+        if (isWKeyPressed && speed < maxSpeed) {
+            speed += acceleration;
         }
         else if (isSKeyPressed && speed > -maxSpeed) {
             speed -= acceleration;
         }
         if (keysPressed.count('D') && !keysPressed.count('A')) {
-            camera->azimuth += (speed / 3 * (GL_PI / 180));
-            rot -= speed / 3;
+            camera->azimuth += (rotJump * (GL_PI / 180));
+            rot -= rotJump;
             if (speed > 0) {
-                wheelAngle = -speed * 2;
+                wheelAngle = -rotJump*4;
             }
             else {
-                wheelAngle = speed * 2;
+                wheelAngle = rotJump*4;
             }
         }
         else if (keysPressed.count('A') && !keysPressed.count('D')) {
-            camera->azimuth -= (speed / 3 * (GL_PI / 180));
-            rot += speed / 3;
+            camera->azimuth -= (rotJump * (GL_PI / 180));
+            rot += rotJump;
             if (speed > 0) {
-                wheelAngle = speed * 2;
+                wheelAngle = rotJump*4;
             }
             else {
-                wheelAngle = -speed * 2;
+                wheelAngle = -rotJump *4;
             }
         }
     }
@@ -88,25 +96,25 @@ void Lazik::move(bool pause, bool& isWKeyPressed, bool& isSKeyPressed, Camera* c
         if (abs(speed) > 0.1) {
 
             if (keysPressed.count('D') && !keysPressed.count('A')) {
-                camera->azimuth += (speed / 3 * (GL_PI / 180));
-                rot -= speed / 3;
+                camera->azimuth += (rotJump * (GL_PI / 180));
+                rot -= rotJump;
                 if (speed > 0) {
                     if (speed > 0) {
-                        wheelAngle = -speed * 2;
+                        wheelAngle = -rotJump*4;
                     }
                     else {
-                        wheelAngle = speed * 2;
+                        wheelAngle = rotJump*4;
                     }
                 }
             }
             else if (keysPressed.count('A') && !keysPressed.count('D')) {
-                camera->azimuth -= (speed / 3 * (GL_PI / 180));
-                rot += speed / 3;
+                camera->azimuth -= (rotJump * (GL_PI / 180));
+                rot += rotJump;
                 if (speed > 0) {
-                    wheelAngle = speed * 2;
+                    wheelAngle = rotJump *4;
                 }
                 else {
-                    wheelAngle = -speed * 2;
+                    wheelAngle = -rotJump*4;
                 }
             }
         }
@@ -127,7 +135,7 @@ void Lazik::updateLight()
     glEnable(GL_LIGHT0);
     glNormal3f(0, 1, 0);
     glColor3f(0.8f, 0.8f, 0.8f);
-    glClearColor(0.04, 0, 0.16, 1.0f);
+    glClearColor(0.0, 0, 0.0, 1.0f);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
     glShadeModel(GL_SMOOTH);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

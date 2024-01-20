@@ -29,6 +29,7 @@ class Game
 	int gameTimeSeconds = 0;
 	bool isWKeyPressed = false;
 	bool isSKeyPressed = false;
+	bool isShiftKeyPressed = false;
 	bool dragging = false;
 	set<int> keysPressed;
 	POINTS prevMousePos = { 0, 0 };
