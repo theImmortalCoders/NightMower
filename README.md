@@ -7,6 +7,10 @@ NightMower is a 3D game developed in C++ using OpenGL. The project was created a
 Marcin Bator,
 Bogdan Bosak
 
+## Used libraries:
+- tinyobjloader
+- stb_image
+
 ## 1. Project Goals
 The goal of the project was to create a 3D game on the Windows platform using C++ and OpenGL. The game should implement basic physical phenomena such as vehicle control, collisions with objects, and the motion of a moving object. Other requirements included object texturing, camera movement, and adding a simple storyline. All project goals outlined in the lab instructions were successfully implemented and extended with additional features.
 
