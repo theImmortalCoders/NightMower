@@ -20,7 +20,7 @@ C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(181,23): wa
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(187,25): warning C4244: 'initializing': conversion from 'GLfloat' to 'int', possible loss of data
 C:\Repozytorium\Code\Desktop\Lazik\GK_Bator_Bosak\szescian\Lazik.cpp(192,27): warning C4244: 'initializing': conversion from 'int' to 'GLfloat', possible loss of data
   Generating code
-  1 of 1742 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 1742 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
